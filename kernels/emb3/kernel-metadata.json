@@ -1,0 +1,14 @@
+{
+  "id": "yoursbae/datascape-emb3",
+  "title": "datascape-emb3",
+  "code_file": "emb.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": ["yoursbae/datascape-small-512"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

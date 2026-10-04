@@ -1,0 +1,208 @@
+<title>Datascape Run Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: shipping-label header, then a scan-first board: tonight's submissions, ranked scenario table, LB charts, leakage + side runs. */
+:root {
+  --bg: #f3f4f1; --panel: #ffffff; --ink: #1d2430; --muted: #5d6676; --rule: #d9dcd6; --tape: #b7791f; --tape-soft: #f3e3c4;
+  --ok: #2f7d4f; --ok-bg: #e2f1e7; --warn: #a2620a; --warn-bg: #f8ead2; --bad: #6b7280; --bad-bg: #eceef0; --info: #2c5d9e; --info-bg: #e2ebf7; --run: #6b3fa0; --run-bg: #eee6f7;
+  --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif; --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #14181f; --panel: #1c222b; --ink: #e6e9ee; --muted: #9aa3b2; --rule: #2e3540; --tape: #e0a54a; --tape-soft: #3a2f1c;
+  --ok: #6fcf97; --ok-bg: #1d3328; --warn: #f0b860; --warn-bg: #3a2e18; --bad: #a3aab5; --bad-bg: #2a3038; --info: #8ab4f0; --info-bg: #1d2a3d; --run: #c3a2ee; --run-bg: #2c2240; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #14181f; --panel: #1c222b; --ink: #e6e9ee; --muted: #9aa3b2; --rule: #2e3540; --tape: #e0a54a; --tape-soft: #3a2f1c;
+  --ok: #6fcf97; --ok-bg: #1d3328; --warn: #f0b860; --warn-bg: #3a2e18; --bad: #a3aab5; --bad-bg: #2a3038; --info: #8ab4f0; --info-bg: #1d2a3d; --run: #c3a2ee; --run-bg: #2c2240; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 24px 48px; display: grid; gap: 28px; }
+h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+h2 { font-size: 22px; text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+h2 small { font: 400 13px var(--body); text-transform: none; letter-spacing: 0; color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.label { background: var(--panel); border: 2px solid var(--ink); border-radius: 4px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.label > div { padding: 18px 20px; min-width: 0; }
+.label .left { border-right: 2px dashed var(--rule); display: grid; gap: 8px; align-content: start; }
+.eyebrow { font: 600 11px var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.label h1 { font-size: 40px; line-height: 1; }
+.tape { display: inline-block; background: var(--tape-soft); color: var(--tape); font: 600 12px var(--mono); padding: 3px 8px; border-left: 3px solid var(--tape); }
+.figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+.fig b { display: block; font: 600 26px var(--mono); font-variant-numeric: tabular-nums; }
+.fig span { font-size: 12px; color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.subs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.sub { border: 1px solid var(--rule); border-radius: 6px; padding: 14px; display: grid; gap: 6px; min-width: 0; }
+.sub .nm { font: 600 15px var(--mono); }
+.sub p { margin: 0; color: var(--muted); font-size: 13px; }
+.range { position: relative; height: 26px; margin-top: 4px; }
+.range .axis { position: absolute; left: 0; right: 0; top: 12px; height: 2px; background: var(--rule); }
+.range .band { position: absolute; top: 7px; height: 12px; background: var(--info-bg); border: 1px solid var(--info); border-radius: 3px; }
+.range .tick { position: absolute; top: 3px; width: 2px; height: 20px; background: var(--ink); }
+.range .best { position: absolute; top: 0; width: 2px; height: 26px; background: var(--tape); }
+.range .lbl { position: absolute; top: 0; font: 11px var(--mono); color: var(--muted); transform: translateX(-50%); }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font: 600 11px var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 8px; border-bottom: 2px solid var(--ink); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.exp { min-width: 260px; }
+td.exp small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.pill { display: inline-block; font: 600 11px var(--body); letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.p-ok { background: var(--ok-bg); color: var(--ok); } .p-bad { background: var(--bad-bg); color: var(--bad); } .p-warn { background: var(--warn-bg); color: var(--warn); }
+.p-info { background: var(--info-bg); color: var(--info); } .p-run { background: var(--run-bg); color: var(--run); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 12px var(--body); border: 1px solid var(--rule); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.chip:focus-visible { outline: 2px solid var(--tape); outline-offset: 2px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+svg text { fill: var(--muted); font: 11px var(--mono); }
+.note { color: var(--muted); font-size: 13px; margin: 0; max-width: 70ch; }
+.matrix td:first-child { font-weight: 600; }
+@media (max-width: 760px) { .label, .subs, .grid2 { grid-template-columns: minmax(0, 1fr); } .label .left { border-right: 0; border-bottom: 2px dashed var(--rule); } .label h1 { font-size: 32px; } }
+</style>
+
+<div class="wrap">
+  <header class="label">
+    <div class="left">
+      <span class="eyebrow">Kaggle · datascape-2026-data-mining-competition · macro-F1 (Aman / Rusak / Lainnya)</span>
+      <h1>Datascape Run Board</h1>
+      <p class="note">Every scenario tried, ranked by how hard its evidence is: paired leaderboard reads first, then honest group-fold OOF against the original labels. Cleaned-label and leaky fine-tune scores never decide a rank.</p>
+      <span class="tape" id="updated"></span>
+    </div>
+    <div class="figs" id="figs"></div>
+  </header>
+
+  <section class="panel" aria-labelledby="h-subs">
+    <h2 id="h-subs">Submissions 10-05 00:00 UTC <small>two paired probes against d04_da_bt2 (0.84521); public LB is 30% of test</small></h2>
+    <div class="subs" id="subs"></div>
+    <div class="scroll"><table class="matrix">
+      <thead><tr><th>Outcome</th><th>d05_p675_R</th><th>d05_p416_allA</th><th>What 10-06 does</th></tr></thead>
+      <tbody>
+        <tr><td>Copy structure holds</td><td class="num">≥ +0.01</td><td class="num">≤ −0.01</td><td>Rusak for no-copy rows in synthetic/curated sources; keep 416 as is</td></tr>
+        <tr><td>Stricter test convention</td><td class="num">≤ −0.01</td><td class="num">≥ +0.01</td><td>Keep the DA lock in 675; push 416 to Aman</td></tr>
+        <tr><td>Per-source priors differ</td><td class="num">up</td><td class="num">up</td><td>Apply both changes</td></tr>
+        <tr><td>Bases already right</td><td class="num">down</td><td class="num">down</td><td>Keep da_bt2; add the 24-row exact-copy fix</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-rank">
+    <h2 id="h-rank">Scenario ranking <small id="rankcount"></small></h2>
+    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+    <div class="scroll"><table>
+      <thead><tr><th class="num">#</th><th>Category</th><th>Scenario</th><th class="num">OOF orig</th><th>Test-domain</th><th class="num">LB</th><th class="num">Exp.</th><th>Evidence</th><th>Decision</th></tr></thead>
+      <tbody id="rank"></tbody></table></div>
+  </section>
+
+  <div class="grid2">
+    <section class="panel" aria-labelledby="h-lb">
+      <h2 id="h-lb">Expected vs actual LB</h2>
+      <div id="lbchart"></div>
+      <p class="note">Bars are the registered expectation range, the dot is the public score. Every expectation built on train-label validation overshot.</p>
+    </section>
+    <section class="panel" aria-labelledby="h-share">
+      <h2 id="h-share">LB vs predicted Rusak share</h2>
+      <div id="sharechart"></div>
+      <p class="note">These points come from different models, so the downward slope is not a paired finding. The share probe that would test it flips rows that look damaged, so it is parked.</p>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="h-copy">
+    <h2 id="h-copy">Duplicates and leakage <small>pixel-exact copies, dihedral NCC ≥ 0.99 on 128 px thumbnails</small></h2>
+    <div class="scroll"><table id="copies"></table></div>
+    <p class="note">In the synthetic and curated sources (416, 512, 675) no train Rusak row has a test copy, while copies of Aman rows cross the split. Exact train-train copies agree on labels 96.8% of the time.</p>
+  </section>
+
+  <div class="grid2">
+    <section class="panel" aria-labelledby="h-pl">
+      <h2 id="h-pl">Iterative pseudo-labels <small>held-out locked test rows</small></h2>
+      <div class="scroll"><table id="pl"></table></div>
+      <p class="note" id="plnote"></p>
+    </section>
+    <section class="panel" aria-labelledby="h-vlm">
+      <h2 id="h-vlm">Frozen-tower gate <small>+ cat6+PE-G, MLP 3 seeds</small></h2>
+      <div class="scroll"><table id="probe9"></table></div>
+      <p class="note">Bar fixed in advance: at least +0.005 OOF against the original labels and no rise in the test Rusak share.</p>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="h-gpu">
+    <h2 id="h-gpu">Compute log <small>Colab Pro A100, released after every session</small></h2>
+    <div class="scroll"><table id="sessions"></table></div>
+  </section>
+</div>
+
+<script>
+const D = /*DATA*/null;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const pill = d => { const s = String(d).toUpperCase();
+  const c = s.startsWith('ADOPTED') || s === 'USED' || s === 'BASELINE' ? 'p-ok' : s.startsWith('SUBMIT') || s.startsWith('PROBING') ? 'p-info' : s.startsWith('RUNNING') ? 'p-run' : s.startsWith('PARKED') || s.startsWith('NOT USED') || s.startsWith('BROKEN') ? 'p-warn' : 'p-bad';
+  return `<span class="pill ${c}">${esc(d)}</span>`; };
+$('updated').textContent = 'Updated ' + D.updated;
+const submitted = D.ledger.filter(r => r.actual_lb !== '');
+const best = Math.max(...submitted.map(r => +r.actual_lb));
+const mins = (D.sessions || []).reduce((a, r) => a + (+r.minutes || 0), 0);
+$('figs').innerHTML = [[best.toFixed(5), 'team best public LB (d04_da_bt2)'], ['0.97577', 'leaderboard #1'], ['−0.065', 'CV → LB gap at equal share'], [D.experiments.length, 'scenarios tracked'], [submitted.length, 'submissions scored'], [Math.round(mins) + ' min', 'A100 time logged']]
+  .map(([v, l]) => `<div class="fig"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+
+// tonight's submissions with range bars on a shared 0.78-0.90 scale
+const lo = 0.78, hi = 0.90, x = v => ((v - lo) / (hi - lo) * 100).toFixed(2) + '%';
+const pending = D.ledger.filter(r => ['d05_p416_allA', 'd05_p675_R'].includes(r.name));
+$('subs').innerHTML = pending.map(r => `<div class="sub"><span class="nm">${esc(r.name)}</span>
+  <p>${esc(String(r.strategy).split('. Breakeven')[0].slice(0, 230))}…</p>
+  <div class="range" role="img" aria-label="expected ${r.expected_lb} between ${r.exp_lo} and ${r.exp_hi}; team best ${best}">
+    <div class="axis"></div><div class="band" style="left:${x(+r.exp_lo)};width:calc(${x(+r.exp_hi)} - ${x(+r.exp_lo)})"></div>
+    <div class="tick" style="left:${x(+r.expected_lb)}"></div><div class="best" style="left:${x(best)}" title="team best"></div></div>
+  <span class="num">expected ${(+r.expected_lb).toFixed(3)} [${(+r.exp_lo).toFixed(2)}, ${(+r.exp_hi).toFixed(2)}] · amber line = team best ${best.toFixed(3)}${r.actual_lb !== '' ? ' · actual ' + r.actual_lb : ''}</span></div>`).join('');
+
+// ranking with category chips
+const cats = ['all', ...new Set(D.experiments.map(e => e.category))];
+let cat = 'all'; try { cat = localStorage.getItem('cat') || 'all'; } catch (e) {}
+if (!cats.includes(cat)) cat = 'all';
+function renderRank() {
+  const rows = D.experiments.filter(e => cat === 'all' || e.category === cat);
+  $('rankcount').textContent = `${rows.length} of ${D.experiments.length} shown`;
+  $('rank').innerHTML = rows.map(e => `<tr><td class="num">${e.rank}</td><td>${esc(e.category)}</td>
+    <td class="exp">${esc(e.experiment)}${e.notes ? `<small>${esc(e.notes)}</small>` : ''}</td><td class="num">${esc(e.metric_oof_orig)}</td>
+    <td>${esc(e.test_domain_metric)}</td><td class="num">${esc(e.lb_public)}</td><td class="num">${esc(e.expected_lb)}</td><td>${esc(e.evidence)}</td><td>${pill(e.decision)}</td></tr>`).join('');
+  $('chips').innerHTML = cats.map(c => `<button class="chip" type="button" aria-pressed="${c === cat}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+}
+$('chips').addEventListener('click', ev => { const b = ev.target.closest('.chip'); if (!b) return; cat = b.dataset.c; try { localStorage.setItem('cat', cat); } catch (e) {} renderRank(); });
+renderRank();
+
+// expected vs actual (scored submissions with an expectation)
+function lbChart() {
+  const rows = D.ledger.filter(r => r.actual_lb !== '' && r.expected_lb !== ''), W = 520, rowH = 30, H = rows.length * rowH + 40, L = 150, R = 20;
+  const a = 0.74, b = 0.98, sx = v => L + (v - a) / (b - a) * (W - L - R);
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="expected range and actual public LB per submission">`;
+  for (let t = 0.76; t <= 0.97; t += 0.04) s += `<line x1="${sx(t)}" x2="${sx(t)}" y1="10" y2="${H - 24}" stroke="var(--rule)"/><text x="${sx(t)}" y="${H - 8}" text-anchor="middle">${t.toFixed(2)}</text>`;
+  rows.forEach((r, i) => { const y = 24 + i * rowH;
+    s += `<text x="0" y="${y + 4}">${esc(r.name.slice(0, 20))}</text><rect x="${sx(+r.exp_lo)}" y="${y - 6}" width="${sx(+r.exp_hi) - sx(+r.exp_lo)}" height="12" rx="2" fill="var(--info-bg)" stroke="var(--info)"/>
+      <line x1="${sx(+r.expected_lb)}" x2="${sx(+r.expected_lb)}" y1="${y - 8}" y2="${y + 8}" stroke="var(--info)" stroke-width="2"/><circle cx="${sx(+r.actual_lb)}" cy="${y}" r="5" fill="var(--tape)"/>`; });
+  $('lbchart').innerHTML = s + '</svg>';
+}
+function shareChart() {
+  const p = D.share_trend, W = 520, H = 220, L = 44, B = 30, T = 12, R = 16, sx = v => L + (v - 0.25) / (0.44 - 0.25) * (W - L - R), sy = v => T + (0.85 - v) / (0.85 - 0.75) * (H - T - B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="public LB against predicted Rusak share">`;
+  for (let v = 0.76; v <= 0.85; v += 0.02) s += `<line x1="${L}" x2="${W - R}" y1="${sy(v)}" y2="${sy(v)}" stroke="var(--rule)"/><text x="${L - 6}" y="${sy(v) + 4}" text-anchor="end">${v.toFixed(2)}</text>`;
+  [0.26, 0.30, 0.34, 0.38, 0.42].forEach(v => s += `<text x="${sx(v)}" y="${H - 10}" text-anchor="middle">${Math.round(v * 100)}%</text>`);
+  s += `<polyline fill="none" stroke="var(--muted)" stroke-dasharray="4 3" points="${p.map(q => sx(q.share) + ',' + sy(q.lb)).join(' ')}"/>`;
+  p.forEach(q => s += `<circle cx="${sx(q.share)}" cy="${sy(q.lb)}" r="4.5" fill="var(--ink)"/>`);
+  s += `<circle cx="${sx(0.274)}" cy="${sy(best)}" r="6" fill="var(--tape)"/><text x="${sx(0.274) + 10}" y="${sy(best) + 4}" text-anchor="start">da_bt2 ${best.toFixed(3)}</text>`;
+  $('sharechart').innerHTML = s + '</svg>';
+}
+lbChart(); shareChart();
+
+function table(id, rows, cols, head) {
+  if (!rows || !rows.length) { $(id).innerHTML = '<tbody><tr><td>Not available yet.</td></tr></tbody>'; return; }
+  $(id).innerHTML = `<thead><tr>${cols.map((c, i) => `<th class="${typeof rows[0][c] === 'number' ? 'num' : ''}">${esc(head[i])}</th>`).join('')}</tr></thead><tbody>` +
+    rows.map(r => `<tr>${cols.map(c => `<td class="${typeof r[c] === 'number' ? 'num' : ''}">${esc(r[c])}</td>`).join('')}</tr>`).join('') + '</tbody>';
+}
+table('copies', D.copies, ['source', 'test_rows', 'test_with_exact_copy', 'copy_label_aman', 'copy_label_rusak', 'train_rusak', 'train_rusak_with_test_copy', 'train_aman_with_test_copy', 'da_bt2_rusak_share'],
+  ['Source', 'Test rows', 'Exact copy', 'Copy = Aman', 'Copy = Rusak', 'Train Rusak', 'Train R with test copy', 'Train A with test copy', 'da_bt2 Rusak share']);
+table('pl', D.pl, ['round', 'pseudo_rows', 'heldout_f1', 'heldout_f1_b08', 'unlocked_rusak_b08'], ['Round', 'Pseudo rows', 'F1', 'F1 @ bias −0.8', 'Unlocked Rusak share']);
+$('plnote').textContent = 'Bar: at least +0.005 held-out F1 over round 0 and no rise in the unlocked Rusak share. Locked rows are split by SSCD twin groups so no held-out row has a near-copy in training.';
+table('probe9', D.probe9, ['tag', 'f1_orig', 'f1_clean', 'test_rusak', 'f1_twin_locked'], ['Config', 'OOF orig', 'OOF cleaned', 'Test Rusak', 'Twin-locked F1']);
+table('sessions', D.sessions, ['session', 'date', 'minutes', 'job', 'outcome'], ['#', 'Date', 'Minutes', 'Job', 'Outcome']);
+</script>

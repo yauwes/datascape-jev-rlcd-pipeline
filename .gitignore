@@ -1,0 +1,11 @@
+# competition images, embeddings, weights stay out of git (see README §3)
+work/small/
+work/emb/*.npz
+datascape/Train_Set/
+datascape/Test_Set/
+*.pt
+*.pth
+*.safetensors
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

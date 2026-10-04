@@ -1,0 +1,49 @@
+id,date,category,experiment,metric_oof_orig,test_domain_metric,lb_public,expected_lb,evidence,decision,notes
+LB01,10-04,leakage+DA,SSCD twin lock (0.55 purity>=0.9 clean_other) + domain-adapted MLP heads (d04_da_bt2),0.9318*,locked-row F1 0.978,0.84521,0.93,LB paired,ADOPTED (team best),+0.015 vs plain h2 at equal shares; *hybrid OOF (twin vote + group-OOF) not a pure model OOF; expected was 0.93 -> miss -0.085
+LB02,10-04,architecture,Plain h2 heads (MLP cat6+PE-G & cat11) at 27.4% Rusak (d05_h2_nolock_s337),0.8967,,0.83004,0.845,LB paired,BASELINE,CV->LB gap -0.065
+LB03,10-03,architecture,Team SAM-SLCA + ConvNeXt-S 384 (teammate),,,0.82086,,LB single,SUPERSEDED,previous team best
+LB04,10-03,leakage,Team super-ensemble + DINOv2 kNN twin lock,,,0.79,,LB single,CLOSED->REOPENED,confounded; SSCD + purity gate replaced it
+LB05,10-03,architecture,0.5*5NN(DINOv2-B)+0.5*LR(DINOv2-L+CLIP-L) random folds,0.7987,,0.78627,0.799,LB single,SUPERSEDED,random-fold OOF 0.897 was misleading
+LB06,10-03,cleaning,Confident-learning relabel 700 rows (r1003_clean_v1),0.7856,,0.76761,0.786,LB paired,CLOSED,-0.019 vs same recipe; confounded with +3% Rusak share; chaii 1st place also found OOF relabelling hurts
+LB07,10-05,postproc,416x416 synthetic source: all 136 Rusak preds -> Aman (d05_p416_allA),0.9318*,,,0.85,LB probe (pending 10-05),SUBMIT 10-05,copy-structure predicts <=-0.01; stricter-convention predicts >=+0.01
+LB08,10-05,leakage,675x900 VN parcels without train copy (158 rows) Aman -> Rusak (d05_p675_R),0.9318*,breakeven q~0.45,,0.855,LB probe (pending 10-05),SUBMIT 10-05,only Aman crosses the split as copies in 416/512/675
+V01,10-03,validation,Random StratifiedKFold,0.897,,,,OOF vs LB,CLOSED,rewards memorising near-duplicates (LB 0.786)
+V02,10-03,validation,Group folds on DINOv2>=0.90 clusters (folds_group90),0.805,,,,OOF vs LB,ADOPTED,closest to LB; all OOF below is on these folds
+A01,10-03,architecture,Frozen PE-Core-G/14@448 LR probe,0.8512,,,,OOF honest,ADOPTED (in PE-G set),best single tower
+A02,10-03,architecture,Frozen PE-Core-L/14@336 LR probe,0.8431,,,,OOF honest,ADOPTED (cat6),
+A03,10-03,architecture,Frozen EVA02-CLIP-E/14 LR probe,0.8432,,,,OOF honest,ADOPTED (cat11),
+A04,10-03,architecture,Frozen DFN5B CLIP-H LR probe,0.8407,,,,OOF honest,ADOPTED (cat6),
+A05,10-03,architecture,Frozen SigLIP2-so400m@384 LR probe,0.8382,,,,OOF honest,ADOPTED (cat6),
+A06,10-03,architecture,Frozen CLIP-L/14 / EVA02-CLIP-L / DINOv2-L LR probes,0.8083 / 0.8271 / 0.7597,,,,OOF honest,ADOPTED (cat6),diversity: DINOv2 corr ~0.7 with CLIP
+A07,10-03,architecture,LR on concat cat6,0.8804,,,,OOF honest,SUPERSEDED,
+A08,10-03,architecture,MLP head on cat6 (3 seeds),0.8889,,,,OOF honest,SUPERSEDED,
+A09,10-03,architecture,MLP heads h2 = mean(cat6+PE-G & cat11) 5 seeds,0.8926,twin-locked 0.9299,0.83004,,OOF honest + LB,ADOPTED,core model
+A10,10-03,architecture,Hierarchical 2-stage head,0.7686,,,,OOF honest,CLOSED,-0.037 vs 3-way
+A11,10-03,architecture,Fine-tune CLIP-L 6 ep,0.849,,,,OOF honest,CLOSED,below frozen MLP heads
+A12,10-03,architecture,Fine-tune ConvNeXt-B/L CLIP and EVA02-B 448,0.8157 / 0.8396 / 0.8210,,,,OOF honest,CLOSED,corr 0.92-0.93 with CLIP-L ft; no ensemble value
+A13,10-04,architecture,Fine-tune PE-L / EVA02-L / DINOv2-L @224 (cleaned labels + twin pseudo),0.8770 / 0.8531 / 0.8586,,,,OOF leaky,CLOSED (stopped early),still below frozen heads even with leaky OOF; SigLIP2@384 stopped mid-fold
+A14,10-04,architecture,Frozen DINOv3-L / H+ / 7B (+cat6+PE-G),+0.001 / +0.0003 / +0.0018,,,,OOF honest,CLOSED,bar +0.005 not met
+A15,10-03,architecture,VLM towers re-probed in bf16 + mean token pooling: InternViT-300M (InternVL2.5) / AIMv2-H / Qwen3-VL ViT merger (+cat6+PE-G),-0.0002 / -0.0019 / -0.0030,,,,OOF honest,CLOSED,extraction fixed (InternViT alone 0.28 -> 0.73; AIMv2 0.67 -> 0.83; Qwen 0 -> 0.84) but no ensemble gain; bar +0.005
+A16,10-04,architecture,Noise-robust losses GCE / SCE / bootstrap,+0.0015,,,,OOF honest,CLOSED,noise level
+P01,10-03,preprocessing,Median 3x3 filter vs salt-and-pepper noise (all towers),,,,,design,ADOPTED,S&P noise on 19.7% Aman vs 3.8% test
+P02,10-03,preprocessing,Native vs higher resolution (PE-L@448 / SigLIP2@512),-0.008 / -0.002,,,,OOF honest,CLOSED,native resolution best
+P03,10-03,preprocessing,Multi-resolution views in MLP,-0.0064,,,,OOF honest,CLOSED,
+P04,10-03,preprocessing,5-view geometric TTA (orig/hflip/rot90/180/270) summed embeddings,,,,,design,ADOPTED,
+E01,10-04,ensemble,Hill climbing over heads (cleaned labels),0.9079,twin-locked 0.9653,,,OOF honest (cleaned),NOT USED,raises test Rusak share to 0.36
+E02,10-04,ensemble,LR stacking over heads + fine-tunes,0.9147,twin-locked 0.9607,,,OOF leaky,NOT USED,test Rusak 0.37-0.41; circular selection
+C01,10-04,cleaning,CL 2 rounds + cluster majority (labels_clean_v2; 433 changes),0.8954,,,,OOF honest,PARKED,LB untested (d05_clean_s30 confounded)
+C02,10-04,cleaning,cleanlab 2.9 find_label_issues + Datalab (global),,,,,audit,CLOSED,447 flags; 333 overlap C01
+C03,10-04,cleaning,cleanlab per-source prune (640x640: 449 rows) + DA retrain,,0 of 95 test rows change,,,test-domain,CLOSED,640 test Rusak rows are genuinely damaged
+L01,10-03,leakage,MD5 byte-identical copies,,253 test rows,,,count,USED,
+L02,10-03,leakage,SSCD-large / rotation-robust SSCD / SIFT-RANSAC twins,+0.0004 / -0.0005 / ~+1 row,,,,OOF honest,CLOSED,
+L03,10-04,leakage,Pixel-exact dihedral NCC>=0.99 (pix_all),,796 test rows (26%); train-train agreement 96.2% (6439 pairs),,,audit,ADOPTED,20 test rows disagree with their exact copy (notebook mode label; 24 by first-label count) -> fix held for 10-06
+L04,10-04,leakage,Test ID order leak,,none,,,audit,CLOSED,
+L05,10-04,leakage,Copy structure per source (only Aman crosses split in 416/512/675),,0/807 train Rusak have test copies,,,audit,PROBING 10-05,drives LB07/LB08
+D01,10-03,postproc,Fold-honest class bias (A11),+0.042,,,,OOF honest,ADOPTED,
+D02,10-03,postproc,Per-stratum prior matching (A14/pm38),,,,,design,SUPERSEDED,targets from MD5 subset were unrepresentative
+D03,10-04,postproc,Share dial (clean_other Rusak 0.30/0.26),,,,0.852,LB probe,PARKED,the rows it flips look damaged
+D04,10-03,postproc,Test-time cluster smoothing,+0.003,,,,OOF honest,CLOSED,noise level
+D05,10-04,postproc,Lainnya share correction,,F1_L OOF 0.955,,,audit,CLOSED,no hidden Lainnya in test
+S01,10-04,pseudo-label,Twin pseudo-labels in fine-tunes (session 7),see A13,,,,OOF leaky,CLOSED,
+S02,10-04,pseudo-label,Iterative pseudo-label rounds on DA heads (tau 0.9),,held-out locked F1 0.9604 -> best 0.9628 (+0.0024); @bias +0.0010,,,test-domain held-out,CLOSED,bar +0.005 not met; unlocked Rusak share unchanged (0.262-0.263); 749-806 pseudo rows per round
+V03,10-04,validation,Leak check of group90 folds: pixel-exact train pairs split across folds,,6.71% of 6439 exact pairs cross folds,,,audit,KNOWN CAVEAT,group-OOF slightly optimistic; exact-copy-aware folds would tighten it

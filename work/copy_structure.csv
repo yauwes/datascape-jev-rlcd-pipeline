@@ -1,0 +1,7 @@
+source,test_rows,test_with_exact_copy,copy_label_aman,copy_label_rusak,train_rusak,train_rusak_with_test_copy,train_aman,train_aman_with_test_copy,da_bt2_rusak_share
+224x224,520,53,53,0,0,0,253,28,0.000
+416x416,193,21,21,0,211,0,87,11,0.705
+512x512,45,5,5,0,205,0,2259,11,0.133
+640x640,347,246,71,174,1305,238,1478,122,0.784
+675x900,280,51,51,0,391,0,108,32,0.068
+other,1672,420,361,59,889,68,4615,502,0.242
