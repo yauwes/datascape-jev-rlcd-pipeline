@@ -45,16 +45,16 @@ Untuk mendapatkannya, lihat [§3](#3-cara-reproduce).
 
 ```mermaid
 flowchart LR
-  A[Gambar train+test] --> B[Median 3x3 + resize native<br/>5 view: orig/hflip/rot90/180/270]
-  B --> C[7–11 frozen vision towers<br/>PE-Core-L/G, SigLIP2, DINOv2, CLIP-L,<br/>DFN5B CLIP-H, EVA02-CLIP-L/E, MetaCLIP2]
-  C --> D[MLP head 512 x 5 seed<br/>2 set fitur → h2]
-  A --> E[SSCD copy detector<br/>+ pixel-exact NCC]
-  E --> F[Twin vote: sim≥0.55, purity≥0.9<br/>stratum clean_other → LOCK label]
-  F --> G[Domain-adapted heads<br/>train + baris test yang di-lock]
+  A["Gambar train+test"] --> B["Median 3x3 + resize native<br/>5 view: orig/hflip/rot90/180/270"]
+  B --> C["7–11 frozen vision towers<br/>PE-Core-L/G, SigLIP2, DINOv2, CLIP-L,<br/>DFN5B CLIP-H, EVA02-CLIP-L/E, MetaCLIP2"]
+  C --> D["MLP head 512 x 5 seed<br/>2 set fitur → h2"]
+  A --> E["SSCD copy detector<br/>+ pixel-exact NCC"]
+  E --> F["Twin vote: sim≥0.55, purity≥0.9<br/>stratum clean_other → LOCK label"]
+  F --> G["Domain-adapted heads<br/>train + baris test yang di-lock"]
   D --> G
-  G --> H[Post-proc: bias Rusak −0.8 (no-twin),<br/>kalibrasi mixed-vote, match per stratum]
+  G --> H["Post-proc: bias Rusak −0.8 (no-twin),<br/>kalibrasi mixed-vote, match per stratum"]
   F --> H
-  H --> I[submission]
+  H --> I["submission"]
 ```
 
 1. **Data dan sumber.** Ukuran gambar menandai sumber data:
