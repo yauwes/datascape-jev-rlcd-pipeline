@@ -29,7 +29,7 @@ work/emb/meta_sorted.csv       ← urutan baris global (semua artefak mengikuti 
 work/*.csv|npz|npy             ← artefak kecil: folds, noise strata, tetangga SSCD, skor pixel-copy, label bersih, dll.
 work/preds/{h2_peg_c11,da_h2,c2_h2}/  ← prediksi head (OOF group-fold + test) yang dipakai submission terbaik
 colab/                         ← driver sesi Colab A100 (embedding giant tower, fine-tune, gate probe)
-kernels/                       ← kernel Kaggle (embedding tower, fine-tune ft.py, ablation, copy-detector)
+kernels/                       ← kernel Kaggle, diratakan `<nama>__<file>` (embedding tower, fine-tune, ablation, copy-detector; lihat kernels/README.md)
 submissions/                   ← CSV submission + ledger.csv (strategi, expected LB, actual LB)
 datascape/sample_submission.csv
 ```
@@ -105,7 +105,7 @@ cd notebook && jupyter nbconvert --to notebook --execute --inplace Datascape_Pip
 - Melatih ulang domain-adapted heads dari embedding (±10 menit di Apple MPS, ±2 menit di GPU CUDA).
 - Butuh `work/emb/emb_*.npz`, yang tersimpan di dataset Kaggle privat `asuudane/datascape-artifacts` dan `asuudane/datascape-colab-out*` (minta akses), atau dihitung ulang:
   - `colab/emb_giant.py`: A100, bf16;
-  - `kernels/emb*/emb.py`: Kaggle T4.
+  - `kernels/emb*__emb.py`: Kaggle T4.
 - Seed berbeda per device, jadi yang dilaporkan adalah agreement, bukan equality.
 
 **Script penting** (jalankan dari root repo):
@@ -123,7 +123,7 @@ cd notebook && jupyter nbconvert --to notebook --execute --inplace Datascape_Pip
 | `work/lbdelta.py BASE PROBE S0` | membaca hasil probe LB: berapa fraksi baris yang di-flip benar-benar Rusak |
 | `work/subreg.py add/submit/sync/show` | ledger submission (expected vs actual) |
 | `work/build_report.py`, `work/make_notebook.py` | membangun laporan dan notebook dari CSV sumber |
-| `colab/driver*.py`, `colab/probe8.py`, `kernels/ft/ft.py` | sesi A100: embedding tower, fine-tune (protocol v2: warmup, EMA, ReduceLROnPlateau, early stop) |
+| `colab/driver*.py`, `colab/probe8.py`, `kernels/ft__ft.py` | sesi A100: embedding tower, fine-tune (protocol v2: warmup, EMA, ReduceLROnPlateau, early stop) |
 
 ## 4. Skenario uji coba yang sudah dijalankan
 
