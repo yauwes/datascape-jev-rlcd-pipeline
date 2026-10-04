@@ -92,6 +92,8 @@ flowchart LR
 
 ## 3. Cara reproduce
 
+**Panduan langkah demi langkah menjalankan notebook submission terbaik ada di [`notebook/README.md`](notebook/README.md).**
+
 ```bash
 pip install -r requirements.txt
 cd notebook && jupyter nbconvert --to notebook --execute --inplace Datascape_Pipeline.ipynb   # < 1 menit
