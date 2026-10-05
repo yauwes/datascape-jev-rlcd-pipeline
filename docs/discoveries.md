@@ -92,3 +92,11 @@ Relay notes per Deotte, *1st Place – The AI Relay* (PS S6E9 write-up): `progra
     - Pixel-exact copies show that in the synthetic and curated sources (416, 512, 675) only Aman rows cross the train/test split: 0 of 807 train Rusak rows in those sources have a test copy.
     - Leading hypothesis: no-copy test rows in those sources carry a much higher Rusak rate than da_bt2 predicts (675: 11%).
     - The Oct 5 paired probes `p675_R` and `p416_allA` decide it (RESULTS 10-04 07:30).
+29. **`ft.py` never applied layer decay before 10-04 (found while preparing session 10).** timm's `create_optimizer_v2(layer_decay=…)` stores each group's decay as `lr_scale` and leaves `lr` at the base value; only timm's own schedulers multiply them. `ft.py` drives LR itself from `g['lr']`, so every earlier fine-tune (ConvNeXt, EVA02, CLIP-L, DINOv3-L, SigLIP2; `layer_decay` 0.8) trained the whole backbone at one uniform LR.
+    - Fixed: `g['lr'] = g['lr0'] = g['lr'] * g.get('lr_scale', 1.0)`. It is checked on timm 1.0.30: groups report `lr` 1e-3 with `lr_scale` 1e-4…1.0.
+    - Consequence: the closed "L fine-tunes trail frozen heads" results tested uniform-LR fine-tuning, not LLRD. The pig-posture winner found uniform LR best anyway, so this does not by itself reopen them.
+30. **Test is largely augmented train, but augmentation does not preserve train labels (session 10).**
+    - Exhaustive matching confirms the mapping is saturated: 800 test rows have an exact copy, and SSCD top-10 already held 99.5% of them. 79% of test has some train source.
+    - The near-copy tier shows the generator: Gaussian noise, colour shift, flips, grayscale.
+    - Train itself holds the same base image as a colour copy labelled Aman and a grayscale copy labelled Rusak. Copy groups with conflicting labels are coin flips for every model (h2 0.564, frozen DINOv3 0.532).
+    - A fully fine-tuned DINOv3-H+ reproduces copied train labels on near-duplicates far better than frozen heads (0.939 vs 0.889 on locked rows, without seeing them). Metrics built on copied labels therefore reward memorisation. The LB (copy label right ~55% where it disagrees with the model) is the only arbiter.

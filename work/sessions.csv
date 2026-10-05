@@ -8,3 +8,4 @@ session,date,gpu,minutes,job,outcome
 7,10-04,A100,310.0,fine-tunes PE-L EVA02-L DINOv2-L SigLIP2 (stopped early),below frozen heads; stopped to save CU
 8,10-04,A100,17.0,frozen DINOv3-H+ / 7B gate,+0.0003 / +0.0018 -> closed
 9,10-04,A100,12.0,VLM towers InternViT-300M / AIMv2-H / Qwen3-VL ViT (bf16 avg pool) gate,all three fail the +0.005 bar -> VLM towers closed
+10,10-04,A100,194.0,DINOv3-H+ fine-tune gate (arms A/B fold 0) + exhaustive copy matching + EDA notebook,A fails; B passes (b) at argmax only; mapping saturated (+4 exact rows); 17.2 CU

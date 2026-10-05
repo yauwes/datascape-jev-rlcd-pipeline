@@ -1,13 +1,23 @@
-## >>> NEXT ACTION 10-05 00:00 UTC (survives context reset) <<<
-1. `env -u KAGGLE_API_TOKEN /usr/local/bin/python3.11 work/subreg.py submit d05_p416_allA`
-2. `env -u KAGGLE_API_TOKEN /usr/local/bin/python3.11 work/subreg.py submit d05_p675_R`
-
-   `d05_share_non416` is PARKED: it flips visibly damaged rows. Do not submit it.
-3. Read each result against `d04_da_bt2` (0.84521):
-   - `python work/lbdelta.py submissions/d04_da_bt2.csv submissions/<probe>.csv 0.84521` (supports both A→R and R→A).
-4. Apply the decision matrix in RESULTS.md (10-04 07:30) to build the 10-06 per-source combination.
-   - The 20-row exact-copy fix (notebook §7 definition) is added only on 10-06.
-   - Fallback final pick: `d04_da_bt2` (private LB is 70% of test).
+## >>> NEXT ACTION 10-06 00:00 UTC (survives context reset) <<<
+**10-05 result:** `d05_p416_allA` LB **0.87739**, the new team best (+0.0322 vs 0.84521). `d05_p675_R` scored 0.80201 (−0.043). Row "stricter convention": test 416 and no-copy 675 are ~all Aman (q≈0). **The new base is `d05_p416_allA` @ 0.87739.**
+1. Check `date -u`. Submit only on 2026-10-06 or later, because 10-05's slots are spent (2 of the 3 shared with the teammate).
+2. `env -u KAGGLE_API_TOKEN /usr/local/bin/python3.11 work/subreg.py submit d06_cur_A`: the 25 remaining curated-source (512/675) Rusak → Aman.
+3. SLOT 2 = (none yet). It is filled only if the session-11 fine-tune gate passes (h3A/h3B on the 473 LB-confirmed Aman rows; see RESULTS 10-05 08:30).
+   - `d06_p640_A` is PARKED 10-05: in the montage 6–7 of 8 sampled no-copy 640 Rusak preds are visibly crushed or torn, so q ≈ 0.75 against a breakeven of 0.4 → ≈ −0.03.
+4. Read each with `/usr/local/bin/python3.11 work/lbdelta.py submissions/d05_p416_allA.csv submissions/<name>.csv 0.87739`. The lbdelta bands run slightly optimistic: 0.80201 came in below the q=0 floor.
+5. Combine the winners for 10-07.
+6. **Colab status (10-05 08:40 WIB).**
+   - Session 11b (h4H = H+ augeq, fold 0) is running in the runner notebook `datascape_a100_runner.ipynb` (Drive, authuser=2) and finishes ~02:53 UTC. Outputs go to Drive `datascape_2026/session11`.
+   - **10-05 03:05 UTC:** session 11b done (h4H FAIL, so `d8`). Session 12 (F1) launched; it runs 7008 iterations and finishes ~05:06 UTC. A check cron is set for 12:13 WIB.
+   - **Finalist notebook.** Generator `work/make_final_nb.py` → `notebook/Datascape_Final_Pipeline.ipynb`, runner `colab/run_final.py`, cell `scratchpad/cell_final.txt` (1,075,559 chars, hash 3188133481; pack `work/sf/pack`).
+     - QUICK mode reproduces d04/d05/d06 row for row (verified locally 10-05).
+     - §9 recomputes the gate in meta_sorted order (the s11/s12 copy subsets were scrambled; see RESULTS 05:00 UTC). §10 rebuilds the F1 candidates.
+     - Drive output: `datascape_2026/final`.
+   - Next: paste `scratchpad/cell12.txt` (53,919 chars, hash 1726930677; built from `work/s12/pack`) and run session 12, the final model F1 (H+ full-fit + pseudo, ~2 h). It reads `gate11_result.json` from Drive to pick `augeq` or `d8`.
+   - Candidate CSVs land in Drive `session1x/cands/` and need the user's OK before they are downloaded to the Mac for submission.
+ Final-pick fallback: `d05_p416_allA`.
+   - Do NOT submit `d06_map_max`: it is built on `d04_da_bt2` and reverts the 416 fix.
+   - `d05_share_non416` stays parked.
 
 # Datascape 2026 autoresearch contract
 
@@ -23,7 +33,7 @@ Pattern from [karpathy/autoresearch](https://github.com/karpathy/autoresearch) a
 
 ## Compute
 - GPU: `asuudane` (T4 x2, 30 h/week) via private dataset `asuudane/datascape-small-512`; `yoursbae` only as extra GPU. Neither account submits.
-- **Colab A100** (user's Colab Pro account, 10-03). The code lives in the private dataset `asuudane/datascape-colab-code`, published by `work/push_colab_code.sh` from `kernels/ft/ft.py` + `colab/{setup.sh,emb_giant.py,driver.py}`.
+- **Colab A100** (the user's Google account, 10-03). The code lives in the private dataset `asuudane/datascape-colab-code`, published by `work/push_colab_code.sh` from `kernels/ft/ft.py` + `colab/{setup.sh,emb_giant.py,driver.py}`.
   - The user stores the asuudane token as Colab Secret `KAGGLE_API_TOKEN`. Claude never types tokens.
   - Then one typed cell:
     `import os; from google.colab import userdata; os.environ['KAGGLE_API_TOKEN'] = userdata.get('KAGGLE_API_TOKEN')`

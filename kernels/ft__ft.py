@@ -9,7 +9,9 @@ except Exception: pass
 
 CFG = dict(model='vit_large_patch14_clip_224.openai', img=224, epochs=50, patience=5, aug='base', mix='', median=True, resize='squash', lr=3e-5, layer_decay=0.8, bs=32,
            ls=0.1, wd=0.05, folds=[0, 1, 2, 3, 4], seed=42, tag='clipL_224', balance='none', drop_file='', pseudo_file='', full_fit=False,
-           ema=0.999, plateau=1, lr_factor=0.3, min_lr_frac=0.01, min_delta=1e-3, lpft=False, save_w=True, label_file='', tta='h')
+           ema=0.999, plateau=1, lr_factor=0.3, min_lr_frac=0.01, min_delta=1e-3, lpft=False, save_w=True, label_file='', tta='h',
+           sched='plateau', warm=0.0, head_mult=1.0, dpr=0.0, gc=False, fold_file='folds.csv', pretrained=True,  # session 10: cosine/warm-frac, head LR mult, drop-path, grad ckpt
+           augeq=False, tta_k=8)  # session 11: every train image AND every TTA view gets noise + fill-rotation, so 'augmented vs raw' carries no label signal
 CFG.update(json.loads(os.environ.get('CFG', '{}')))
 for p in glob.glob('/kaggle/input/**/cfg_override.json', recursive=True): CFG.update(json.load(open(p)))
 IN = os.environ.get('DS_IN', '/kaggle/input')
@@ -39,7 +41,7 @@ def run_fold(fold, gpu):
     dev = 'cuda' if torch.cuda.is_available() else 'cpu'
     bf16 = dev == 'cuda' and torch.cuda.get_device_capability()[0] >= 8  # A100/L4/H100: bf16 + TF32, no loss scaling
     amp = torch.bfloat16 if bf16 else torch.float16; torch.backends.cuda.matmul.allow_tf32 = torch.backends.cudnn.allow_tf32 = True
-    meta = pd.read_csv(find('meta_sorted.csv')); folds = pd.read_csv(find('folds.csv')).set_index('path')
+    meta = pd.read_csv(find('meta_sorted.csv')); folds = pd.read_csv(find(CFG['fold_file'])).set_index('path')
     root = os.path.dirname(os.path.dirname(find('Aman__Aman_00001.jpg')))
     tr = meta[meta.split == 'train'].copy(); te = meta[meta.split == 'test'].copy()
     tr['fold'] = folds.loc[tr.path, 'fold'].values; tr['y'] = tr.label.map({c: i for i, c in enumerate(C)})
@@ -54,7 +56,10 @@ def run_fold(fold, gpu):
         trn = pd.concat([trn, te.set_index('path').loc[ps.path].reset_index()]); Ytrn = np.concatenate([Ytrn, ps[C].values.astype(np.float32)])
     if SMOKE: ix = np.random.RandomState(0).choice(len(trn), 64, replace=False); trn, val, te, Ytrn = trn.iloc[ix], val.sample(32, random_state=0), te.iloc[:32], Ytrn[ix]
     S = CFG['img']
-    m = timm.create_model(CFG['model'], pretrained=True, num_classes=3, img_size=S) if 'eva' in CFG['model'] or 'vit' in CFG['model'] else timm.create_model(CFG['model'], pretrained=True, num_classes=3)
+    kw = dict(img_size=S) if 'eva' in CFG['model'] or 'vit' in CFG['model'] else {}
+    if CFG['dpr']: kw['drop_path_rate'] = CFG['dpr']
+    m = timm.create_model(CFG['model'], pretrained=CFG['pretrained'], num_classes=3, **kw)
+    if CFG['gc']: m.set_grad_checkpointing(True)  # ViT-H+ @384 needs it on a 40 GB A100
     m = m.to(dev)
     cfg = timm.data.resolve_data_config({}, model=m); norm = T.Normalize(cfg['mean'], cfg['std'])
 
@@ -67,24 +72,35 @@ def run_fold(fold, gpu):
             a[msk < p / 2] = 0; a[msk > 1 - p / 2] = 255
         elif r < 0.3: a = a + np.random.randn(*a.shape) * np.random.uniform(5, 40)
         return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+    def noise_eq(im):  # session 11: always-on corruption (train Aman were noised by the organiser, train Rusak and all test rows are raw)
+        a = np.asarray(im).astype(np.float32); a = a + np.random.randn(*a.shape) * np.random.uniform(8, 45)
+        if np.random.rand() < 0.5:
+            msk = np.random.rand(*a.shape[:2]); p = np.random.uniform(0.01, 0.08); a[msk < p / 2] = 0; a[msk > 1 - p / 2] = 255
+        return Image.fromarray(a.clip(0, 255).astype(np.uint8))
+    rot45 = T.RandomChoice([T.RandomRotation(45, fill=0), T.RandomRotation(45, fill=255)])   # organiser-style rotation with black or white corners
+    r90 = T.Lambda(lambda x: torch.rot90(x, int(np.random.randint(4)), (-2, -1)))
     base = [T.RandomResizedCrop(S, scale=(0.4, 1), ratio=(0.6, 1.66)), T.RandomHorizontalFlip(), T.RandomVerticalFlip(0.2),
             T.RandomApply([T.RandomRotation(90)], p=0.2), T.ColorJitter(0.3, 0.3, 0.3, 0.05), T.RandomGrayscale(0.1)]
     aug = T.Compose({'light': [T.RandomResizedCrop(S, scale=(0.7, 1)), T.RandomHorizontalFlip()],
                      'base': base,
-                     'strong': base + [T.TrivialAugmentWide()]}[CFG['aug']])  # Mueller 2021 TrivialAugment
+                     'strong': base + [T.TrivialAugmentWide()],
+                     'd8': base[:2] + [T.RandomVerticalFlip(0.5), T.Lambda(lambda x: torch.rot90(x, int(np.random.randint(4)), (-2, -1)))] + base[4:],
+                     'augeq': base[:2] + [T.RandomVerticalFlip(0.5), r90, rot45] + base[4:]}[CFG['aug']])
+    tta_aug = T.Compose([T.Resize((S, S), antialias=True), T.RandomHorizontalFlip(), T.RandomVerticalFlip(), r90, rot45])  # stochastic TTA in the same corrupted domain  # TrivialAugment (Mueller 2021); d8 = dihedral group, matches d8 TTA
     erase = T.RandomErasing(p=0.25) if CFG['aug'] == 'strong' else None   # Zhong 2020 random erasing
     class DS(Dataset):
-        def __init__(s, df, Y=None, train=False): s.p, s.Y, s.train = df.path.values, Y, train
+        def __init__(s, df, Y=None, train=False, taug=False): s.p, s.Y, s.train, s.taug = df.path.values, Y, train, taug
         def __len__(s): return len(s.p)
         def __getitem__(s, i):
             im = Image.open(f'{root}/{s.p[i].split("work/small/")[1]}').convert('RGB')
             if s.train:
                 if np.random.rand() < 0.2: im = im.resize((224, 224)).resize(im.size)  # low-res copies seen in test
-                im = noise(im)
+                im = noise_eq(im) if CFG['augeq'] else noise(im)
+            elif s.taug: im = noise_eq(im)
             if CFG['median']: im = Image.fromarray(cv2.medianBlur(np.asarray(im), 3))  # == PIL MedianFilter(3) bit-exact, ~80x faster
             if CFG['resize'] == 'pad': im = ImageOps.pad(im, (max(im.size),) * 2, color=(128, 128, 128))  # letterbox keeps aspect ratio
             x = T.functional.to_image(im)
-            x = aug(x) if s.train else T.functional.resize(x, [S, S], antialias=True)
+            x = aug(x) if s.train else tta_aug(x) if s.taug else T.functional.resize(x, [S, S], antialias=True)
             x = norm(T.functional.to_dtype(x, torch.float32, scale=True))
             if s.train and erase is not None: x = erase(x)
             return (x, s.Y[i]) if s.Y is not None else x
@@ -104,30 +120,40 @@ def run_fold(fold, gpu):
         with torch.no_grad(): hd.weight.copy_(torch.tensor(lp.coef_)); hd.bias.copy_(torch.tensor(lp.intercept_))
         m.train(); print(f'fold {fold} LP-FT head fitted', flush=True)
     opt = timm.optim.create_optimizer_v2(m, 'adamw', lr=CFG['lr'], weight_decay=CFG['wd'], layer_decay=CFG['layer_decay'])
-    for g in opt.param_groups: g['lr0'] = g['lr']
+    if CFG['head_mult'] != 1:  # pig 1st place: head 3e-4 vs backbone 3e-5
+        hp = {id(p) for p in m.get_classifier().parameters()}
+        for g in opt.param_groups: g['params'] = [p for p in g['params'] if id(p) not in hp]
+        opt.add_param_group(dict(params=list(m.get_classifier().parameters()), lr=CFG['lr'] * CFG['head_mult'], weight_decay=CFG['wd']))
+    for g in opt.param_groups: g['lr'] = g['lr0'] = g['lr'] * g.get('lr_scale', 1.0)  # timm stores layer decay as lr_scale (only its own schedulers apply it); before 10-04 ft.py ignored it
     plat = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, 'min', factor=CFG['lr_factor'], patience=CFG['plateau'], threshold=CFG['min_delta'], threshold_mode='abs',
                                                       min_lr=[g['lr'] * CFG['min_lr_frac'] for g in opt.param_groups])
-    warm, total = len(dl), CFG['epochs'] * len(dl)
+    total = CFG['epochs'] * len(dl); warm = max(1, int(CFG['warm'] * total)) if CFG['warm'] else len(dl); cos = CFG['full_fit'] or CFG['sched'] == 'cosine'
     def set_lr(it):  # per step: linear warmup over epoch 0; full_fit (no val) instead cosine-decays over the fixed epochs
         if it < warm: f = (it + 1) / warm
-        elif CFG['full_fit']: f = 0.5 * (1 + np.cos(np.pi * (it - warm) / max(1, total - warm)))
+        elif cos: f = 0.5 * (1 + np.cos(np.pi * (it - warm) / max(1, total - warm)))
         else: return
         for g in opt.param_groups: g['lr'] = g['lr0'] * f
     ema = ModelEmaV3(m, decay=CFG['ema'], use_warmup=True)  # fp32 copy; all eval/selection/saving uses it
     scaler = torch.amp.GradScaler(enabled=dev == 'cuda' and not bf16)
     def predict(df, tta=True):
         net = ema.module.eval(); out = []
+        if tta and CFG['tta'] == 'augeq':  # mean over tta_k stochastic corrupted views (new DataLoader per pass -> new worker seeds)
+            def one():
+                with torch.no_grad(), torch.autocast(dev, dtype=amp, enabled=dev == 'cuda'):
+                    return np.concatenate([net(x.to(dev)).float().softmax(1).cpu().numpy() for x in DataLoader(DS(df, taug=True), batch_size=128, num_workers=nw)])
+            return sum(one() for _ in range(CFG['tta_k'])) / CFG['tta_k']
         with torch.no_grad(), torch.autocast(dev, dtype=amp, enabled=dev == 'cuda'):
             for x in DataLoader(DS(df), batch_size=128, num_workers=nw):
                 x = x.to(dev); p = net(x).float().softmax(1)
-                if tta and CFG['tta'] == 'hv4': p = (p + net(x.flip(3)).float().softmax(1) + net(x.flip(2)).float().softmax(1) + net(x.flip(2).flip(3)).float().softmax(1)) / 4
+                if tta and CFG['tta'] == 'd8': p = sum(net(torch.rot90(v, k, (2, 3))).float().softmax(1) for v in (x, x.flip(3)) for k in range(4)) / 8
+                elif tta and CFG['tta'] == 'hv4': p = (p + net(x.flip(3)).float().softmax(1) + net(x.flip(2)).float().softmax(1) + net(x.flip(2).flip(3)).float().softmax(1)) / 4
                 elif tta: p = (p + net(x.flip(3)).float().softmax(1)) / 2
                 out.append(p.cpu().numpy())
         return np.concatenate(out)
     from sklearn.metrics import f1_score
     t0 = time.time(); m.train(); hist, best, bad, it = [], (np.inf, -1, None), 0, 0
     for ep in range(CFG['epochs']):
-        tl = 0
+        tl = ta = 0
         for x, yb in dl:
             x, yb = x.to(dev, non_blocking=True), yb.to(dev)
             if CFG['mix'] and np.random.rand() < 0.5:  # Zhang 2018 mixup / Yun 2019 cutmix (both noted robust to label noise)
@@ -147,16 +173,21 @@ def run_fold(fold, gpu):
                 if CFG['balance'] == 'focal': lp = lp * (1 - lp.exp()) ** 2  # Lin 2017, gamma=2
                 loss = torch.sum(-yb * cw * lp, 1).mean()
             opt.zero_grad(set_to_none=True); scaler.scale(loss).backward(); scaler.unscale_(opt)
-            nn.utils.clip_grad_norm_(m.parameters(), 1.0); scaler.step(opt); scaler.update(); ema.update(m, step=it); it += 1; tl += loss.item()
-        lr = max(g['lr'] for g in opt.param_groups); msg = f'fold {fold} ep {ep} lr {lr:.2e} loss {tl / max(len(dl), 1):.4f} {time.time() - t0:.0f}s'
+            nn.utils.clip_grad_norm_(m.parameters(), 1.0); scaler.step(opt); scaler.update(); ema.update(m, step=it); it += 1; tl += loss.item(); ta += (z.argmax(1) == yb.argmax(1)).float().mean().item()
+            if it % 20 == 0:  # live progress + ETA for the Colab monitor
+                el = time.time() - t0; json.dump(dict(tag=CFG['tag'], fold=fold, ep=ep, it=it, total=total, elapsed=round(el), eta=round(el / it * (total - it)),
+                                                     loss=round(tl / ((it - 1) % len(dl) + 1), 4), acc=round(ta / ((it - 1) % len(dl) + 1), 4),  # running train acc vs the (smoothed/pseudo) targets
+                                                     mode='full-fit' if CFG['full_fit'] else 'fold', val_f1=hist[-1]['val_f1'] if hist else None), open(f'{OUT}/progress_{CFG["tag"]}.json', 'w'))
+        lr = max(g['lr'] for g in opt.param_groups); msg = f'fold {fold} ep {ep} lr {lr:.2e} loss {tl / max(len(dl), 1):.4f} trainAcc {ta / max(len(dl), 1):.4f} {time.time() - t0:.0f}s'
         if not CFG['full_fit']:  # EMA val NLL drives plateau decay, ES and checkpoint choice (smoother than F1 -> less selection bias)
             pv = predict(val, tta=False); vl = float(-np.log(pv[np.arange(len(val)), val.y.values] + 1e-9).mean())
             vf = f1_score(val.y, pv.argmax(1), average='macro'); hist.append(dict(ep=ep, lr=lr, train_loss=tl / max(len(dl), 1), val_loss=vl, val_f1=vf))
             msg += f' valLoss {vl:.4f} valF1 {vf:.4f}'
-            if vl < best[0] - CFG['min_delta']: best = (vl, ep, {k: v.detach().to('cpu', copy=True) for k, v in ema.module.state_dict().items()}); bad = 0
-            else: bad += 1
-            if ep > 0: plat.step(vl)
-            if bad >= CFG['patience']: print(msg + ' -> early stop', flush=True); break
+            if not cos:  # fixed cosine schedule (pig recipe) keeps the final EMA: no plateau, no early stop, no best-epoch selection
+                if vl < best[0] - CFG['min_delta']: best = (vl, ep, {k: v.detach().to('cpu', copy=True) for k, v in ema.module.state_dict().items()}); bad = 0
+                else: bad += 1
+                if ep > 0: plat.step(vl)
+                if bad >= CFG['patience']: print(msg + ' -> early stop', flush=True); break
         print(msg, flush=True)
     if best[2] is not None: ema.module.load_state_dict(best[2]); print(f'fold {fold} restored best epoch {best[1]} valLoss {best[0]:.4f}', flush=True)
     json.dump(dict(hist=hist, best_epoch=best[1]), open(f'{OUT}/hist_{CFG["tag"]}_f{fold}.json', 'w'))

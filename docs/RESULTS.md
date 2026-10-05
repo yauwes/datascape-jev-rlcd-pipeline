@@ -356,3 +356,168 @@ MLP512+CE, 3 seeds, group folds; each row is vs original labels.
   - Held-out F1 round 0 → 3: 0.9604 → best +0.0024, and +0.001 at bias −0.8.
   - The unlocked Rusak share stays at 0.262–0.263, with 749–806 pseudo rows per round.
   - **Below the +0.005 bar, so it is closed.**
+
+## 10-04 15:00 UTC — session 10 PRE-REGISTERED: DINOv3 ViT-H+ full fine-tune (pig-posture 1st-place recipe) + exhaustive copy matching
+Ref: Kaggle multi-view-pig-posture-recognition public 1st (sugupoko, 2026): `vit_huge_plus_patch16_dinov3.lvd1689m` @384, AdamW lr 3e-5 / head 3e-4, LLRD 1.0, cosine 5% warmup, 12 ep, EMA 0.9985, LS 0.1, drop-path 0.1, grad ckpt, dihedral TTA, equal-weight LLRD-ladder ensemble.
+Adaptation: no ConditionalDesaturate (test chroma ≥ train for every source, `meta_noise.csv`); dihedral 8-view TTA without remap (no chiral classes); `ft.py` noise aug kept.
+Reopens a closed idea (L fine-tunes, frozen H+ +0.0003) only because the recipe differs (H+ size, uniform LR, EMA, cosine); the gate decides.
+
+Gate (fold 0 only, two runs: **A** train-only, **B** train + twin-locked test rows of the other 4 `pl_iter` folds = pseudo-label arm). Baselines from `work/gate10.py` → `work/gate10_baselines.csv`:
+- (a) group90 fold-0 val, original labels: h2 0.9035 all (n 2445), **0.9017 clean** (n 2399, no pixel-exact copy in train folds ≠ 0).
+- (b) fold-0 held-out locked test rows (n 278, `pl_iter` seed-0 split): h2 train-only 0.889 / 0.9174 @ bias −0.8; **DA head r0 0.9466 / 0.9853 @ −0.8**.
+- PASS = any of: A or B ≥ +0.005 over h2 on (a)-clean; B ≥ +0.005 over DA r0 on (b) at the same bias; equal-weight blend with h2 (a) or DA (b) ≥ +0.005 — AND unlocked-test Rusak share not above the baseline's. n 278 → SE ≈ 0.015, so (b) alone is weak evidence.
+- FAIL on all → close the DINOv3-H+ fine-tune; no further folds. PASS → next session: remaining folds of the passing arm + LLRD 0.95 member.
+- 0.99 is not a usable stop rule: exact train-train copies agree 96–97% (label noise ceiling).
+
+## 10-04 17:30 UTC — "Pillar 4" (Lainnya prior matching to 3.5%) checked; candidate built, PARKED (user kept the planned probes)
+- Claim (pasted 4-pillar write-up): Lainnya is under-predicted (1.8% vs train 3.46%), so F1_Lainnya ≈ 0.65 caps LB at 0.84; prior matching to 3.5% would lift macro-F1 to 0.97+. The arithmetic does not hold: 0.65 → 0.97 adds +0.107, i.e. 0.845 → 0.95, and only if every new Lainnya call is right.
+- Evidence:
+  - Reaching 3.5% flips 52 non-copy test rows whose DA-head P(L) is only 0.056–0.080. Test has just 6 non-Lainnya rows with P(L) ≥ 0.1.
+  - Train group-OOF (h2) rows at P(L) 0.05–0.1 are truly Lainnya 0.3% of the time (n = 1456); at 0.1–0.2, 2.8% (n = 108).
+  - Lainnya rarely has pixel copies (5.7% of Lainnya train rows vs 28.4% overall), so copy structure says nothing about the test Lainnya share.
+- `d05_lainnya_pm35` is registered: expected LB 0.765 [0.74, 0.957]. Nearly all 52 flips should be false positives, F1_Lainnya ~0.8 → ~0.55, so about −0.08.
+- The user chose to keep the 10-05 slots for `d05_p416_allA` + `d05_p675_R`. This strengthens the 10-03 closed idea "Lainnya share correction".
+- Separately, `datascape/ground_truth_test_set.csv` (created 17:09 UTC by another process) is not ground truth. Its tiers are SHA-256/dihedral/SSCD copy labels plus "DA-Ensemble Model Prediction", the last identical to `d04_da_bt2`. It scores `d04_da_bt2` at 0.9906 while the real LB is 0.845. `submission_from_ground_truth.csv` = `d04_da_bt2` + 24 copy-label flips, 20 of them shared with the 10-06 exact-copy fix.
+
+## 10-04 17:50 UTC — "test = augmented train?" precise-mapping audit + LB estimate (`d06_map_max` registered)
+- Coverage (SSCD top-10 + dihedral pixel NCC + SIFT/RANSAC):
+
+  | tier | test rows | share | train-side agreement with own label |
+  |---|---|---|---|
+  | exact pixel copy | 796 | 26.0% | 0.968 |
+  | SSCD twin, pure vote | 1345 | 44.0% | 0.977 |
+  | SSCD twin, mixed vote | 216 | 7.1% | 0.767 |
+  | SIFT ≥ 30 inliers | 60 | 2.0% | 0.981 |
+  | no train source | 640 | 20.9% | — |
+
+  So the user's suspicion holds for ~79% of test.
+- If test labels equalled the copied train labels, mapping + OOF-level model would give ≈ 0.93 accuracy.
+- The LB says otherwise:
+  - `d04_da_bt2` vs `d05_h2_nolock_s337` differ by a balanced swap of 253 rows (126 A→R, 127 R→A) and +0.0152 LB. At ≈ 0.00055 macro-F1 per row, the copy/DA label is right in only ≈ 55% of contested rows (LOO promised 88–98%).
+  - Test labels of copies therefore often differ from their train labels: group-consistent label noise, or a different labelling convention (discoveries #24, #27).
+- `d06_map_max` = `d04_da_bt2` + every remaining mapping disagreement: 29 rows (15 exact, 11 SIFT, 3 twin).
+  - Expected LB 0.85 [0.845, 0.861]: the upper end is q = 1, the centre uses the train calibration discounted toward the LB-anchored 55%.
+  - It replaces the 24-row exact-copy fix as the 10-06 mapping candidate. Mapping alone cannot reach 0.99: the remaining gap is label convention/noise on rows that already carry mapped labels.
+
+## 10-04 18:10 UTC — session 10 results (A100, 194 min, 17.2 CU; runtime released, 0 active sessions, 147.17 CU left)
+Executed notebook: Drive `datascape_2026/session10/Datascape_S10_DINOv3_A100.ipynb` (also `asuudane/datascape-colab-out10`).
+
+| model | (a) fold-0 all | (a) clean | (b) locked held-out | (b) @ −0.8 | unlocked Rusak | @ −0.8 |
+|---|---|---|---|---|---|---|
+| h2 (baseline) | 0.9035 | 0.9017 | 0.889 | 0.9174 | 0.363 | 0.303 |
+| h3A DINOv3-H+ FT, train only | 0.8874 | 0.8855 | 0.9387 | 0.9398 | 0.274 | 0.236 |
+| h3B = A + 1256 locked test rows | 0.9034 | 0.9016 | **0.965** | 0.9763 | 0.284 | 0.260 |
+| h3A + h2 (equal) | 0.9037 | 0.9020 | 0.9413 | 0.9466 | 0.302 | 0.248 |
+| h3B + h2 (equal) | 0.9077 | 0.9061 | 0.9492 | 0.9735 | 0.309 | 0.255 |
+
+DA head constants on (b): 0.9466, and 0.9853 @ −0.8.
+- **Gate:**
+  - A FAILS: (a) −0.016, blend +0.0003.
+  - B PASSES the pre-registered rule on (b) at argmax (+0.018 vs DA head), but it is −0.009 at the DA bias. n = 278 (SE ≈ 0.015), so B ≈ DA head within noise.
+- **Pseudo-labels vs none (user question):**
+  - +0.016 on (a) and +0.026 on (b), with the Rusak share still low.
+  - Adding the locked test rows helps the fine-tune, as it did the heads.
+- **Caveat:** (b) labels are copied train labels, and a fully fine-tuned H+ memorises near-duplicates better than frozen heads (A gets 0.939 on (b) without seeing a single locked row). On the LB, copied labels are right only ~55% of the time where they disagree with the model (10-04 17:50). So (b) overstates B's LB value. Only an LB probe can decide.
+- **Copy matching** (exhaustive all-pairs dihedral NCC, 64 px over all pairs → 128 px verify):
+  - 800 test rows have an exact copy (was 796). SSCD top-10 already held 99.5% of them, so mapping is saturated.
+  - Train-train exact agreement is 0.963; 6.9% of those pairs straddle group90 folds.
+  - The near tier (0.95–0.99) is visibly augmented copies (Gaussian noise, colour shift, vertical flip + recolour), and some carry another label.
+  - The 20 conflicting copy groups are colour-vs-grayscale versions of one image with different train labels.
+  - 15 unanimous copy labels differ from `d04_da_bt2` (11 R→A, 3 A→R, 1 A→L).
+- **Frozen DINOv3-H+ for conflicts:** LR OOF 0.8207 vs h2 0.8926. On 156 train rows whose copies disagree, DINO gets 0.532 and h2 0.564, so h2 is used. Labels inside conflict groups are coin flips.
+- **Next (pre-registered PASS → B):**
+  - First, a free LB probe from the existing fold-0 B test predictions, blended with the DA heads on unlocked rows. This needs `pred_h3B_f0.npz` downloaded from Drive.
+  - Only if that probe beats `d04_da_bt2`: full-fit B (~100 min) and an LLRD 0.95 member.
+
+## 10-05 00:00 UTC — LB: per-source probes read "stricter convention"
+| sub | LB | Δ vs 0.84521 | read |
+|---|---|---|---|
+| `d05_p416_allA` | **0.87739** | +0.0322 | above the q=0 centre (0.8747): all 136 flipped 416 rows are Aman. **New best** |
+| `d05_p675_R` | 0.80201 | −0.0432 | below the q=0 floor (0.8045): the no-copy 675 rows are Aman, so the DA lock was right |
+
+- Copy-structure hypothesis refuted. In the curated/synthetic test sources (416, 675) Aman makes up ~100%, while train 416 is 71% Rusak and train 675 is 78% Rusak. The model's 416 Rusak calls were domain shift.
+- lbdelta's public-LB model is slightly off: the 675 read landed under its band. Trust direction, not q to two decimals.
+- **10-06 pair**, both built on `d05_p416_allA` and each changing one hypothesis:
+  - `d06_cur_A`: the remaining 25 Rusak in 512 and 675 → Aman. Expected 0.881 [0.868, 0.889].
+  - `d06_p640_A`: 121 no-copy (NCC ≤ 0.8) 640 Rusak → Aman. Test 640 is predicted 78% Rusak against 47% in train. Breakeven q ≈ 0.4; expected 0.869 [0.832, 0.903].
+- `d06_map_max` is retired: it was built on `d04_da_bt2`. Its 5 A→R flips in 675 contradict this read.
+
+## 10-05 08:30 UTC — error-pattern study (local, light)
+- **Augmentation shortcut (montage of 416).**
+  - Train 416 Rusak are raw renders of dented boxes.
+  - Train 416 Aman are intact boxes that are mostly augmented: Gaussian or impulse noise, rotation with black corners, brightness.
+  - Test 416 rows are raw intact boxes; the LB shows they are all Aman.
+  - The model learned "augmented ⇒ Aman, raw ⇒ Rusak", and every test image is raw.
+- **Noise confound in numbers.**
+  - Train noisy share for Aman vs Rusak: 416 0.46 vs 0.04; 675 0.57 vs 0.03; 640 0.13 vs 0.04; other 0.34 vs 0.17.
+  - Test noisy share is 0–3% everywhere except 224 (0.73) and 512 (0.38).
+- **The noise-only fix fails.** A quick test (frozen PE-G + EVA02-E + DINOv2-L, LR, group folds):
+
+  | variant | OOF clean | R rate 416 (truly A) | R rate 675 (truly A) |
+  |---|---|---|---|
+  | all rows | 0.8851 | 0.974 | 0.868 |
+  | clean-only | 0.8773 | 0.974 | 0.886 |
+  | noise-reweighted | 0.8858 | 0.927 | 0.800 |
+
+  The noise flag misses the rotation and brightness augmentations.
+- **640 and "other" montage.**
+  - Test no-copy Rusak predictions are mostly visibly crushed or torn, so they are probably right.
+  - Train Rusak includes many intact boxes and stock illustrations, which is label noise.
+  - `d06_p640_A` is parked.
+- **Joint LB inversion** of base + 416 + 675 (both q = 0, binomial public counts).
+  - Implied public counts: k ≈ 36 of 41 expected and k2 ≈ 54 of 47 expected, which explains the 675 read landing below its floor.
+  - F1 A 0.89 [0.77, 0.97], R 0.81 [0.70, 0.90], L 0.85 [0.71, 0.97]; true public Lainnya ≈ 17, close to the predicted count.
+  - Underdetermined, so no class can be singled out as the weak one.
+- **Next gate (session 11, Colab).** Score h3A (fine-tune, train-only) on the 473 LB-confirmed Aman rows (all 193 test 416 + all 280 test 675).
+  - Two-sided: Rusak on the 473 rows must fall sharply, while the Rusak share on copy-labelled 640 Rusak rows and on "other" stays near the base.
+  - h3A's augmentation was RRC, flips, rot90, ColorJitter and grayscale, with no noise and no fill-rotation.
+
+## 10-05 09:30 UTC — session 11 PRE-REGISTERED: augmentation-equalised fine-tune (Colab A100)
+- **Notebook.** `colab/ds11.ipynb` (generator `colab/make_nb11.py`, runner `colab/run11.py`); the local dry run passed.
+- **Arms.** DINOv3 ViT-L/16 @384, train-only, fold 0, pig recipe, 10 epochs:
+  - **h4 `augeq`:** every train image and every TTA view (8 stochastic) gets Gaussian noise σ 8–45, plus 50% impulse noise and a ±45° rotation with black or white fill.
+  - **h4c:** the same with `d8` aug.
+  - h3A/h3B (session 10, H+, `d8`) are read from Drive.
+- **Gate (train-only models).** PASS needs all three:
+  1. Rusak rate on G1n ≤ 0.50. G1n = 233 LB-confirmed Aman rows (test 416/675 with no train copy at NCC ≥ 0.95). h2 = 0.923, da_h2 = 0.498.
+  2. Rusak rate on CRx ≥ 0.917. CRx = 244 rows whose exact copies unanimously say Rusak, outside 416/675. h2 = 0.967.
+  3. 640 Rusak share ≥ 0.65 (h2 = 0.81).
+- **On PASS.**
+  - Candidate = `d06_cur_A` plus the model's ≥ 0.70-confidence disagreements on 640/other rows with no copy. It goes in the 10-06 slot 2 and is read paired against `d06_cur_A`.
+  - Then: full-fit, and augeq for the frozen towers.
+- **On FAIL.** Fine-tuning does not break the shortcut; 10-06 slot 2 stays empty.
+- **10-05 10:05 amendment (before any new training).**
+  - Run 1 (8 min, ~1 CU) produced no fine-tune: `ft.py` could not find `meta_sorted.csv` under `/content/in`, because the aux download was dropped. Fixed by copying it into `extra/`.
+  - Run 1 did read the session-10 fine-tunes against the gate:
+
+    | model | G1n_R | CRx_R | R_640 | gate |
+    |---|---|---|---|---|
+    | h3A (H+, d8, train-only) | 0.476 | 0.922 | 0.781 | **PASS** (fold-0 val F1 0.8874) |
+    | h3B (+ locked test) | 0.399 | 0.943 | 0.767 | not eligible |
+
+    Fine-tuning roughly halves the shortcut, against frozen h2 at 0.923.
+  - The h4/h4c ViT-L pair is replaced by **h4H**: h3A's exact H+ recipe with only the augmentation changed to `augeq`. h3A is the control.
+  - Same gate. Candidates come in two variants: R→A only, and both directions.
+
+## 10-05 03:00 UTC — session 11b result (gate pre-registered 09:30 UTC; A100 93.4 min; Drive `datascape_2026/session11`)
+| model (fold 0, train-only) | G1n_R (≤ 0.50) | CRx_R (≥ 0.917) | R_640 (≥ 0.65) | R_other | fold-0 val F1 | gate |
+|---|---|---|---|---|---|---|
+| h2 frozen (reference) | 0.923 | 0.967 | 0.810 | 0.285 | — | — |
+| h3A H+ `d8` | **0.476** | 0.922 | 0.781 | 0.265 | 0.8874 | **PASS** |
+| h4H H+ `augeq` | 0.515 | 0.963 | 0.795 | 0.273 | 0.8871 | FAIL (G1n) |
+
+- Always-on corruption did **not** reduce the shortcut further: 0.515 vs 0.476. It kept more Rusak overall (CRx 0.963), so it is a more Rusak-leaning model, not a less biased one.
+- The gain comes from full fine-tuning itself (h2 0.923 → h3A 0.476), not from equalising augmentation. `augeq` is closed.
+- **Session 12 rule** (h4H must beat h3A by ≥ 0.05 on G1n): not met, so the final model F1 uses `d8`, h3A's recipe.
+
+## 10-05 05:00 UTC — CORRECTION: row-order bug in today's copy-based subsets
+- `work/pix_all.npz` is in **meta_sorted order** (`work/pixall.py`): 796 exact test rows, train-train agreement 0.962. Today's s11 rows file, the gate sets and the `d06_p640_A` selection remapped it through `meta.csv` order. That scrambles it: 1,309 exact rows, agreement 0.823.
+- **Affected:**
+  - G1n (the no-copy subset of the LB-confirmed Aman rows) and CRx/CAx (copy-labelled sets) in sessions 11/12;
+  - the candidates' "no copy" eligibility in sessions 11/12 (`cand_*` in Drive are superseded);
+  - the parked `d06_p640_A` set, and the "no-copy" label of the 640 montage. That montage was effectively a random sample of 640 Rusak predictions, which still look damaged.
+- **Not affected:**
+  - G1-all (source only): h2 0.925, DA 0.490, h3A **0.471**, h3B 0.396, h4H 0.512. The h3A conclusion stands on this set.
+  - F1's pseudo-labels (twin vote plus source).
+  - `d06_cur_A` (source only), `lbdelta` and the LB inversion.
+- **Fix:** `work/make_final_nb.py` §9/§10 recompute the gate and the candidates in meta_sorted order from the Drive predictions.
