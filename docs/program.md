@@ -1,23 +1,18 @@
 ## >>> NEXT ACTION 10-06 00:00 UTC (survives context reset) <<<
-**10-05 result:** `d05_p416_allA` LB **0.87739**, the new team best (+0.0322 vs 0.84521). `d05_p675_R` scored 0.80201 (−0.043). Row "stricter convention": test 416 and no-copy 675 are ~all Aman (q≈0). **The new base is `d05_p416_allA` @ 0.87739.**
-1. Check `date -u`. Submit only on 2026-10-06 or later, because 10-05's slots are spent (2 of the 3 shared with the teammate).
-2. `env -u KAGGLE_API_TOKEN /usr/local/bin/python3.11 work/subreg.py submit d06_cur_A`: the 25 remaining curated-source (512/675) Rusak → Aman.
-3. SLOT 2 = (none yet). It is filled only if the session-11 fine-tune gate passes (h3A/h3B on the 473 LB-confirmed Aman rows; see RESULTS 10-05 08:30).
-   - `d06_p640_A` is PARKED 10-05: in the montage 6–7 of 8 sampled no-copy 640 Rusak preds are visibly crushed or torn, so q ≈ 0.75 against a breakeven of 0.4 → ≈ −0.03.
-4. Read each with `/usr/local/bin/python3.11 work/lbdelta.py submissions/d05_p416_allA.csv submissions/<name>.csv 0.87739`. The lbdelta bands run slightly optimistic: 0.80201 came in below the q=0 floor.
-5. Combine the winners for 10-07.
-6. **Colab status (10-05 08:40 WIB).**
-   - Session 11b (h4H = H+ augeq, fold 0) is running in the runner notebook `datascape_a100_runner.ipynb` (Drive, authuser=2) and finishes ~02:53 UTC. Outputs go to Drive `datascape_2026/session11`.
-   - **10-05 03:05 UTC:** session 11b done (h4H FAIL, so `d8`). Session 12 (F1) launched; it runs 7008 iterations and finishes ~05:06 UTC. A check cron is set for 12:13 WIB.
-   - **Finalist notebook.** Generator `work/make_final_nb.py` → `notebook/Datascape_Final_Pipeline.ipynb`, runner `colab/run_final.py`, cell `scratchpad/cell_final.txt` (1,075,559 chars, hash 3188133481; pack `work/sf/pack`).
-     - QUICK mode reproduces d04/d05/d06 row for row (verified locally 10-05).
-     - §9 recomputes the gate in meta_sorted order (the s11/s12 copy subsets were scrambled; see RESULTS 05:00 UTC). §10 rebuilds the F1 candidates.
-     - Drive output: `datascape_2026/final`.
-   - Next: paste `scratchpad/cell12.txt` (53,919 chars, hash 1726930677; built from `work/s12/pack`) and run session 12, the final model F1 (H+ full-fit + pseudo, ~2 h). It reads `gate11_result.json` from Drive to pick `augeq` or `d8`.
-   - Candidate CSVs land in Drive `session1x/cands/` and need the user's OK before they are downloaded to the Mac for submission.
- Final-pick fallback: `d05_p416_allA`.
-   - Do NOT submit `d06_map_max`: it is built on `d04_da_bt2` and reverts the 416 fix.
-   - `d05_share_non416` stays parked.
+SUBMIT: d06_cur_A, d06_F1_AR25
+(The cron submits exactly the names on the SUBMIT line, at most 2 and only if each is registered in submissions/ledger.csv. Slot 2 is added here ONLY after `subreg add`.)
+- **Base:** `d05_p416_allA`, public LB 0.87739. Read each submission with `/usr/local/bin/python3.11 work/lbdelta.py submissions/d05_p416_allA.csv submissions/<name>.csv 0.87739`. lbdelta integrates Binomial public counts and handles flips in both directions.
+- **Slot-2 candidate (needs `pred_F1_f0.npz` from Drive `datascape_2026/session12`):** `d06_F1_AR25` = `d06_cur_A` + the 25 "other" no-copy rows that F1 calls Rusak at ≥ 0.70 where the base says Aman.
+  - It tests whether the base's −0.8 no-twin Aman bias over-corrects in "other".
+  - It runs AGAINST the confirmed direction (every LB win so far was R→A); this is stated when it is pre-registered.
+- **Autoresearch ratchet:** `work/results.tsv` holds one paired LB probe per row (hypothesis, base, rows changed by group and direction, lbdelta expectation, actual, q, KEEP/DISCARD). The base moves only on KEEP.
+- **Never submit:** `d06_p640_A` (visually damaged), `d06_map_max` (old base), `d05_share_non416`.
+- **Colab artifacts (Drive `datascape_2026`):**
+  - session10: h3A/h3B fold-0 predictions;
+  - session11: h4H and the gate;
+  - session12: F1 predictions + `weights/`;
+  - final: the executed finalist notebook (QUICK, no cell errors) + submissions.
+- **Team repo** (private, pushed a147f27): `yauwes/datascape-2026-pipeline`, with `reproduce_best.py` → 0.87739, the finalist notebook and FUTURE_WORK.md.
 
 # Datascape 2026 autoresearch contract
 

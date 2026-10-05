@@ -27,7 +27,7 @@ It builds the team's submissions end to end. Each stage records the evidence tha
 | 9 | Model II (re-modelling) | DINOv3-H+ full fine-tune breaks half of the augmentation shortcut; final model F1 = full-fit + pseudo-labels |
 | 10 | Ensemble, TTA, candidates | F1 disagreements on 640/other rows with no copy |
 | 11 | Error analysis | LB history, paired probe reads, joint LB inversion, confusion by source |
-| 12 | Iteration log | every experiment ranked by strength of evidence |
+| 12 | Autoresearch ratchet + iteration log | paired LB probes (KEEP/DISCARD) and every experiment ranked by evidence |
 | 13 | Final submissions | 2 picks with expected scores and reasons |
 
 ## How to run
@@ -60,7 +60,7 @@ FULL = os.environ.get('DS_FULL') == '1'
 flag = lambda k: FULL or os.environ.get(f'DS_{k}') == '1'
 RECOMPUTE_EMB, RECOMPUTE_PIX, RETRAIN_HEADS, RETRAIN_FT = flag('RECOMPUTE_EMB'), flag('RECOMPUTE_PIX'), flag('RETRAIN_HEADS'), flag('RETRAIN_FT')
 SEARCH = [Path('/content/code'), ROOT / 'work', ROOT / 'submissions', ROOT / 'datascape', ROOT, Path('/content/in/artifacts'),   # Colab: the pack (/content/code) overrides older snapshot copies
-          DRIVE / 'session12', DRIVE / 'session11', DRIVE / 'session10', ROOT / 'work/out12_local', ROOT / 'work/out11_local', ROOT / 'work/out10_local']
+          DRIVE / 'session12', DRIVE / 'session11', DRIVE / 'session10', ROOT / 'work/drive_in/session12', ROOT / 'work/drive_in/session11', ROOT / 'work/drive_in/session10']
 def find(rel, required=True):  # exact relative path under each root first; else the shallowest file with that basename (older duplicates live deeper)
     for r in SEARCH:
         if (r / rel).is_file(): return r / rel
@@ -79,10 +79,43 @@ def stage(name):  # progress file for the runner's live status + ETA
 rel = lambda p: str(Path(p).relative_to(ROOT)) if ROOT in Path(p).parents else str(p)   # print paths relative to the repo root
 def show(df, n=60): print(df.head(n).to_string() if isinstance(df, pd.DataFrame) else df)   # plain text renders everywhere (Drive viewer, GitHub, Kaggle)
 print('env', 'Colab' if COLAB else 'local', '| root', ROOT.name, '| mode', 'FULL' if FULL else 'QUICK', dict(RECOMPUTE_EMB=RECOMPUTE_EMB, RECOMPUTE_PIX=RECOMPUTE_PIX, RETRAIN_HEADS=RETRAIN_HEADS, RETRAIN_FT=RETRAIN_FT))"""),
+md("""## Executive summary
+| | |
+|---|---|
+| **Best public LB** | **0.87739** (`d05_p416_allA`); `d06_cur_A` and `d06_F1_AR25` are scored 10-06 |
+| **What moved the score** | Twin lock + domain-adapted heads (+0.015); per-source rules read from paired LB probes (+0.032) |
+| **Main error** | an *augmentation shortcut*: train Aman images are organiser-augmented and train Rusak images are raw, while every test image is raw → models over-call Rusak |
+| **Re-modelling** | a full DINOv3-H+ fine-tune halves the shortcut (Rusak on LB-confirmed Aman rows 0.938 → 0.487) without losing true Rusak (0.978) |
+| **Method** | autoresearch ratchet: one pre-registered hypothesis per paired LB probe, KEEP/DISCARD, base moves only on KEEP (§12) |
+
+The diagram below is the pipeline that produces the submissions. Each box is one section of this notebook."""),
+code("""import matplotlib as mpl
+from matplotlib.patches import FancyBboxPatch
+mpl.rcParams.update({'figure.dpi': 110, 'axes.spines.top': False, 'axes.spines.right': False, 'axes.grid': True, 'grid.alpha': 0.25,
+                     'font.size': 10, 'axes.titleweight': 'bold', 'axes.titlesize': 11})
+COL = {'Aman': '#2e7d32', 'Rusak': '#c62828', 'Lainnya': '#757575', 'blue': '#1a73e8', 'amber': '#f9a825'}
+def annotate(ax, fmt='{:.2f}', horizontal=False):
+    for p in ax.patches:
+        v = p.get_width() if horizontal else p.get_height()
+        if v and np.isfinite(v):
+            xy = (v, p.get_y() + p.get_height() / 2) if horizontal else (p.get_x() + p.get_width() / 2, v)
+            ax.annotate(fmt.format(v), xy, ha='left' if horizontal else 'center', va='center' if horizontal else 'bottom', fontsize=8, xytext=(2, 0) if horizontal else (0, 1), textcoords='offset points')
+fig, ax = plt.subplots(figsize=(15, 4.4)); ax.axis('off'); ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+B = {'img': (0.01, 0.58, 'Images\\ntrain 12,224 · test 3,057'), 'pre': (0.165, 0.58, '§3 median-3 denoise\\nnative resize · views'), 'tow': (0.32, 0.58, '§5 11 frozen towers\\n+ MLP heads (h2)'),
+     'da': (0.475, 0.58, '§6 twin lock (SSCD)\\n+ domain-adapted heads'), 'pp': (0.63, 0.58, '§7 post-processing\\nd04_da_bt2 · 0.845'), 'rule': (0.785, 0.58, '§8 LB-anchored rules\\nd05_p416_allA · 0.877'),
+     'ncc': (0.32, 0.12, '§2 pixel-exact NCC\\ncopy detection'), 'ft': (0.475, 0.12, '§9 DINOv3-H+ fine-tune\\n+ pseudo-labels (F1)'), 'cand': (0.785, 0.12, '§10/§12 candidates\\npaired LB probes')}
+for k, (x, y, t) in B.items():
+    hi = k in ('rule', 'ft'); ax.add_patch(FancyBboxPatch((x, y), 0.135, 0.3, boxstyle='round,pad=0.008', fc='#fff4e5' if hi else '#e8f0fe', ec=COL['amber'] if hi else COL['blue'], lw=1.6))
+    ax.text(x + 0.0675, y + 0.15, t, ha='center', va='center', fontsize=8.6)
+for a, b in [('img', 'pre'), ('pre', 'tow'), ('tow', 'da'), ('da', 'pp'), ('pp', 'rule'), ('ncc', 'da'), ('ft', 'cand'), ('rule', 'cand'), ('img', 'ncc'), ('da', 'ft')]:
+    (x0, y0, _), (x1, y1, _) = B[a], B[b]; s0 = (x0 + 0.135, y0 + 0.15) if abs(y0 - y1) < 0.01 else (x0 + 0.0675, y0 + (0 if y1 < y0 else 0.3))
+    e0 = (x1, y1 + 0.15) if abs(y0 - y1) < 0.01 else (x1 + 0.0675, y1 + (0.3 if y1 < y0 else 0))
+    ax.annotate('', e0, s0, arrowprops=dict(arrowstyle='->', color='#5f6368', lw=1.3))
+ax.set_title('Datascape 2026 pipeline (orange = the levers that moved the leaderboard)'); plt.show()"""),
 md("## 0. Preflight\nEvery input is checked before any heavy stage runs, so a missing file fails here in seconds instead of after an hour of GPU time."),
 code("""stage('preflight')
 need = ['emb/meta_sorted.csv', 'meta_noise.csv', 'folds_group90.csv', 'nntr_sscd.npz', 'sample_submission.csv', 'ledger.csv', 'experiments.csv',
-        'd04_da_bt2.csv', 'd05_p416_allA.csv', 'd05_p675_R.csv', 'd06_cur_A.csv', 'lbdelta.py'] + [f'preds/h2_peg_c11/pred_h2_peg_c11_f{k}.npz' for k in range(5)]
+        'd04_da_bt2.csv', 'd05_p416_allA.csv', 'd05_p675_R.csv', 'd06_cur_A.csv', 'lbdelta.py', 'results.tsv'] + [f'preds/h2_peg_c11/pred_h2_peg_c11_f{k}.npz' for k in range(5)]
 if not RETRAIN_HEADS: need += [f'preds/da_h2/pred_da_h2_f{k}.npz' for k in range(5)]
 if RETRAIN_HEADS and not RECOMPUTE_EMB: need += [f'emb/emb_{t}.npz' for t in ['vit_pe_core_large_patch14_336', 'vit_so400m_patch16_siglip_384', 'vit_large_patch14_dinov2', 'vit_large_patch14_clip_224', 'vit_huge_patch14_clip_224', 'eva02_large_patch14_clip_224', 'vit_pe_core_gigantic_patch14_448', 'eva02_enormous_patch14_clip_224', 'vit_huge_patch14_clip_378', 'vit_giantopt_patch16_siglip_384', 'vit_gigantic_patch14_clip_378']]
 FT_SCRIPT = find('kernels/ft/ft.py', False) or find('kernels/ft__ft.py', False)   # repo layout flattens kernels/<k>/<f> to kernels/<k>__<f>
@@ -134,7 +167,14 @@ if img_ok:
     for r, (name, sel) in enumerate([(c, TR & (meta.label == c).values) for c in C] + [('test', TE)]):
         for j, i in enumerate(rng.choice(np.where(sel)[0], 8, replace=False)):
             ax[r, j].imshow(Image.open(IMG / meta.path[i].split('work/small/')[1]).convert('RGB').resize((150, 150))); ax[r, j].set_title(f'{name} | {meta.source[i]}', fontsize=7); ax[r, j].axis('off')
-    plt.suptitle('Random train images per class (rows 1-3) and test images (row 4)'); plt.tight_layout(); plt.show()"""),
+    plt.suptitle('Random train images per class (rows 1-3) and test images (row 4)'); plt.tight_layout(); plt.show()
+fig, ax = plt.subplots(1, 2, figsize=(15, 4.2))
+mix = pd.crosstab(meta[TR].source, meta[TR].label, normalize='index')[list(C)]
+mix.plot.barh(stacked=True, ax=ax[0], color=[COL[c] for c in C], width=0.75); ax[0].set_title('Train class mix per source'); ax[0].set_xlabel('share')
+for i, s_ in enumerate(mix.index): ax[0].text(1.01, i, f"train {src.loc[s_, 'train_n']} · test {src.loc[s_, 'test_n']}", va='center', fontsize=8)
+nzt = pd.DataFrame({'train Aman': src['noisy|Aman'], 'train Rusak': src['noisy|Rusak'], 'test (all)': src['noisy|test']}).fillna(0)
+nzt.plot.bar(ax=ax[1], color=[COL['Aman'], COL['Rusak'], COL['blue']], width=0.8, rot=0); ax[1].set_title('The confound: share of noisy images (train Aman >> train Rusak; test raw)'); annotate(ax[1])
+plt.tight_layout(); plt.show()"""),
 md("""## 2. Data cleaning: duplicates, near-copies, label noise
 - **Pixel-exact copies.** Each image becomes a 128-px grayscale thumbnail with zero mean and unit norm. All 8 dihedral variants are compared with the top-10 SSCD copy-detector neighbours by NCC, and NCC ≥ 0.99 counts as an exact copy. This survives re-encoding, resizing, flips and rotations.
 - **SSCD** (Pizzi et al., CVPR 2022) finds near-copies, including noisy, recoloured and cropped ones.
@@ -165,7 +205,9 @@ for r in te_idx:
     k = np.where(NCC[r] >= 0.99)[0]
     if len(k): labs = set(LAB[I_sscd[r, k]]); copy_lab[r] = labs.pop() if len(labs) == 1 else -2   # -2 = copies disagree
 cs = pd.DataFrame([(meta.source[r], C[v] if v >= 0 else 'CONFLICT') for r, v in copy_lab.items()], columns=['source', 'copy_label'])
-print('copy labels of test rows by source:'); show(pd.crosstab(cs.source, cs.copy_label))"""),
+print('copy labels of test rows by source:'); ct = pd.crosstab(cs.source, cs.copy_label); show(ct)
+ax = ct.reindex(columns=[c for c in ['Aman', 'Rusak', 'Lainnya', 'CONFLICT'] if c in ct.columns]).plot.bar(stacked=True, figsize=(9, 3.6), rot=0, color=[COL.get(c, COL['amber']) for c in ['Aman', 'Rusak', 'Lainnya', 'CONFLICT'] if c in ct.columns])
+ax.set_title('Test rows with a pixel-exact train copy, by the copy label'); plt.tight_layout(); plt.show()"""),
 code("""from cleanlab.filter import find_label_issues
 y = LAB[TR]; fold = pd.read_csv(find('folds_group90.csv')).set_index('path').fold.loc[meta.path[TR]].values
 def load_preds(tag, k_files=5):
@@ -248,7 +290,14 @@ f1m = lambda yt, p: round(f1_score(yt, p, average='macro'), 4)
 print('h2 group-OOF macro-F1 vs original labels', f1m(y, oof_h2.argmax(1)), '| per class', f1_score(y, oof_h2.argmax(1), average=None).round(3))
 show(pd.DataFrame(confusion_matrix(y, oof_h2.argmax(1)), index=[f'true {c}' for c in C], columns=[f'pred {c}' for c in C]))
 s_tr = meta.source.values[TR]
-show(pd.DataFrame([(s, int((s_tr == s).sum()), f1m(y[s_tr == s], oof_h2[s_tr == s].argmax(1))) for s in BIG + ['other']], columns=['source', 'n', 'OOF macro-F1']))"""),
+per_src = pd.DataFrame([(s, int((s_tr == s).sum()), f1m(y[s_tr == s], oof_h2[s_tr == s].argmax(1))) for s in BIG + ['other']], columns=['source', 'n', 'OOF macro-F1']); show(per_src)
+fig, ax = plt.subplots(1, 2, figsize=(13, 4)); cm = confusion_matrix(y, oof_h2.argmax(1)); cmn = cm / cm.sum(1, keepdims=True)
+ax[0].imshow(cmn, cmap='Blues', vmin=0, vmax=1); ax[0].grid(False); ax[0].set_xticks(range(3), [f'pred {c}' for c in C]); ax[0].set_yticks(range(3), [f'true {c}' for c in C])
+for i in range(3):
+    for j in range(3): ax[0].text(j, i, f'{cm[i, j]}\\n{cmn[i, j]:.0%}', ha='center', va='center', color='white' if cmn[i, j] > 0.5 else 'black', fontsize=9)
+ax[0].set_title('h2 group-OOF confusion (train labels)')
+per_src.set_index('source')['OOF macro-F1'].plot.bar(ax=ax[1], color=COL['blue'], rot=0); annotate(ax[1]); ax[1].set_ylim(0, 1.08); ax[1].set_title('h2 OOF macro-F1 per source (416/640 are the hard sources)')
+plt.tight_layout(); plt.show()"""),
 md("""## 6. Pseudo-labels: twin lock + domain-adapted (DA) heads
 1. **Twin vote.** Each test row takes a similarity-weighted vote of its SSCD train twins with sim ≥ 0.55. It is **locked** to the vote when purity ≥ 0.9 and the row is in the clean, non-224 stratum. Train leave-one-out accuracy of this rule is 0.981.
 2. **DA heads.** The h2 heads are retrained on train plus the locked test rows (2 feature sets × 5 seeds), so they see the test-domain shift.
@@ -282,7 +331,10 @@ if RETRAIN_HEADS:  # same recipe as work/da_heads.py
         Ls.append(np.log(P + 1e-9))
     t_new = np.exp(np.mean(Ls, 0)); t_new /= t_new.sum(1, keepdims=True)
     print(f'RETRAIN_HEADS ({dev}): argmax agreement with the cached DA heads {np.mean(t_new.argmax(1) == t_da.argmax(1)):.4f}'); t_da = t_new
-pl = find('pl_iter_scores.csv', False); print('iterative pseudo-labelling, held-out locked test rows:'); show(pd.read_csv(pl) if pl else 'pl_iter_scores.csv not available')"""),
+pl = find('pl_iter_scores.csv', False); print('iterative pseudo-labelling, held-out locked test rows:'); show(pd.read_csv(pl) if pl else 'pl_iter_scores.csv not available')
+if pl:
+    d_ = pd.read_csv(pl); fig, ax = plt.subplots(figsize=(7, 3.2)); ax.plot(d_['round'], d_.heldout_f1, 'o-', color=COL['blue'], label='held-out F1'); ax.plot(d_['round'], d_.heldout_f1_b08, 's--', color=COL['amber'], label='held-out F1 (bias -0.8)')
+    ax.set_xlabel('pseudo-label round'); ax.set_title('Iterating pseudo-labels: < +0.005 → closed'); ax.legend(); plt.tight_layout(); plt.show()"""),
 md("""## 7. Post-processing → `d04_da_bt2` (public LB 0.84521)
 - Locked rows keep their twin label.
 - No-twin clean rows get a Rusak logit bias of −0.8, cross-validated on the held-out locked rows.
@@ -399,7 +451,12 @@ for n, f in [('h3A H+ d8 fold0 (train-only)', 'pred_h3A_f0.npz'), ('h3B H+ d8 fo
 if P_F1 is not None: MODELS['F1 H+ full-fit + pseudo (sees G1 rows)'] = P_F1
 else: print('pred_F1_f0.npz not found (it lives in Drive datascape_2026/session12): F1 rows skipped')
 GT = pd.DataFrame({n: rates(P) for n, P in MODELS.items()}).T.add_prefix('Rusak | '); show(GT)
-print('reading: lower on G1/G1n (truly Aman) is better; CRx should stay high. Train-only models are the fair gate; F1 trains on G1 rows, so its G1 numbers are in-sample.')"""),
+print('reading: lower on G1/G1n (truly Aman) is better; CRx should stay high. Train-only models are the fair gate; F1 trains on G1 rows, so its G1 numbers are in-sample.')
+fig, ax = plt.subplots(1, 2, figsize=(15, 3.8)); gt = GT.copy(); gt.index = [i[:34] for i in gt.index]
+gt['Rusak | G1n no copy (LB: Aman)'].plot.barh(ax=ax[0], color=COL['Aman']); ax[0].invert_yaxis(); ax[0].axvline(0.5, ls='--', c='k', lw=1); annotate(ax[0], horizontal=True)
+ax[0].set_title('Rusak rate on LB-confirmed Aman rows (lower = less shortcut)')
+gt['Rusak | CRx copy says Rusak'].plot.barh(ax=ax[1], color=COL['Rusak']); ax[1].invert_yaxis(); ax[1].set_xlim(0.85, 1.0); annotate(ax[1], horizontal=True)
+ax[1].set_title('Rusak rate on copy-confirmed Rusak rows (higher = keeps true Rusak)'); plt.tight_layout(); plt.show()"""),
 md("""## 10. Ensemble, TTA and candidates
 TTA:
 - frozen towers: summed geometric views (§3);
@@ -453,8 +510,39 @@ def q_(v, p): i = np.argsort(v); return float(v[i][np.searchsorted(np.cumsum(W[i
 show(pd.DataFrame([(n, round(float((W * o[:, j]).sum()), 3), round(q_(o[:, j], 0.05), 3), round(q_(o[:, j], 0.95), 3)) for j, n in enumerate(['F1 Aman', 'F1 Rusak', 'F1 Lainnya', 'true public Rusak', 'true public Lainnya'], 1)],
                   columns=['implied (public, base d04)', 'mean', '5%', '95%']))
 yp = oof_h2.argmax(1); show(pd.DataFrame([(s, int(m.sum()), int(((y == 0) & (yp == 2) & m).sum()), int(((y == 2) & (yp == 0) & m).sum()), int(((y == 1) != (yp == 1)) [m].sum())) for s, m in [(s, s_tr == s) for s in BIG + ['other']]],
-                  columns=['source', 'n', 'OOF: true A pred R', 'true R pred A', 'Lainnya errors']))"""),
-md("""## 12. Iteration log
+                  columns=['source', 'n', 'OOF: true A pred R', 'true R pred A', 'Lainnya errors']))
+lh = led[led.actual_lb.notna()].reset_index(drop=True); fig, ax = plt.subplots(1, 3, figsize=(17, 4.2))
+ax[0].errorbar(range(len(lh)), lh.expected_lb, yerr=[lh.expected_lb - lh.exp_lo, lh.exp_hi - lh.expected_lb], fmt='o', color='#9e9e9e', capsize=3, label='expected (range)')
+ax[0].plot(range(len(lh)), lh.actual_lb, 's-', color=COL['blue'], label='actual public LB'); ax[0].set_xticks(range(len(lh)), [n.replace('_', '\\n', 1) for n in lh.name], fontsize=7)
+ax[0].set_title('LB history: expected vs actual'); ax[0].legend(fontsize=8)
+for nm, (bs_, pr_, s0_, act) in {'p416 (416 R->A)': ('d04_da_bt2', 'd05_p416_allA', 0.84521, 0.87739), 'p675 (675 A->R)': ('d04_da_bt2', 'd05_p675_R', 0.84521, 0.80201)}.items():
+    cv = read_probe(bs_, pr_, s0_); ax[1].plot([0, 0.25, 0.5, 0.75, 1], list(cv.values()), 'o-', label=nm); ax[1].axhline(act, ls=':', lw=1)
+ax[1].set_xticks(np.linspace(0, 1, 5)); ax[1].set_xlabel('q = share of flipped rows truly Rusak'); ax[1].set_title('Paired probes: LB vs q (dotted = actual)'); ax[1].legend(fontsize=8)
+inv = pd.DataFrame([(n, float((W * o[:, j]).sum()), q_(o[:, j], 0.05), q_(o[:, j], 0.95)) for j, n in enumerate(['Aman', 'Rusak', 'Lainnya'], 1)], columns=['cls', 'm', 'lo', 'hi'])
+ax[2].bar(inv.cls, inv.m, yerr=[inv.m - inv.lo, inv.hi - inv.m], color=[COL[c] for c in inv.cls], capsize=4); ax[2].set_ylim(0.6, 1.0); annotate(ax[2])
+ax[2].set_title('Implied public F1 per class (base d04, 5–95%)'); plt.tight_layout(); plt.show()"""),
+md("""## 12. Autoresearch ratchet (karpathy/autoresearch applied to a leaderboard)
+[karpathy/autoresearch](https://github.com/karpathy/autoresearch) runs an agent loop:
+1. A fixed evaluator and a contract (`program.md`) are set up front.
+2. Each iteration changes **one thing**.
+3. The result is logged to `results.tsv`, and only an improvement is kept, as a git-style ratchet.
+
+Here, train-label metrics have repeatedly misled (expected 0.93 → LB 0.845). So the **fixed evaluator is a paired LB probe**:
+- One hypothesis changes one group of rows against a base with a known score.
+- Its expected LB, as a function of q (the share of flipped rows that are truly Rusak), is pre-registered with `work/lbdelta.py`.
+- The actual LB gives q, which gives KEEP or DISCARD. The base moves only on KEEP.
+
+Offline numbers (the §9 gate, OOF) only act as guardrails that reject candidates before they spend a slot. The log is `work/results.tsv`."""),
+code("""rt = pd.read_csv(find('results.tsv'), sep='\t'); show(rt[['date_utc', 'hypothesis', 'candidate', 'changed_rows', 'actual_lb', 'implied_q', 'decision']])
+done = rt[pd.to_numeric(rt.actual_lb, errors='coerce').notna()].copy(); done['lb'] = done.actual_lb.astype(float)
+if len(done):
+    fig, ax = plt.subplots(figsize=(10, 3.6)); base_lb = [0.84521]; ax.scatter(0, 0.84521, s=60, color=COL['blue'], zorder=3); ax.annotate('start: d04_da_bt2', (0, 0.84521), xytext=(4, 4), textcoords='offset points', fontsize=8)
+    for i, r in enumerate(done.itertuples(), 1):
+        keep = str(r.decision).startswith('KEEP'); ax.scatter(i, r.lb, s=80, color=COL['Aman'] if keep else COL['Rusak'], zorder=3); ax.annotate(r.candidate, (i, r.lb), xytext=(4, 4), textcoords='offset points', fontsize=8)
+        base_lb.append(r.lb if keep else base_lb[-1])
+    ax.step(range(len(base_lb)), base_lb, where='post', color=COL['blue'], label='base (moves only on KEEP)'); ax.set_xticks(range(len(base_lb))); ax.set_xlim(-0.3, len(base_lb) - 0.4)
+    ax.set_title('Autoresearch ratchet on the public LB (green = KEEP, red = DISCARD)'); ax.set_xlabel('paired probe #'); ax.set_ylabel('public LB'); ax.legend(loc='lower right'); plt.tight_layout(); plt.show()"""),
+md("""## 12b. Iteration log
 Experiments are ranked by strength of evidence: paired LB reads first, then single LB scores, the test-domain gate, and honest group-OOF last.
 
 | step | hypothesis | evidence | decision |

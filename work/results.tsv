@@ -1,0 +1,4 @@
+date_utc	hypothesis	base	candidate	changed_rows	expected_lb_q0	expected_lb_q1	actual_lb	implied_q	decision	new_base
+2026-10-05	416 synthetic source is intact (test raw renders)	d04_da_bt2 (0.84521)	d05_p416_allA	136 R->A (416)	0.8775	0.7980	0.87739	~0	KEEP	d05_p416_allA
+2026-10-05	no-copy 675 rows are Rusak (copy structure)	d04_da_bt2 (0.84521)	d05_p675_R	158 A->R (675 no-copy)	0.8110	0.8907	0.80201	~0 (truly Aman)	DISCARD	-
+2026-10-06	base -0.8 no-twin Aman bias over-corrects in 'other' (F1 says Rusak)	d06_cur_A (same day)	d06_F1_AR25	25 A->R (other, no copy, F1 conf>=0.70)	0.8773(q=0; vs p416 0.87739)	0.8906(q=0.9)	pending	pending	KEEP if AR25-cur_A>=+0.003	pending

@@ -27,6 +27,10 @@ print('CELL ERRORS:', errs if errs else 'none', flush=True)
 shutil.copy(nb_in, OUT)
 if os.path.isdir('/content/drive/MyDrive'):
     shutil.copytree(OUT, f'{DRV}/final', dirs_exist_ok=True); print('copied to Drive datascape_2026/final', flush=True)
+else:  # Drive not mounted: never lose the run, push it to a private Kaggle dataset instead
+    json.dump(dict(title='datascape-colab-final', id='asuudane/datascape-colab-final', licenses=[dict(name='CC0-1.0')]), open(f'{OUT}/dataset-metadata.json', 'w'))
+    if sh(f'kaggle datasets version -p {OUT} -m final -r zip -q'): sh(f'kaggle datasets create -p {OUT} -r zip -q')
+    print('Drive not mounted: outputs saved to Kaggle dataset asuudane/datascape-colab-final', flush=True)
 fin = f'{OUT}/final'
 if os.path.isdir(fin): print('final submissions:', sorted(os.listdir(fin)), flush=True)
 print(f'RUN_FINAL DONE {(time.time() - T0) / 60:.1f} min', flush=True)

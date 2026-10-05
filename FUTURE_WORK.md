@@ -16,7 +16,13 @@ Dokumen ini untuk teammate yang melanjutkan. Mulailah dari `python reproduce_bes
 - Default: `d06_cur_A` bila skornya ≥ 0.8774, ditambah `d05_p416_allA`.
 - Perbarui setiap ada hasil probe yang menang.
 
-## 2. Kandidat siap pakai (sudah dibangun, belum disubmit)
+## 2. Kandidat siap pakai
+
+**Sudah dijadwalkan 10-06 (auto-submit):** `d06_cur_A` + `d06_F1_AR25`. File `submissions/d06_F1_AR25.csv` (terdaftar di ledger) = `d06_cur_A` + 25 baris "other" tanpa copy yang oleh F1 dipanggil Rusak (keyakinan 0.70–0.93).
+- Breakeven q ≈ 0.42; montage kelompok memberi q ≈ 0.55–0.6.
+- Aturan yang sudah di-pre-register di `work/results.tsv`: selisih AR25 − cur_A ≥ +0.003 → KEEP (perluas flip A→R dari F1); ≤ −0.001 → DISCARD.
+
+Prediksi F1 kini ada di repo: `work/drive_in/session12/pred_F1_f0.npz`. Notebook §10 otomatis membangun kandidat dari file ini.
 
 Kandidat F1 = model final **DINOv3-H+ full-fit + pseudo-label**. Prediksinya ada di Drive `datascape_2026/session12/pred_F1_f0.npz`. Notebook finalis §10 membangun kandidat ini otomatis bila file itu ada; versi yang sudah jadi ada di Drive `datascape_2026/final/`.
 

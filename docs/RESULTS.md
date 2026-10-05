@@ -521,3 +521,23 @@ DA head constants on (b): 0.9466, and 0.9853 @ −0.8.
   - F1's pseudo-labels (twin vote plus source).
   - `d06_cur_A` (source only), `lbdelta` and the LB inversion.
 - **Fix:** `work/make_final_nb.py` §9/§10 recompute the gate and the candidates in meta_sorted order from the Drive predictions.
+
+## 10-05 07:00 UTC — autoresearch loop formalised + finalist notebook v2 (Drive `datascape_2026/final`)
+- **Research** (kaggle-competition-research RAG):
+  - UBC-OCEAN r001: frozen foundation features plus large seed ensembles; entropy outliers; domain-consistent inputs; CV→LB gap from domain shift.
+  - BirdCLEF-2025 r005: self-distillation for noisy labels.
+  - BirdCLEF-2024 r004: build a test-like validation set.
+  - None replaces the paired LB probe here.
+- **Evaluator** (advisor-agreed): the paired LB probe is the fixed autoresearch evaluator, logged in `work/results.tsv` (KEEP/DISCARD; the base moves only on KEEP). Offline gate numbers are guardrails only.
+- **F1 predictions downloaded** with the user's OK: `work/drive_in/session12/pred_F1_f0.npz`, 233 KB.
+  - F1 vs `d06_cur_A` on all rows: 96 disagreements (82 A→R, 13 R→A, 1 L→A).
+  - Eligible (640/other, no copy at NCC < 0.95, conf ≥ 0.70): 25 A→R (all "other") and 6 R→A.
+- **10-06 slot 2 = `d06_F1_AR25`** (registered): `d06_cur_A` + those 25 A→R.
+  - Montage, group-level: ~13–15 of 25 look damaged, so q ≈ 0.55–0.6; breakeven q ≈ 0.42.
+  - Expected vs p416: q 0.5 → 0.8849, q 0.6 → 0.8864, q 0.7 → 0.8881; `d06_cur_A` alone is 0.8837 at q = 0.
+  - Rule: AR25 − cur_A ≥ +0.003 KEEP (widen F1 A→R); ≤ −0.001 DISCARD.
+  - program.md: `SUBMIT: d06_cur_A, d06_F1_AR25`.
+- **Finalist notebook v2.**
+  - Added an executive summary, a pipeline diagram, 11 matplotlib charts and an autoresearch-ratchet section.
+  - Executed on Colab A100: no cell errors, runtime released.
+  - The runner cell is now fail-safe (try/finally `runtime.unassign()`, mount retry, Kaggle fallback). An earlier `mount failed` left an A100 idle ~3 min before a manual release.
