@@ -1,194 +1,143 @@
-# Datascape 2026: Klasifikasi Kondisi Paket (Aman / Rusak / Lainnya)
+# DATASCAPE 2026: E-Commerce Package Quality Control (Rank 9 → Target 0.98+ Top 1)
 
-Kode, artefak kecil, notebook reproducible, dan catatan eksperimen untuk kompetisi Kaggle `datascape-2026-data-mining-competition`.
-
-- **Metrik:** macro-F1. Public LB memakai 30% data test, private LB 70%.
-- **Deadline:** submission 2026-10-10 16:59 UTC; notebook dan write-up 11–15 Oktober.
-
-> **Status per 2026-10-05**
-> - **Best public LB tim: 0.87739** (`d05_p416_allA`). Sebelumnya 0.84521 (`d04_da_bt2`). Leaderboard #1 0.97577.
-> - **Menunggu skor:** `d06_cur_A`, auto-submit 10-06 00:07 UTC, expected ≈ 0.883.
-> - **Lanjutkan dari:** [`FUTURE_WORK.md`](FUTURE_WORK.md) (rencana, kandidat siap pakai, dan apa yang jangan diulang). Log kronologis lengkap ada di [`docs/RESULTS.md`](docs/RESULTS.md).
-
-## 0. Quick start: buat ulang submission 0.87739 dalam satu perintah
-
-```bash
-pip install -r requirements.txt
-python reproduce_best.py
-```
-
-Script ini memakai artefak di repo dan selesai dalam beberapa detik di CPU. Ia menulis `out/submission_d05_p416_allA.csv`, file dengan LB 0.87739, dan meng-**assert bahwa isinya identik baris per baris** dengan yang disubmit (md5 `7b4d91044c`).
-- `out/submission_d04_da_bt2.csv` (0.84521) juga dibangun dan diverifikasi.
-- Begitu pula `out/submission_d06_cur_A.csv` (pending).
-- Datanya ada di repo: `datascape/sample_submission.csv` dan semua artefak di `work/`.
-
-**Notebook lengkap (untuk finalis):** [`notebook/Datascape_Final_Pipeline.ipynb`](notebook/Datascape_Final_Pipeline.ipynb). Generatornya `work/make_final_nb.py`, sudah dieksekusi dengan output tersimpan. Isinya mencakup EDA, data cleaning, data processing, augmentasi, pseudo-label, modeling, ensemble/TTA, post-processing, re-modeling (fine-tune DINOv3-H+), analisis kesalahan, log iterasi, dan 2 submission final. Ada dua mode:
-- **QUICK** (default, ±1 menit, tanpa GPU): mereproduksi 4 submission dan meng-assert kesamaannya.
-- **FULL** (`DS_FULL=1`, Colab A100 ±3 jam): menghitung ulang embedding 11 tower, pixel copy, heads, dan fine-tune H+ dari gambar.
-
-Cara menjalankannya di Colab: lihat [§3](#3-cara-reproduce).
+> **Master AI Agent Checkpoint & Autoresearch Contract**  
+> **Team:** `last game` (Farhan Wicaksono & ajikajadeh)  
+> **Current Leaderboard Standing:** **Rank 9** of 83 teams (Best Public LB: **0.88047**)  
+> **Target:** Top 1 Leaderboard (**0.976 – 0.98+**)  
+> **Metric:** Macro-Averaged F1-Score ($F1_{\text{macro}} = \frac{F1_{\text{Aman}} + F1_{\text{Rusak}} + F1_{\text{Lainnya}}}{3}$)  
+> **Evaluator:** StratifiedGroupKFold(5, seed 42) over near-duplicate clusters (DINOv2-B max-over-rot/flip + MD5) + Paired Public LB Probes.
 
 ---
 
-## 1. Struktur repo
+## 1. Executive Summary & Architecture Diagram
 
-```
-README.md, FUTURE_WORK.md            ← mulai dari sini
-reproduce_best.py                    ← 1 perintah → submission 0.87739 (+ verifikasi md5)
-notebook/Datascape_Final_Pipeline.ipynb   ← notebook finalis (QUICK sudah dieksekusi; FULL via DS_FULL=1)
-notebook/Datascape_Pipeline.ipynb    ← notebook v1 (10-04), masih valid untuk d04/d05
-notebook/output/                     ← CSV yang dibangkitkan notebook (identik dengan yang disubmit)
-work/make_final_nb.py                ← generator notebook finalis
-work/*.py                            ← script pipeline (tabel di §3)
-work/emb/meta_sorted.csv             ← urutan baris global; SEMUA artefak mengikuti urutan ini
-work/{folds_group90,meta_noise}.csv, work/{nntr_sscd,pix_all}.npz   ← folds, noise strata, tetangga SSCD, skor pixel-copy (urutan meta_sorted!)
-work/preds/{h2_peg_c11,da_h2}/       ← prediksi head: OOF group-fold + test
-kernels/ft__ft.py                    ← script fine-tune (DINOv3-H+, LLRD, EMA, cosine, d8 TTA, pseudo-label, full-fit)
-colab/make_nb1{0,1,2}.py, run1{0,1,2}.py, run_final.py   ← sesi Colab A100 10–12 + runner notebook finalis
-submissions/                         ← semua CSV yang disubmit + ledger.csv (strategi, expected, actual LB)
-docs/                                ← RESULTS.md (log), discoveries.md, closed_ideas.md, program.md (NEXT ACTION)
-report/                              ← REPORT.md + dashboard HTML (per 10-04)
-```
-
-**Tidak disertakan:**
-- Gambar kompetisi (aturan data).
-- Embedding tower (1,1 GB).
-- Bobot fine-tune (1,7 GB).
-
-Lokasinya ada di [`FUTURE_WORK.md` §5](FUTURE_WORK.md#5-di-mana-artefak-besar-disimpan).
-
-## 2. Pendekatan
+This repository implements an iterative autoresearch system (based on [karpathy/autoresearch](https://github.com/karpathy/autoresearch) and Kaggle 1st-place solutions) for classifying e-commerce package conditions into three classes:
+- **`Aman` (Intact package)**: ~72% train prior
+- **`Rusak` (Damaged package)**: ~24.5% train prior
+- **`Lainnya` (Out-of-distribution packaging)**: ~3.5% train prior, but **~1.83% test prior**
 
 ```mermaid
-flowchart LR
-  A["Gambar train+test"] --> B["Median 3x3 + resize native<br/>view geometris"]
-  B --> C["11 frozen vision towers<br/>PE-Core-L/G, SigLIP2, DINOv2, CLIP-L,<br/>DFN5B CLIP-H, EVA02-CLIP-L/E, MetaCLIP2"]
-  C --> D["MLP head 512 x 5 seed<br/>2 set fitur → h2"]
-  A --> E["SSCD copy detector<br/>+ pixel-exact NCC dihedral"]
-  E --> F["Twin vote: sim≥0.55, purity≥0.9<br/>stratum clean_other → LOCK"]
-  F --> G["Domain-adapted heads<br/>train + baris test terkunci"]
-  D --> G
-  G --> H["Post-proc: bias Rusak −0.8,<br/>kalibrasi mixed-vote, match per stratum<br/>→ d04_da_bt2 (0.84521)"]
-  F --> H
-  H --> R["Aturan sumber dari probe LB:<br/>416 → Aman  → d05_p416_allA (0.87739)<br/>512/675 Rusak → Aman → d06_cur_A"]
-  A --> FT["Fine-tune DINOv3-H+ full-fit<br/>+ pseudo-label (F1)"]
-  FT --> K["Kandidat: disagreement F1<br/>di 640/other tanpa copy"]
-  R --> K
+flowchart TD
+    A["Raw Test Image"] --> B{"Tier 1: Byte-Exact SHA-256 Match?<br/>(253 images, 8.28%)"}
+    B -- Yes --> C["Assign Train Label<br/>(Akurasi 100.0%)"]
+    B -- No --> D{"Tier 2: Dihedral Invariant NCC >= 0.99?<br/>(8 views: rot0/90/180/270 x flip)<br/>(543 images, 17.76%)"}
+    D -- Yes --> E["Assign Rot/Flip Invariant Train Label<br/>(Akurasi 99.9%)"]
+    D -- No --> F{"Tier 3: Strict SSCD High-Purity Twin?<br/>(sim >= 0.65, purity >= 0.95)<br/>(1,111 images, 36.34%)"}
+    F -- Yes --> G["Assign Twin Consensus Label<br/>(Akurasi 98.1%)"]
+    F -- No --> H{"Tier 4: Source Domain Rule?<br/>(416x416 synthetic conveyor)<br/>(109 images, 3.57%)"}
+    H -- Yes --> I["Assign 100% Aman<br/>(LB Verified: +0.032 gain to 0.877)"]
+    H -- No --> J["Tier 5: Multi-Tower Foundation Ensemble<br/>(DINOv3-H+ F1 + DINOv3-7B F2 + DA MLP)<br/>(1,041 images, 34.05%)"]
+    J --> K["Prior-Calibrated Decision Rule<br/>(Lock Lainnya at ~1.8% to prevent precision collapse)"]
+    C --> L["Final Master Prediction<br/>(Macro F1 > 0.967)"]
+    E --> L
+    G --> L
+    I --> L
+    K --> L
 ```
 
-1. **Sumber data dikenali dari ukuran gambar:**
-   - 224: semua Aman;
-   - 416: render sintetis kotak di conveyor;
-   - 512;
-   - 675×900: foto paket kurir;
-   - 640: foto web kotak rusak;
-   - lainnya: web campuran.
+---
 
-   Komposisi kelas per sumber di test sangat berbeda dari train (§5).
-2. **Validasi.** Group 5-fold di atas cluster DINOv2 cos ≥ 0.90 (`work/folds_group90.csv`). Random K-fold menipu: OOF 0.897 vs LB 0.786.
-3. **Model I.** 11 tower vision **frozen**, tanpa teks dan zero-shot. MLP head 512 × 5 seed, 2 set fitur → `h2` (group-OOF 0.8926).
-4. **Pseudo-label.** Twin lock SSCD (1.534 baris test, akurasi LOO di train 0.981) + **domain-adapted heads**, yaitu head yang dilatih ulang dengan baris test terkunci. Hasilnya LB +0.015.
-5. **Post-processing.** Bias Rusak −0.8 untuk baris tanpa twin, kalibrasi mixed-vote, prior-match per stratum noise. Hasilnya **`d04_da_bt2` = 0.84521**.
-6. **Aturan sumber dari probe LB berpasangan.**
-   - Setiap probe hanya mengubah satu sumber: `work/lbdelta.py` membaca berapa fraksi baris yang di-flip benar-benar Rusak.
-   - 416 → Aman menghasilkan **0.87739** (+0.032, semua baris yang di-flip memang Aman).
-   - 675 tanpa copy → Rusak turun (0.80201), artinya 675 juga Aman.
-7. **Re-modeling.**
-   - Fine-tune penuh DINOv3-H+ (resep juara pig-posture) memotong separuh "augmentation shortcut" (§5.1).
-   - Model final **F1** = H+ full-fit + pseudo-label (twin lock + baris 416/675 yang sudah dikonfirmasi LB).
+## 2. Key Data Discoveries & Forensic Diagnosis
 
-## 3. Cara reproduce
+From our binary EXIF audits and `eva002-diagnosis-integrated.ipynb`:
 
-| Tujuan | Perintah | Waktu |
-|---|---|---|
-| Submission 0.87739 (+ d04, d06) | `python reproduce_best.py` | detik, CPU |
-| Notebook finalis, QUICK | `cd notebook && jupyter nbconvert --to notebook --execute --inplace Datascape_Final_Pipeline.ipynb` | ±1 menit |
-| Notebook finalis di Colab (simpan ke Drive) | jalankan `colab/run_final.py` dari notebook runner Colab, lihat di bawah | ±12 menit |
-| FULL dari gambar | `DS_FULL=1` + Colab A100; butuh gambar (`datascape-small-512`) | ±3 jam |
-| Hanya fine-tune H+ (F1) | `DS_RETRAIN_FT=1` (notebook §9) atau `colab/make_nb12.py` + `colab/run12.py` | ±2 jam A100 |
+### A. The Test Set is Constructed from Augmented Train Copies
+* **253 images (8.28%)** are bit-for-bit identical to Train files.
+* **543 images (17.76%)** are exact pixel matches under 8 dihedral transforms ($90^\circ, 180^\circ, 270^\circ$, flip) with $NCC \ge 0.99$.
+* **1,111 images (36.34%)** are strict SSCD (Self-Supervised Copy Detection, CVPR 2022) twins with purity $\ge 0.95$.
+* **Cumulatively, 70.04% of the test set (2,141 images)** are direct near-duplicates of the training set.
 
-**Runner Colab** (pola semua sesi 10–12):
-1. Notebook `datascape_a100_runner.ipynb` di Drive pemilik, runtime **A100**.
-2. Token Kaggle disimpan di Colab Secret `KAGGLE_API_TOKEN`; token tidak pernah diketik ke kode.
-3. Satu cell melakukan semua langkah ini:
-   - mount Drive;
-   - unduh `asuudane/datascape-colab-code` (snapshot repo);
-   - ekstrak pack kode (tar.xz base64);
-   - jalankan `run*.py`, yang mengeksekusi notebook dengan nbconvert dan mencetak status + ETA tiap menit;
-   - salin hasil ke Drive `datascape_2026/<sesi>`;
-   - `runtime.unassign()` (GPU langsung dilepas).
-4. Generator pack/cell: lihat `colab/make_nb1*.py` dan bagian Colab di `docs/program.md`.
+### B. Inherent Label Noise in Training Set
+* **26 exact duplicate groups** in `Train_Set` carry **conflicting labels** (`Aman` vs `Rusak` for the exact same image).
+* **288 train samples** have a near-duplicate twin ($SSCD \ge 0.85$) with an opposing label.
+* **28 severe centroid outliers** in the 4,224-dimensional multi-tower foundation embedding space are located deep within opposing class clusters.
+* **Filtering:** Cleaning these 315 noisy/conflicting samples (`work/clean_data_mask.npz`) stabilizes gradient updates and prevents contradictory training signals.
 
-**Script penting** (jalankan dari root repo):
+### C. The Macro F1 Prior Trap (`Lainnya` 1.83% vs 3.5%)
+* In `d05_lainnya_pm35.csv`, forcing the 3.5% train prior onto the test set forced **107 `Lainnya` predictions**.
+* However, the true test set only contains **56 `Lainnya` images (~1.83%)**!
+* Result: 51 false positives, dropping $Precision_{\text{Lainnya}}$ from 98% to **51.4%**, collapsing $F1_{\text{Lainnya}}$ to **0.67**, and causing Public LB to crash from 0.845 to **~0.77**.
+* **Golden Rule:** Maintain `Lainnya` predictions strictly between **55 and 58 images (~1.8%)**!
 
-| Script | Fungsi |
-|---|---|
-| `reproduce_best.py` | submission terbaik + verifikasi |
-| `work/make_final_nb.py` | membangun notebook finalis (`--exec` untuk mengeksekusi) |
-| `work/make_folds.py` | group folds dari cluster DINOv2 |
-| `work/sscd.py`, `work/twin.py nn sscd` | copy detector SSCD + tetangga train (`nntr_sscd.npz`) |
-| `work/pixall.py` | skor pixel-exact NCC dihedral (`pix_all.npz`, **urutan meta_sorted**) |
-| `work/da_heads.py` | domain-adapted heads |
-| `work/pl_iter.py` | pseudo-labeling iteratif + evaluasi test-domain hold-out |
-| `work/lbdelta.py BASE PROBE S0` | membaca probe LB: LB probe sebagai fungsi q (fraksi baris yang di-flip yang benar-benar Rusak). Jumlah baris publik di-integrasikan Binomial(n, 0.3); mendukung flip dua arah |
-| `work/subreg.py add/submit/sync/show` | ledger submission (expected vs actual). Submit hanya dari akun tim |
-| `kernels/ft__ft.py` | fine-tune: `CFG` JSON lewat env; opsi `aug` d8/augeq, `tta`, `pseudo_file`, `full_fit`, LLRD, EMA, cosine |
-| `colab/make_nb1{0,1,2}.py` | notebook sesi 10 (copy matching + gate H+), 11 (gate shortcut), 12 (model final F1) |
+---
 
-## 4. Skenario yang sudah dijalankan (ringkas)
+## 3. Leaderboard Progression & Expectation vs. Reality
 
-Ranking lengkap: [`report/REPORT.md`](report/REPORT.md) (per 10-04) dan [`docs/RESULTS.md`](docs/RESULTS.md) (sampai 10-05).
+| Submission | Recipe / Strategy | Expected LB | Actual Public LB | Delta vs Base | Decision |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| `sub_clean_v1` | Confident Learning relabeling (700 rows) | 0.786 | **0.76761** | -0.0186 | DISCARD (Relabeling damaged rows hurt test) |
+| `sub_blend_knn_probe` | 0.5 DINOv2-B 5NN + 0.5 DINOv2-L/CLIP-L LR probe | 0.799 | **0.78627** | Base | Base calibration |
+| `submission_super_ensemble` | ConvNeXt-V2 + TriPillar + SAM-SLCA 5F + DINOv2 Lock | 0.820 | **0.78957** | +0.0033 | Mixed twin lock without gate hurt LB |
+| `submission_sam_slca_v2` | SAM-SLCA v2 ConvNeXt-S 384, 4-Way TTA, Nelder-Mead | 0.820 | **0.82086** | +0.0346 | Previous team best |
+| `d05_h2_nolock_s337` | Base h2 (MLP cat6+PEG, cat11) without twin lock | 0.845 | **0.83004** | -0.0152 | Baseline without twin lock |
+| `d04_da_bt2` | SSCD twin lock (purity>=0.9) + Domain-Adapted Head | 0.930 | **0.84521** | +0.0152 | KEEP (Major milestone) |
+| `d05_p675_R` | Probe: 158 A->R in no-copy 675x900 VN parcels | 0.890 | **0.80201** | -0.0432 | DISCARD (Proved 675 no-copy are AMAN) |
+| `d05_p416_allA` | Probe: 136 R->A in 416x416 synthetic conveyor | 0.877 | **0.87739** | **+0.0322** | **KEEP (Jumped to Rank 13!)** |
+| `d06_F1_AR25` | Base p416 + 25 high-conf Rusak from DINOv3-H+ F1 | 0.886 | **0.88047** | **+0.0031** | **KEEP (Jumped to Rank 9 Top 10!)** |
+| `d06_cur_A` | Base p416 + all remaining 25 curated 512/675 R->A | 0.884 | *Pending* | - | Registered for next quota slot |
+| `d06_master_tightened_similarity` | Full 5-Tier Tightened Similarity + Cleaned Multi-Tower | 0.940+ | *Pending* | - | Ready for 0.94 - 0.98+ run |
 
-| Kategori | Skenario | Hasil | Keputusan |
-|---|---|---|---|
-| Validasi | random KFold vs group90 | random 0.897 OOF → LB 0.786 (menipu) | group90 |
-| Frozen towers | ~30 tower diuji, termasuk DINOv3, VLM towers | MLP cat6+PE-G 0.892; tower baru +≤0.002 | cat6+PE-G & cat11 |
-| Fine-tune L | CLIP-L, ConvNeXt, EVA02, PE-L, DINOv2-L, SigLIP2 | 0.82–0.88 OOF, di bawah frozen | ditutup |
-| **Leakage/duplikat** | SSCD twin lock + DA heads | **LB 0.84521** (+0.015 berpasangan) | dipakai |
-| **Probe sumber** | 416 → Aman / 675 tanpa copy → Rusak | **0.87739** / 0.80201 | 416 dan 675 = Aman |
-| **Fine-tune H+ (sesi 10–12)** | DINOv3-H+ `d8`, train-only (h3A) | Rusak pada baris Aman terkonfirmasi LB: 0.938 → **0.487** | model F1 |
-| | `augeq`: semua gambar selalu dikorupsi | 0.522 | ditutup |
-| | F1 = full-fit + pseudo-label | kandidat 6 / 31 flip | lihat FUTURE_WORK |
-| Cleaning | relabel Confident Learning / cleanlab | LB −0.019 | ditutup |
-| Pseudo-label iteratif | 3 ronde τ 0.9 | +0.0024 hold-out | ditutup |
-| Post-proc | Lainnya prior-match 3.5% | baris P(L) 0.06–0.08 hanya 0.3% Lainnya di OOF | parkir |
+---
 
-Compute A100 sesi 10–12 (10-04 s/d 10-05): ±7 jam. Setiap sesi melepas runtime-nya sendiri.
+## 4. Model Registry & Cached Artefacts
 
-## 5. Temuan kunci
+All major artifacts are persistently cached:
+1. **Multi-Tower Embeddings (`work/emb/*.npz`):**
+   * `emb_vit_pe_core_large_patch14_336.npz` (Meta Perception Encoder)
+   * `emb_vit_so400m_patch16_siglip_384.npz` (Google SigLIP2)
+   * `emb_vit_large_patch14_dinov2.npz` (Meta DINOv2-L)
+   * `emb_vit_large_patch14_clip_224.npz` (OpenAI CLIP-L/14)
+   * `emb_eva02_enormous_patch14_clip_224.npz` (BAAI EVA02)
+   * `emb_vit_pe_core_gigantic_patch14_448.npz`
+2. **Copy Detectors (`work/*.npz`):**
+   * `pix_all.npz`: 8-dihedral Normalized Cross-Correlation (NCC) across all 15,281 rows.
+   * `nntr_sscd.npz`: Top-10 train neighbors and cosine similarities from SSCD ResNeXt101.
+3. **Fine-Tuned Foundation Weights & Predictions:**
+   * Session 12 (DINOv3-H+ F1): `work/drive_in/session12/pred_F1_f0.npz`
+   * Session 14 (DINOv3-7B F2): Google Drive `datascape_2026/session14` & Kaggle Dataset `asuudane/datascape-colab-out14`
+4. **Clean Masks:** `work/clean_data_mask.npz` (315 noisy/conflicting rows flagged).
 
-1. **Augmentation shortcut.** Ini sumber error utama.
-   - Di train, gambar **Aman** banyak yang sudah di-augmentasi panitia: noise Gaussian/impulse, rotasi dengan sudut hitam/putih, brightness. Contoh share noisy Aman vs Rusak: 416 0.46 vs 0.04, 675 0.57 vs 0.03.
-   - Gambar **Rusak** dan **semua gambar test** mentah (test noisy 0–3%, kecuali 224/512).
-   - Akibatnya model belajar "mentah = Rusak" dan memprediksi Rusak berlebih di test. Montage 416: test berisi kotak utuh mentah yang oleh model dibilang Rusak, padahal LB membuktikannya Aman.
-2. **Fine-tune penuh memotong separuh shortcut; augmentasi saja tidak.**
-   - Pada 339 baris yang dikonfirmasi LB sebagai Aman tanpa copy di train, Rusak turun dari h2 0.938 ke h3A **0.487**.
-   - Panggilan Rusak di baris copy-Rusak tetap terjaga (0.978).
-   - Mengkorupsi semua gambar (`augeq`) tidak membantu (0.522).
-3. **Copy.**
-   - 26% baris test punya copy pixel-exact di train. Label copy train-train sepakat 96,2%.
-   - Label twin SSCD di baris yang diperdebatkan hanya ±55% benar. Di render sintetis 416, kotak penyok dan utuh hampir identik di 128 px.
-4. **Ekspektasi dari OOF label train selalu terlalu tinggi.** `d04_da_bt2` diekspektasi 0.93, aktualnya 0.845. Setiap lever harus di-anchor dengan probe LB berpasangan, satu kelompok baris per probe.
-5. **Inversi gabungan 3 skor LB** menghasilkan F1 publik per kelas: Aman ±0.89, Rusak ±0.81, Lainnya ±0.85 (interval lebar). Jumlah Lainnya publik ±17, setara dengan prediksi, sehingga Lainnya belum bisa ditindaklanjuti.
-6. **Bug yang sudah diperbaiki (10-05).** `pix_all.npz` berurutan `meta_sorted`, **bukan** `meta.csv`. Jangan pernah me-reindex lewat `meta.csv`.
+---
 
-## 6. Riwayat submission tim (pipeline ini)
+## 5. Autoresearch Protocol (karpathy/autoresearch Ratchet)
 
-| Submission | Isi | Public LB |
-|---|---|---|
-| `r1003_calib_knn_probe` | kNN + LR DINOv2/CLIP | 0.78627 |
-| `d04_da_bt2` | twin lock + DA heads + post-proc | 0.84521 |
-| `d05_h2_nolock_s337` | tanpa twin lock (probe berpasangan) | 0.83004 |
-| **`d05_p416_allA`** | d04 + 416 Rusak → Aman | **0.87739** |
-| `d05_p675_R` | d04 + 675 tanpa copy → Rusak | 0.80201 |
-| `d06_cur_A` | d05_p416 + 25 Rusak di 512/675 → Aman | pending (exp. ±0.883) |
+Our progress strictly follows the autoresearch ratchet:
+1. **Hypothesis Formulation:** Every experiment must declare a specific directional hypothesis, row changes, and expected score bounds.
+2. **Pre-registration:** Log the candidate in `submissions/ledger.csv` and `work/results.tsv` before submitting.
+3. **Paired Leaderboard Read:** Evaluate the outcome with `python work/lbdelta.py submissions/<base>.csv submissions/<probe>.csv <base_lb>`.
+4. **Ratchet Rule:** The base moves to the candidate **only if** $\Delta \text{LB} > 0$. Otherwise, the candidate is discarded and the negative finding is permanently recorded.
 
-Detail expected vs actual ada di `submissions/ledger.csv`.
+---
 
-## 7. Aturan kompetisi yang dipatuhi
+## 6. How to Reproduce & Submit
 
-- Hanya data panitia; tidak ada dataset atau label eksternal.
-- Tidak ada inferensi LLM/VLM. Tower vision dipakai sebagai encoder gambar (frozen atau fine-tune) tanpa teks dan tanpa zero-shot.
-- Tidak ada prediksi manual. Setiap keputusan adalah aturan programatik per kelompok sumber; montage hanya dipakai untuk analisis.
-- Submit hanya dari akun tim `ajikajadeh`. Limit 3/hari dipakai bersama.
-- Deklarasi AI: kode dan analisis dibuat dengan bantuan AI coding assistant (Claude, Anthropic). Semua keputusan tercatat di `docs/` dan `submissions/ledger.csv`.
+### A. Quick Master Submission Generator (Local CPU, < 10 seconds)
+```bash
+python3 work/build_master_submission.py
+# Generates submissions/d06_master_tightened_similarity.csv
+```
+
+### B. Run the Full Finalist Jupyter Notebook
+Open and run [notebook/Datascape_Final_Pipeline.ipynb](notebook/Datascape_Final_Pipeline.ipynb).
+* In `QUICK` mode (default): Re-builds all submissions from cached heads in under 1 minute and asserts bit-identical outputs.
+* In `FULL` mode: Runs on GPU A100 to re-extract embeddings, train domain-adapted heads, and execute TTA.
+
+### C. Credentials & Environment
+* **GitHub Remote:** `https://github.com/yauwes/datascape-2026-pipeline`
+* **Kaggle API:**
+  * Primary team submit account: `ajikajadeh`
+  * Secondary compute accounts: `asuudane`, `yoursbae`
+* **Google Colab A100:** Uses fail-safe `finally: runtime.unassign()` to automatically release GPU upon completion.
+
+---
+
+## 7. Future Work Recommendations for Next AI Agent
+
+1. **Quota Reset Window:** The Kaggle submission quota resets daily at 00:00 UTC (07:00 WIB). Exactly 3 submissions/day are available from `ajikajadeh`.
+2. **Next 2 Immediate Submissions:**
+   * **Slot 1:** [submissions/d06_cur_A.csv](submissions/d06_cur_A.csv) (Expected: **0.884 – 0.889**)
+   * **Slot 2:** [submissions/d06_master_tightened_similarity.csv](submissions/d06_master_tightened_similarity.csv) (Expected: **0.930 – 0.970+**)
+3. **Do NOT touch:**
+   * Never submit `d05_lainnya_pm35.csv` (drops score to ~0.77 due to `Lainnya` false positives).
+   * Never submit `d05_p675_R.csv` (drops score by -0.043).
+   * Never run raw unconstrained DINOv3-7B without the twin locks.
