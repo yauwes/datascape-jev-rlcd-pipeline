@@ -2,7 +2,7 @@
 
 > **Master AI Agent Checkpoint & Autoresearch Contract**  
 > **Team:** `last game` (Farhan Wicaksono & ajikajadeh)  
-> **Current Leaderboard Standing:** **Rank 9** of 83 teams (Best Public LB: **0.88047**)  
+> **Current Leaderboard Standing:** **Rank 11** of 83 teams (Best Public LB: **0.88789** [NEW ALL-TIME RECORD])  
 > **Target:** Top 1 Leaderboard (**0.976 – 0.98+**)  
 > **Metric:** Macro-Averaged F1-Score ($F1_{\text{macro}} = \frac{F1_{\text{Aman}} + F1_{\text{Rusak}} + F1_{\text{Lainnya}}}{3}$)  
 > **Evaluator:** StratifiedGroupKFold(5, seed 42) over near-duplicate clusters (DINOv2-B max-over-rot/flip + MD5) + Paired Public LB Inversion (`work/lbdelta.py`).
@@ -80,7 +80,7 @@ flowchart TD
 | `d07_ensemble_4way` | 4-Way Ensemble (DINOv3-H+ + DA + PEG + Clean MLP) + domain locks | **0.8851 - 0.8954** | *Ready for manual upload* | +0.005 - 0.015 | **MANUAL CANDIDATE 2 (High Potential)** |
 | `d07_eva_diagnosis_integrated` | 6-Foundation Encoders (7,552-dim) + Shift Weighting + Group Downweighting | **0.8882 - 0.9238** | *Ready for manual upload* | +0.008 - 0.043 | **MANUAL CANDIDATE 3 (Direct EVA002-Diagnosis)** |
 | `d07_dinov3_eva_consensus` | DINOv3-7B F2 (Session 14) + Multi-Tower (7552-dim) + DA-ConvNeXt + Domain Locks | **0.8920 - 0.9280** | *Ready for manual upload* | +0.012 - 0.048 | **MANUAL CANDIDATE 4 (Grand Consensus Champion)** |
-| `d08_grand_consensus_champion` | DINOv3-7B F2 (35%) + 10,368-dim Super-Ensemble (30%) + ens_pe (20%) + DA-ConvNeXt (15%) | **0.8950 - 0.9450** | *Ready for manual upload* | +0.015 - 0.065 | **MANUAL CANDIDATE 5 (Top Grand Champion)** |
+| `d08_grand_consensus_champion` | DINOv3-7B F2 (35%) + 10,368-dim Super-Ensemble (30%) + ens_pe (20%) + DA-ConvNeXt (15%) | **0.8950 - 0.9450** | **`0.88789`** | **+0.00742** | 🏆 **ALL-TIME TEAM RECORD (Rank 11, +0.74% Gain)** |
 
 ---
 
