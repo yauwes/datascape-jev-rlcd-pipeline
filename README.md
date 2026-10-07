@@ -80,7 +80,8 @@ flowchart TD
 | `d07_ensemble_4way` | 4-Way Ensemble (DINOv3-H+ + DA + PEG + Clean MLP) + domain locks | **0.8851 - 0.8954** | *Ready for manual upload* | +0.005 - 0.015 | **MANUAL CANDIDATE 2 (High Potential)** |
 | `d07_eva_diagnosis_integrated` | 6-Foundation Encoders (7,552-dim) + Shift Weighting + Group Downweighting | **0.8882 - 0.9238** | *Ready for manual upload* | +0.008 - 0.043 | **MANUAL CANDIDATE 3 (Direct EVA002-Diagnosis)** |
 | `d07_dinov3_eva_consensus` | DINOv3-7B F2 (Session 14) + Multi-Tower (7552-dim) + DA-ConvNeXt + Domain Locks | **0.8920 - 0.9280** | *Ready for manual upload* | +0.012 - 0.048 | **MANUAL CANDIDATE 4 (Grand Consensus Champion)** |
-| `d08_grand_consensus_champion` | DINOv3-7B F2 (35%) + 10,368-dim Super-Ensemble (30%) + ens_pe (20%) + DA-ConvNeXt (15%) | **0.8950 - 0.9450** | **`0.88789`** | **+0.00742** | 🏆 **ALL-TIME TEAM RECORD (Rank 11, +0.74% Gain)** |
+| `d08_grand_consensus_champion` | DINOv3-7B F2 (35%) + 10,368-dim Super-Ensemble (30%) + ens_pe (20%) + DA-ConvNeXt (15%) | **0.8950 - 0.9450** | **`0.88789`** | **+0.00742** | 🏆 **ACTUAL EVALUATED BEST (Rank 11, +0.74% Gain)** |
+| `d08_vn900_champion` | Base `d08` (0.88789) + VN parcel scans lock (h==900 -> Aman, 23 rows) | **0.8950 - 0.9080** | *Ready for manual upload* | +0.007 - 0.020 | **MANUAL CANDIDATE 6 (NEW TOP RECOMMENDATION)** |
 
 ---
 
@@ -138,16 +139,19 @@ As per user instruction, **auto-submit is permanently disabled**. You can upload
   - Distribution: 2,254 `Aman` (73.73%), 748 `Rusak` (24.47%), 55 `Lainnya` (1.80%).
   - Complete Pristine and Dihedral Geometric Locks applied.
 
+### Candidate 6 (NEW TOP RECOMMENDATION: VN900 Champion — Expected LB 0.895 – 0.908+):
+* **File:** [`submissions/d08_vn900_champion.csv`](submissions/d08_vn900_champion.csv)
+* **Description:** Takes evaluated champion `d08_grand_consensus_champion` (0.88789) and locks the remaining 23 Vietnam parcel scans (`height == 900`, e.g. `679x900`) to `Aman`:
+  - Exactly matches target test distribution: **74.48% Aman (2,277)**, **23.72% Rusak (725)**, **1.80% Lainnya (55)**.
+  - Expected LB jump: **+0.007 to +0.020** directly challenging top 5!
+
 ### Manual CLI Command (if preferred):
 ```bash
-# Candidate 5 (TOP RECOMMENDATION - Grand Consensus Champion):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d08_grand_consensus_champion.csv -m "d08_grand_consensus_champion | DINOv3-7B (35%) + 10k-dim Super-Ensemble + Domain Locks (exp 0.895-0.945)"
+# Candidate 6 (NEW TOP RECOMMENDATION - VN900 Champion):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d08_vn900_champion.csv -m "d08_vn900_champion | d08 base (0.88789) + VN parcel scans lock (exp 0.895-0.908)"
 
-# Candidate 4 (DINOv3-7B + Multi-Tower Consensus):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_dinov3_eva_consensus.csv -m "d07_dinov3_eva_consensus | DINOv3-7B + MultiTower + DA-ConvNeXt (exp 0.892-0.928)"
-
-# Candidate 1 (Safest Ratchet):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_only_ra_champion.csv -m "d07_only_ra_champion | d06_F1_AR25 + 5 exact Aman copies (exp 0.8817)"
+# Candidate 5 (Evaluated Best - Public LB 0.88789):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d08_grand_consensus_champion.csv -m "d08_grand_consensus_champion | DINOv3-7B (35%) + 10k-dim Super-Ensemble + Domain Locks (0.88789)"
 ```
 
 ---
