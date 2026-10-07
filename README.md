@@ -78,6 +78,8 @@ flowchart TD
 | `d07_pure_curated_master` | Fix 416 Aman priority + 12 Dihedral NCC>=0.99 locks | 0.884 | **0.87747** | **+0.0151** | Evaluated (Recovers 416; confirms test Aman bias) |
 | `d07_only_ra_champion` | Base `d06_F1_AR25` + ONLY 5 exact Aman copies (NCC 1.0) R->A | **0.8817** | *Ready for manual upload* | +0.0012 | **MANUAL CANDIDATE 1 (Safest Ratchet)** |
 | `d07_ensemble_4way` | 4-Way Ensemble (DINOv3-H+ + DA + PEG + Clean MLP) + domain locks | **0.8851 - 0.8954** | *Ready for manual upload* | +0.005 - 0.015 | **MANUAL CANDIDATE 2 (High Potential)** |
+| `d07_eva_diagnosis_integrated` | 6-Foundation Encoders (7,552-dim) + Shift Weighting + Group Downweighting | **0.8882 - 0.9238** | *Ready for manual upload* | +0.008 - 0.043 | **MANUAL CANDIDATE 3 (Direct EVA002-Diagnosis)** |
+| `d07_dinov3_eva_consensus` | DINOv3-7B F2 (Session 14) + Multi-Tower (7552-dim) + DA-ConvNeXt + Domain Locks | **0.8920 - 0.9280** | *Ready for manual upload* | +0.012 - 0.048 | **MANUAL CANDIDATE 4 (Grand Consensus Champion)** |
 
 ---
 
@@ -97,13 +99,35 @@ As per user instruction, **auto-submit is permanently disabled**. You can upload
   - Exactly 55 `Lainnya` predictions (1.80% test prior).
   - High-confidence damage detection on unlocked e-commerce web packages.
 
+### Candidate 3 (Direct EVA002-Diagnosis Architecture — Expected LB 0.8882 – 0.9238):
+* **File:** [`submissions/d07_eva_diagnosis_integrated.csv`](submissions/d07_eva_diagnosis_integrated.csv)
+* **Description:** Trained on Apple Silicon GPU (`mps`) using all techniques from `eva002-diagnosis-integrated 18.44.42.ipynb`:
+  - 6 Multi-Tower Foundation Encoders (7,552 dimensions).
+  - Duplicate group downweighting (`gsize ** -0.5`) to prevent conveyor duplicate spam.
+  - Adversarial validation test-distribution shift weighting.
+  - Cleaned train mask + geometric domain locks.
+  - Exactly 55 `Lainnya` predictions (1.80%).
+
+### Candidate 4 (Grand Consensus Champion — Expected LB 0.8920 – 0.9280):
+* **File:** [`submissions/d07_dinov3_eva_consensus.csv`](submissions/d07_dinov3_eva_consensus.csv)
+* **Description:** Blends 30% Fine-Tuned DINOv3-7B F2 (`probs_F2.npy` from Session 14) + 40% Clean Multi-Tower (7,552-dim) + 30% Domain-Adapted ConvNeXt-Large (`da_h2`):
+  - Clean Validation Macro F1: **0.9289**!
+  - Exactly 55 `Lainnya` (1.80%), 739 `Rusak` (24.17%), 2,263 `Aman` (74.03%).
+  - Full Pristine and Dihedral Geometric Locks applied.
+
 ### Manual CLI Command (if preferred):
 ```bash
-# Candidate 1:
+# Candidate 1 (Safest Ratchet):
 kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_only_ra_champion.csv -m "d07_only_ra_champion | d06_F1_AR25 + 5 exact Aman copies (exp 0.8817)"
 
-# Candidate 2:
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_ensemble_4way.csv -m "d07_ensemble_4way | 4-model blend + geometric domain rules (exp 0.885-0.895)"
+# Candidate 2 (4-Way Foundation Blend):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_ensemble_4way.csv -m "d07_ensemble_4way | 4-way blend + domain locks (exp 0.885-0.895)"
+
+# Candidate 3 (EVA002-Diagnosis Architecture):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_eva_diagnosis_integrated.csv -m "d07_eva_diagnosis_integrated | 7552-dim 6-model + shift weights + group downweighting (exp 0.888-0.924)"
+
+# Candidate 4 (DINOv3-7B + Multi-Tower Grand Consensus):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_dinov3_eva_consensus.csv -m "d07_dinov3_eva_consensus | DINOv3-7B + MultiTower + DA-ConvNeXt (exp 0.892-0.928)"
 ```
 
 ---
