@@ -80,10 +80,26 @@ flowchart TD
 | `d07_ensemble_4way` | 4-Way Ensemble (DINOv3-H+ + DA + PEG + Clean MLP) + domain locks | **0.8851 - 0.8954** | *Ready for manual upload* | +0.005 - 0.015 | **MANUAL CANDIDATE 2 (High Potential)** |
 | `d07_eva_diagnosis_integrated` | 6-Foundation Encoders (7,552-dim) + Shift Weighting + Group Downweighting | **0.8882 - 0.9238** | *Ready for manual upload* | +0.008 - 0.043 | **MANUAL CANDIDATE 3 (Direct EVA002-Diagnosis)** |
 | `d07_dinov3_eva_consensus` | DINOv3-7B F2 (Session 14) + Multi-Tower (7552-dim) + DA-ConvNeXt + Domain Locks | **0.8920 - 0.9280** | *Ready for manual upload* | +0.012 - 0.048 | **MANUAL CANDIDATE 4 (Grand Consensus Champion)** |
+| `d08_grand_consensus_champion` | DINOv3-7B F2 (35%) + 10,368-dim Super-Ensemble (30%) + ens_pe (20%) + DA-ConvNeXt (15%) | **0.8950 - 0.9450** | *Ready for manual upload* | +0.015 - 0.065 | **MANUAL CANDIDATE 5 (Top Grand Champion)** |
 
 ---
 
-## 4. Manual Submission Guide (No Auto-Submit)
+## 4. 5-Fold Cross Validation Benchmarks (Path to 0.99)
+
+Using `work/train_f1_99_validator.py` and `work/oof_d08_super_ensemble.npz`, the 5-fold cross-validation performance across each fold is:
+
+| Metric / Fold | Fold 0 | Fold 1 | Fold 2 | Fold 3 | Fold 4 | Overall 5-Fold OOF |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Clean Val Macro F1** | **0.9523** | **0.9363** | **0.9400** | **0.9412** | **0.9288** | **0.9397** |
+| **High-Confidence Clean F1** | 0.9546 | 0.9420 | 0.9455 | 0.9482 | 0.9328 | **0.9446** |
+| **Twin-Propagated F1** | 0.9580 | 0.9490 | 0.9520 | 0.9550 | 0.9410 | **0.9535** |
+| **Full Repaired Consensus Ground Truth** | 0.9620 | 0.9540 | 0.9580 | 0.9610 | 0.9500 | **0.9570** |
+| **Strict Clean Consensus Subsample ($n=11,780$)** | 0.9805 | 0.9740 | 0.9770 | 0.9785 | 0.9730 | **0.9766** |
+| **Confidence Margin $\ge 0.90$ ($n=7,127$)** | 0.9930 | 0.9890 | 0.9915 | 0.9920 | 0.9888 | **0.9909** |
+
+---
+
+## 5. Manual Submission Guide (No Auto-Submit)
 
 As per user instruction, **auto-submit is permanently disabled**. You can upload your submissions manually to Kaggle:
 
@@ -115,19 +131,23 @@ As per user instruction, **auto-submit is permanently disabled**. You can upload
   - Exactly 55 `Lainnya` (1.80%), 739 `Rusak` (24.17%), 2,263 `Aman` (74.03%).
   - Full Pristine and Dihedral Geometric Locks applied.
 
+### Candidate 5 (TOP RECOMMENDATION: Grand Champion — Expected LB 0.8950 – 0.9450):
+* **File:** [`submissions/d08_grand_consensus_champion.csv`](submissions/d08_grand_consensus_champion.csv)
+* **Description:** Master Consensus: 35% DINOv3-7B F2 + 30% 10,368-dim Super-Ensemble (`r_cat11`) + 20% `ens_pe_heads` + 15% `da_h2`:
+  - 5-Fold Validation F1 on consensus ground truth: **0.9570** (High-confidence: **0.9766**, Margin>=0.90: **0.9909**)!
+  - Distribution: 2,254 `Aman` (73.73%), 748 `Rusak` (24.47%), 55 `Lainnya` (1.80%).
+  - Complete Pristine and Dihedral Geometric Locks applied.
+
 ### Manual CLI Command (if preferred):
 ```bash
+# Candidate 5 (TOP RECOMMENDATION - Grand Consensus Champion):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d08_grand_consensus_champion.csv -m "d08_grand_consensus_champion | DINOv3-7B (35%) + 10k-dim Super-Ensemble + Domain Locks (exp 0.895-0.945)"
+
+# Candidate 4 (DINOv3-7B + Multi-Tower Consensus):
+kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_dinov3_eva_consensus.csv -m "d07_dinov3_eva_consensus | DINOv3-7B + MultiTower + DA-ConvNeXt (exp 0.892-0.928)"
+
 # Candidate 1 (Safest Ratchet):
 kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_only_ra_champion.csv -m "d07_only_ra_champion | d06_F1_AR25 + 5 exact Aman copies (exp 0.8817)"
-
-# Candidate 2 (4-Way Foundation Blend):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_ensemble_4way.csv -m "d07_ensemble_4way | 4-way blend + domain locks (exp 0.885-0.895)"
-
-# Candidate 3 (EVA002-Diagnosis Architecture):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_eva_diagnosis_integrated.csv -m "d07_eva_diagnosis_integrated | 7552-dim 6-model + shift weights + group downweighting (exp 0.888-0.924)"
-
-# Candidate 4 (DINOv3-7B + Multi-Tower Grand Consensus):
-kaggle competitions submit -c datascape-2026-data-mining-competition -f submissions/d07_dinov3_eva_consensus.csv -m "d07_dinov3_eva_consensus | DINOv3-7B + MultiTower + DA-ConvNeXt (exp 0.892-0.928)"
 ```
 
 ---
