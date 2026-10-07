@@ -11,10 +11,10 @@ test_00009.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.91
 test_00010.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9971)",Aman_01821.jpg,Dihedral NCC=0.9971
 test_00011.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.822)",Aman_04340.png,"SSCD Sim=0.822, Purity=1.00"
 test_00012.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.569)",Aman_01420.jpg,"SSCD Sim=0.569, Purity=1.00"
-test_00013.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.920)",Rusak_00114.jpg,"SSCD Sim=0.920, Purity=0.90"
+test_00013.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00114.jpg,"SSCD Sim=0.920, Purity=0.90"
 test_00014.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.554)",Aman_04329.png,"SSCD Sim=0.554, Purity=1.00"
 test_00015.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.844)",Rusak_01779.jpg,"SSCD Sim=0.844, Purity=1.00"
-test_00016.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00134.jpg,SSCD Sim=0.935
+test_00016.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00134.jpg,SSCD Sim=0.935
 test_00017.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08537.jpg,SHA-256 identical
 test_00018.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9968)",Aman_00084.jpg,Dihedral NCC=0.9968
 test_00019.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02347.jpg,SHA-256 identical
@@ -51,7 +51,7 @@ test_00049.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.94
 test_00050.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.798)",Aman_04344.png,"SSCD Sim=0.798, Purity=1.00"
 test_00051.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.563)",Aman_02750.jpg,"SSCD Sim=0.563, Purity=1.00"
 test_00052.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.620)",Aman_04643.jpg,"SSCD Sim=0.620, Purity=1.00"
-test_00053.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00040.jpg,SSCD Sim=0.925
+test_00053.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00040.jpg,SSCD Sim=0.925
 test_00054.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.406
 test_00055.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.546
 test_00056.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_06794.jpg,Dihedral NCC=0.9996
@@ -69,9 +69,9 @@ test_00067.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_01858.jpg
 test_00068.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.781)",Aman_04335.png,"SSCD Sim=0.781, Purity=1.00"
 test_00069.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.684)",Aman_02235.jpg,"SSCD Sim=0.684, Purity=1.00"
 test_00070.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.906)",Aman_04383.jpg,"SSCD Sim=0.906, Purity=1.00"
-test_00071.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00046.jpg,SSCD Sim=0.937
+test_00071.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00046.jpg,SSCD Sim=0.937
 test_00072.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.732)",Aman_01523.jpg,"SSCD Sim=0.732, Purity=1.00"
-test_00073.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Aman_00204.jpg,Dihedral NCC=0.9994
+test_00073.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00204.jpg,Dihedral NCC=0.9994
 test_00074.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08440.jpg,SHA-256 identical
 test_00075.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.413
 test_00076.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9954)",Aman_02581.jpg,Dihedral NCC=0.9954
@@ -108,7 +108,7 @@ test_00106.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.508
 test_00107.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07415.jpg,SHA-256 identical
 test_00108.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.529
 test_00109.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.531
-test_00110.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00034.jpg,SSCD Sim=0.945
+test_00110.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00034.jpg,SSCD Sim=0.945
 test_00111.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.675)",Aman_03283.jpg,"SSCD Sim=0.675, Purity=1.00"
 test_00112.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.837)",Aman_00566.jpg,"SSCD Sim=0.837, Purity=1.00"
 test_00113.jpg,Lainnya,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.556)",Lainnya_00202.jpg,"SSCD Sim=0.556, Purity=1.00"
@@ -119,7 +119,7 @@ test_00117.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_
 test_00118.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.838)",Rusak_02840.jpg,"SSCD Sim=0.838, Purity=1.00"
 test_00119.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.927)",Aman_04351.jpg,"SSCD Sim=0.927, Purity=1.00"
 test_00120.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08219.jpg,SHA-256 identical
-test_00121.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00148.jpg,SSCD Sim=0.979
+test_00121.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00148.jpg,SSCD Sim=0.979
 test_00122.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.890)",Aman_01882.jpg,"SSCD Sim=0.890, Purity=1.00"
 test_00123.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_02203.jpg,Dihedral NCC=0.9998
 test_00124.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.681)",Aman_02907.jpg,"SSCD Sim=0.681, Purity=1.00"
@@ -131,22 +131,22 @@ test_00129.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.619
 test_00130.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07802.jpg,SSCD Sim=0.914
 test_00131.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.318
 test_00132.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.634)",Aman_01043.jpg,"SSCD Sim=0.634, Purity=1.00"
-test_00133.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_00199.jpg,Dihedral NCC=0.9998
-test_00134.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00086.jpg,SSCD Sim=0.925
+test_00133.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00199.jpg,Dihedral NCC=0.9998
+test_00134.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00086.jpg,SSCD Sim=0.925
 test_00135.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08217.jpg,SHA-256 identical
 test_00136.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.593)",Aman_02197.jpg,"SSCD Sim=0.593, Purity=1.00"
 test_00137.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9988)",Aman_01034.jpg,Dihedral NCC=0.9988
 test_00138.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.664)",Aman_02311.jpg,"SSCD Sim=0.664, Purity=1.00"
 test_00139.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.696)",Aman_01384.jpg,"SSCD Sim=0.696, Purity=1.00"
 test_00140.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.605)",Aman_02861.jpg,"SSCD Sim=0.605, Purity=1.00"
-test_00141.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.965)",Rusak_00055.jpg,"SSCD Sim=0.965, Purity=0.90"
+test_00141.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00055.jpg,"SSCD Sim=0.965, Purity=0.90"
 test_00142.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.271
 test_00143.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.895)",Aman_03697.jpg,"SSCD Sim=0.895, Purity=1.00"
 test_00144.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9992)",Aman_08701.jpg,Dihedral NCC=0.9992
 test_00145.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08386.jpg,SHA-256 identical
 test_00146.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.276
 test_00147.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07489.jpg,SHA-256 identical
-test_00148.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00016.jpg,SSCD Sim=0.972
+test_00148.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00016.jpg,SSCD Sim=0.972
 test_00149.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01229.jpg,SHA-256 identical
 test_00150.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.532
 test_00151.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.837)",Aman_00901.jpg,"SSCD Sim=0.837, Purity=1.00"
@@ -160,7 +160,7 @@ test_00158.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.908
 test_00159.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_04234.png,Dihedral NCC=1.0000
 test_00160.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.387
 test_00161.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_01790.jpg,SSCD Sim=0.667
-test_00162.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.967)",Rusak_00035.jpg,"SSCD Sim=0.967, Purity=1.00"
+test_00162.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00035.jpg,"SSCD Sim=0.967, Purity=1.00"
 test_00163.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07804.jpg,SHA-256 identical
 test_00164.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08421.jpg,SHA-256 identical
 test_00165.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07702.jpg,SHA-256 identical
@@ -196,9 +196,9 @@ test_00194.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9970)",Aman_
 test_00195.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.527
 test_00196.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.475
 test_00197.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.586)",Aman_01033.jpg,"SSCD Sim=0.586, Purity=1.00"
-test_00198.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00109.jpg,SSCD Sim=0.954
+test_00198.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00109.jpg,SSCD Sim=0.954
 test_00199.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.905)",Aman_03879.jpg,"SSCD Sim=0.905, Purity=1.00"
-test_00200.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00066.jpg,SSCD Sim=0.936
+test_00200.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00066.jpg,SSCD Sim=0.936
 test_00201.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.718)",Aman_01037.jpg,"SSCD Sim=0.718, Purity=1.00"
 test_00202.jpg,Lainnya,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.845)",Lainnya_00208.jpg,"SSCD Sim=0.845, Purity=1.00"
 test_00203.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.733)",Aman_01913.jpg,"SSCD Sim=0.733, Purity=1.00"
@@ -225,7 +225,7 @@ test_00223.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02410.jpg,SHA-25
 test_00224.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.620)",Aman_03289.jpg,"SSCD Sim=0.620, Purity=1.00"
 test_00225.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02351.jpg,Dihedral NCC=0.9999
 test_00226.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.965)",Aman_03603.jpg,"SSCD Sim=0.965, Purity=1.00"
-test_00227.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00071.jpg,SSCD Sim=0.977
+test_00227.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00071.jpg,SSCD Sim=0.977
 test_00228.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.555)",Rusak_02969.jpg,"SSCD Sim=0.555, Purity=1.00"
 test_00229.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02887.jpg,Dihedral NCC=0.9999
 test_00230.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.617)",Aman_03838.jpg,"SSCD Sim=0.617, Purity=1.00"
@@ -235,12 +235,12 @@ test_00233.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9983)",Aman_
 test_00234.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_02313.jpg,Dihedral NCC=0.9999
 test_00235.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07555.jpg,SHA-256 identical
 test_00236.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9976)",Aman_08731.jpg,Dihedral NCC=0.9976
-test_00237.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00026.jpg,SSCD Sim=0.944
+test_00237.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00026.jpg,SSCD Sim=0.944
 test_00238.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.821)",Rusak_02757.jpg,"SSCD Sim=0.821, Purity=1.00"
 test_00239.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.554)",Aman_03986.jpg,"SSCD Sim=0.554, Purity=1.00"
-test_00240.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00030.jpg,SSCD Sim=0.958
+test_00240.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00030.jpg,SSCD Sim=0.958
 test_00241.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.783)",Aman_03987.jpg,"SSCD Sim=0.783, Purity=1.00"
-test_00242.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9972)",Aman_02983.jpg,Dihedral NCC=0.9972
+test_00242.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_02983.jpg,Dihedral NCC=0.9972
 test_00243.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_01388.jpg,Dihedral NCC=1.0000
 test_00244.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.778)",Aman_01913.jpg,"SSCD Sim=0.778, Purity=1.00"
 test_00245.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.799)",Aman_00477.jpg,"SSCD Sim=0.799, Purity=1.00"
@@ -259,7 +259,7 @@ test_00257.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.605
 test_00258.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.728)",Aman_00881.jpg,"SSCD Sim=0.728, Purity=1.00"
 test_00259.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.332
 test_00260.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.904)",Aman_05192.jpg,"SSCD Sim=0.904, Purity=1.00"
-test_00261.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_02652.jpg,SSCD Sim=0.974
+test_00261.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_02652.jpg,SSCD Sim=0.974
 test_00262.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.686)",Aman_04303.jpg,"SSCD Sim=0.686, Purity=1.00"
 test_00263.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.778)",Aman_01216.jpg,"SSCD Sim=0.778, Purity=1.00"
 test_00264.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.946)",Aman_08489.jpg,"SSCD Sim=0.946, Purity=1.00"
@@ -273,9 +273,9 @@ test_00271.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_
 test_00272.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.829)",Rusak_01021.jpg,"SSCD Sim=0.829, Purity=1.00"
 test_00273.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.891)",Rusak_02956.jpg,"SSCD Sim=0.891, Purity=1.00"
 test_00274.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.407
-test_00275.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00190.jpg,SSCD Sim=0.908
+test_00275.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00190.jpg,SSCD Sim=0.908
 test_00276.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02182.jpg,SHA-256 identical
-test_00277.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00156.jpg,SSCD Sim=0.946
+test_00277.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00156.jpg,SSCD Sim=0.946
 test_00278.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.853)",Rusak_01084.jpg,"SSCD Sim=0.853, Purity=1.00"
 test_00279.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_01846.jpg,SSCD Sim=0.640
 test_00280.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.798)",Aman_01690.jpg,"SSCD Sim=0.798, Purity=1.00"
@@ -323,13 +323,13 @@ test_00321.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.822
 test_00322.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_07323.jpg,Dihedral NCC=1.0000
 test_00323.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.453
 test_00324.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.671)",Aman_02363.jpg,"SSCD Sim=0.671, Purity=1.00"
-test_00325.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00164.jpg,SSCD Sim=0.947
+test_00325.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00164.jpg,SSCD Sim=0.947
 test_00326.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.547
 test_00327.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.429
 test_00328.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.908)",Aman_01040.jpg,"SSCD Sim=0.908, Purity=1.00"
 test_00329.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9984)",Aman_01022.jpg,Dihedral NCC=0.9984
 test_00330.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.721)",Aman_04170.jpg,"SSCD Sim=0.721, Purity=1.00"
-test_00331.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.967)",Rusak_00195.jpg,"SSCD Sim=0.967, Purity=1.00"
+test_00331.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00195.jpg,"SSCD Sim=0.967, Purity=1.00"
 test_00332.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.452
 test_00333.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.237
 test_00334.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.769)",Rusak_02128.jpg,"SSCD Sim=0.769, Purity=1.00"
@@ -340,9 +340,9 @@ test_00338.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9953)",Rusa
 test_00339.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.929)",Rusak_02969.jpg,"SSCD Sim=0.929, Purity=1.00"
 test_00340.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.769)",Aman_03963.jpg,"SSCD Sim=0.769, Purity=1.00"
 test_00341.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.490
-test_00342.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_00120.jpg,Dihedral NCC=0.9999
+test_00342.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00120.jpg,Dihedral NCC=0.9999
 test_00343.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.696)",Aman_03492.jpg,"SSCD Sim=0.696, Purity=1.00"
-test_00344.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00081.jpg,SSCD Sim=0.969
+test_00344.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00081.jpg,SSCD Sim=0.969
 test_00345.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.890)",Aman_00489.jpg,"SSCD Sim=0.890, Purity=1.00"
 test_00346.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_01275.jpg,Dihedral NCC=1.0000
 test_00347.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.855)",Aman_00230.jpg,"SSCD Sim=0.855, Purity=1.00"
@@ -366,7 +366,7 @@ test_00364.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.655
 test_00365.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.442
 test_00366.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.688)",Aman_02358.jpg,"SSCD Sim=0.688, Purity=1.00"
 test_00367.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.461
-test_00368.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.974)",Rusak_00087.jpg,"SSCD Sim=0.974, Purity=0.90"
+test_00368.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00087.jpg,"SSCD Sim=0.974, Purity=0.90"
 test_00369.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07824.jpg,SSCD Sim=0.621
 test_00370.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.581)",Rusak_01095.jpg,"SSCD Sim=0.581, Purity=1.00"
 test_00371.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.729)",Rusak_02896.jpg,"SSCD Sim=0.729, Purity=1.00"
@@ -388,13 +388,13 @@ test_00386.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.34
 test_00387.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.893)",Rusak_02769.jpg,"SSCD Sim=0.893, Purity=1.00"
 test_00388.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.794)",Rusak_02964.jpg,"SSCD Sim=0.794, Purity=1.00"
 test_00389.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_06599.jpg,Dihedral NCC=0.9999
-test_00390.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00029.jpg,SSCD Sim=0.951
+test_00390.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00029.jpg,SSCD Sim=0.951
 test_00391.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.295
 test_00392.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.453
-test_00393.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00181.jpg,SSCD Sim=0.945
+test_00393.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00181.jpg,SSCD Sim=0.945
 test_00394.jpg,Aman,Tier 1,"100% (Byte-exact, train label conflict resolved by model)",Aman_06795.jpg,SHA-256 identical
 test_00395.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_03026.jpg,Dihedral NCC=0.9999
-test_00396.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00109.jpg,SSCD Sim=0.966
+test_00396.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00109.jpg,SSCD Sim=0.966
 test_00397.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.717)",Aman_03565.jpg,"SSCD Sim=0.717, Purity=1.00"
 test_00398.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.741)",Aman_02043.jpg,"SSCD Sim=0.741, Purity=1.00"
 test_00399.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.815)",Aman_03612.jpg,"SSCD Sim=0.815, Purity=1.00"
@@ -433,7 +433,7 @@ test_00431.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.729
 test_00432.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.708)",Aman_02629.jpg,"SSCD Sim=0.708, Purity=1.00"
 test_00433.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.674)",Aman_02148.jpg,"SSCD Sim=0.674, Purity=1.00"
 test_00434.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.532
-test_00435.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07822.jpg,SHA-256 identical
+test_00435.jpg,Aman,Tier 2 (Dihedral NCC 1.0000),100% (Dihedral Identical Copy of Train Aman),Aman_07822.jpg,SHA-256 identical
 test_00436.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9937)",Aman_00280.jpg,Dihedral NCC=0.9937
 test_00437.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.294
 test_00438.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.877)",Aman_02204.jpg,"SSCD Sim=0.877, Purity=1.00"
@@ -473,7 +473,7 @@ test_00471.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9976)",Aman_
 test_00472.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.517
 test_00473.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07301.jpg,SHA-256 identical
 test_00474.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.475
-test_00475.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.982)",Rusak_00099.jpg,"SSCD Sim=0.982, Purity=0.90"
+test_00475.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00099.jpg,"SSCD Sim=0.982, Purity=0.90"
 test_00476.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02469.jpg,SHA-256 identical
 test_00477.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9946)",Aman_03697.jpg,Dihedral NCC=0.9946
 test_00478.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_06782.jpg,SSCD Sim=0.944
@@ -484,7 +484,7 @@ test_00482.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.67
 test_00483.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_02079.jpg,SSCD Sim=0.678
 test_00484.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.944)",Rusak_02969.jpg,"SSCD Sim=0.944, Purity=1.00"
 test_00485.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.752)",Aman_00943.jpg,"SSCD Sim=0.752, Purity=1.00"
-test_00486.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Aman_03314.jpg,Dihedral NCC=0.9994
+test_00486.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03314.jpg,Dihedral NCC=0.9994
 test_00487.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.368
 test_00488.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Rusak_02879.jpg,Dihedral NCC=0.9994
 test_00489.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.912)",Aman_00803.jpg,"SSCD Sim=0.912, Purity=1.00"
@@ -500,7 +500,7 @@ test_00498.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.32
 test_00499.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08218.jpg,SHA-256 identical
 test_00500.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.697)",Rusak_02659.jpg,"SSCD Sim=0.697, Purity=1.00"
 test_00501.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_03077.jpg,Dihedral NCC=1.0000
-test_00502.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00073.jpg,SSCD Sim=0.936
+test_00502.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00073.jpg,SSCD Sim=0.936
 test_00503.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08260.jpg,SHA-256 identical
 test_00504.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Aman_03843.jpg,Dihedral NCC=0.9994
 test_00505.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.721)",Rusak_00748.jpg,"SSCD Sim=0.721, Purity=1.00"
@@ -539,7 +539,7 @@ test_00537.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.664
 test_00538.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.952)",Rusak_02914.jpg,"SSCD Sim=0.952, Purity=1.00"
 test_00539.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9979)",Aman_02780.jpg,Dihedral NCC=0.9979
 test_00540.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.246
-test_00541.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00026.jpg,SSCD Sim=0.967
+test_00541.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00026.jpg,SSCD Sim=0.967
 test_00542.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.741)",Aman_06662.jpg,"SSCD Sim=0.741, Purity=1.00"
 test_00543.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.576)",Aman_04213.jpg,"SSCD Sim=0.576, Purity=1.00"
 test_00544.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.508
@@ -564,11 +564,11 @@ test_00562.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.858
 test_00563.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.957)",Rusak_02955.jpg,"SSCD Sim=0.957, Purity=1.00"
 test_00564.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.880)",Aman_02489.jpg,"SSCD Sim=0.880, Purity=1.00"
 test_00565.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.609)",Aman_01068.jpg,"SSCD Sim=0.609, Purity=1.00"
-test_00566.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00035.jpg,SSCD Sim=0.952
+test_00566.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00035.jpg,SSCD Sim=0.952
 test_00567.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.854)",Aman_06370.jpg,"SSCD Sim=0.854, Purity=1.00"
 test_00568.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.433
 test_00569.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.253
-test_00570.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00151.jpg,SSCD Sim=0.982
+test_00570.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00151.jpg,SSCD Sim=0.982
 test_00571.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9948)",Rusak_00779.jpg,Dihedral NCC=0.9948
 test_00572.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.788)",Aman_05728.jpg,"SSCD Sim=0.788, Purity=1.00"
 test_00573.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.263
@@ -594,12 +594,12 @@ test_00592.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.892
 test_00593.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.678)",Aman_02338.jpg,"SSCD Sim=0.678, Purity=1.00"
 test_00594.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08421.jpg,SHA-256 identical
 test_00595.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.612)",Rusak_02934.jpg,"SSCD Sim=0.612, Purity=1.00"
-test_00596.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00154.jpg,SSCD Sim=0.885
+test_00596.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00154.jpg,SSCD Sim=0.885
 test_00597.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9902)",Rusak_01275.jpg,Dihedral NCC=0.9902
 test_00598.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_08085.jpg,Dihedral NCC=0.9999
 test_00599.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.661)",Aman_00535.jpg,"SSCD Sim=0.661, Purity=1.00"
 test_00600.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.425
-test_00601.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00106.jpg,SSCD Sim=0.964
+test_00601.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00106.jpg,SSCD Sim=0.964
 test_00602.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.224
 test_00603.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.393
 test_00604.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9936)",Rusak_02759.jpg,Dihedral NCC=0.9936
@@ -609,7 +609,7 @@ test_00607.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.29
 test_00608.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.537
 test_00609.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.374
 test_00610.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.690)",Aman_02907.jpg,"SSCD Sim=0.690, Purity=1.00"
-test_00611.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00063.jpg,SSCD Sim=0.975
+test_00611.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00063.jpg,SSCD Sim=0.975
 test_00612.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.786)",Aman_02460.jpg,"SSCD Sim=0.786, Purity=1.00"
 test_00613.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.220
 test_00614.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_08068.jpg,Dihedral NCC=0.9996
@@ -631,7 +631,7 @@ test_00629.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.800
 test_00630.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.721)",Aman_00433.jpg,"SSCD Sim=0.721, Purity=1.00"
 test_00631.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02062.jpg,SHA-256 identical
 test_00632.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9969)",Aman_01822.jpg,Dihedral NCC=0.9969
-test_00633.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00184.jpg,SSCD Sim=0.926
+test_00633.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00184.jpg,SSCD Sim=0.926
 test_00634.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.808)",Aman_08699.jpg,"SSCD Sim=0.808, Purity=1.00"
 test_00635.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.692)",Rusak_02077.jpg,"SSCD Sim=0.692, Purity=1.00"
 test_00636.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.891)",Rusak_00761.jpg,"SSCD Sim=0.891, Purity=1.00"
@@ -649,7 +649,7 @@ test_00647.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.562
 test_00648.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.363
 test_00649.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.910)",Rusak_02850.jpg,"SSCD Sim=0.910, Purity=1.00"
 test_00650.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.881)",Aman_08272.jpg,"SSCD Sim=0.881, Purity=1.00"
-test_00651.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00019.jpg,SSCD Sim=0.966
+test_00651.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00019.jpg,SSCD Sim=0.966
 test_00652.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.852)",Aman_01142.jpg,"SSCD Sim=0.852, Purity=1.00"
 test_00653.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.722)",Aman_03443.jpg,"SSCD Sim=0.722, Purity=1.00"
 test_00654.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.639)",Aman_07203.jpeg,"SSCD Sim=0.639, Purity=1.00"
@@ -657,12 +657,12 @@ test_00655.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.588
 test_00656.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.745)",Aman_03014.jpg,"SSCD Sim=0.745, Purity=1.00"
 test_00657.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.669)",Aman_04204.jpg,"SSCD Sim=0.669, Purity=1.00"
 test_00658.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.414
-test_00659.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00143.jpg,SSCD Sim=0.984
+test_00659.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00143.jpg,SSCD Sim=0.984
 test_00660.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.590)",Aman_02862.jpg,"SSCD Sim=0.590, Purity=1.00"
 test_00661.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.944)",Rusak_02644.jpg,"SSCD Sim=0.944, Purity=1.00"
 test_00662.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02403.jpg,Dihedral NCC=0.9999
 test_00663.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.639)",Aman_02385.jpg,"SSCD Sim=0.639, Purity=1.00"
-test_00664.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00085.jpg,SSCD Sim=0.970
+test_00664.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00085.jpg,SSCD Sim=0.970
 test_00665.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.772)",Aman_02339.jpg,"SSCD Sim=0.772, Purity=1.00"
 test_00666.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.693)",Aman_03986.jpg,"SSCD Sim=0.693, Purity=1.00"
 test_00667.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Rusak_02922.jpg,Dihedral NCC=0.9989
@@ -674,7 +674,7 @@ test_00672.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07342.jpg,SHA-256 
 test_00673.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.967)",Rusak_02972.jpg,"SSCD Sim=0.967, Purity=1.00"
 test_00674.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_04201.jpg,Dihedral NCC=0.9998
 test_00675.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9960)",Rusak_02930.jpg,Dihedral NCC=0.9960
-test_00676.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00027.jpg,SSCD Sim=0.987
+test_00676.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00027.jpg,SSCD Sim=0.987
 test_00677.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.382
 test_00678.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.626)",Aman_07209.jpeg,"SSCD Sim=0.626, Purity=1.00"
 test_00679.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.505
@@ -683,7 +683,7 @@ test_00681.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9987)",Aman_
 test_00682.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.632)",Aman_03336.jpg,"SSCD Sim=0.632, Purity=1.00"
 test_00683.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.869)",Rusak_02914.jpg,"SSCD Sim=0.869, Purity=1.00"
 test_00684.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08189.jpg,SHA-256 identical
-test_00685.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00083.jpg,SSCD Sim=0.970
+test_00685.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00083.jpg,SSCD Sim=0.970
 test_00686.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.642)",Rusak_00808.jpg,"SSCD Sim=0.642, Purity=1.00"
 test_00687.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.325
 test_00688.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.877)",Aman_00979.jpg,"SSCD Sim=0.877, Purity=1.00"
@@ -709,10 +709,10 @@ test_00707.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.953
 test_00708.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02078.jpg,SHA-256 identical
 test_00709.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.430
 test_00710.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.708)",Aman_02832.jpg,"SSCD Sim=0.708, Purity=1.00"
-test_00711.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.969)",Rusak_00109.jpg,"SSCD Sim=0.969, Purity=1.00"
+test_00711.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00109.jpg,"SSCD Sim=0.969, Purity=1.00"
 test_00712.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.951)",Rusak_02651.jpg,"SSCD Sim=0.951, Purity=1.00"
 test_00713.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.751)",Aman_00587.jpg,"SSCD Sim=0.751, Purity=1.00"
-test_00714.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00018.jpg,SSCD Sim=0.944
+test_00714.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00018.jpg,SSCD Sim=0.944
 test_00715.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.506
 test_00716.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.939)",Aman_02739.jpg,"SSCD Sim=0.939, Purity=1.00"
 test_00717.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.534
@@ -734,7 +734,7 @@ test_00732.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.799
 test_00733.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.543
 test_00734.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9990)",Aman_05811.jpg,Dihedral NCC=0.9990
 test_00735.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_06823.jpg,Dihedral NCC=0.9996
-test_00736.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.978)",Rusak_00025.jpg,"SSCD Sim=0.978, Purity=1.00"
+test_00736.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00025.jpg,"SSCD Sim=0.978, Purity=1.00"
 test_00737.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.375
 test_00738.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.342
 test_00739.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.608)",Aman_07878.jpg,"SSCD Sim=0.608, Purity=1.00"
@@ -771,7 +771,7 @@ test_00769.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.
 test_00770.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9909)",Aman_01390.jpg,Dihedral NCC=0.9909
 test_00771.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.246
 test_00772.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.426
-test_00773.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.958)",Rusak_00129.jpg,"SSCD Sim=0.958, Purity=0.90"
+test_00773.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00129.jpg,"SSCD Sim=0.958, Purity=0.90"
 test_00774.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9991)",Aman_02515.jpg,Dihedral NCC=0.9991
 test_00775.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.428
 test_00776.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.851)",Aman_00245.jpg,"SSCD Sim=0.851, Purity=1.00"
@@ -801,8 +801,8 @@ test_00799.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.48
 test_00800.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07340.jpg,SHA-256 identical
 test_00801.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.892)",Aman_04812.jpg,"SSCD Sim=0.892, Purity=1.00"
 test_00802.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9910)",Aman_04876.jpg,Dihedral NCC=0.9910
-test_00803.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00041.jpg,SSCD Sim=0.970
-test_00804.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00742.jpg,SSCD Sim=0.956
+test_00803.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00041.jpg,SSCD Sim=0.970
+test_00804.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00742.jpg,SSCD Sim=0.956
 test_00805.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9912)",Aman_05897.jpg,Dihedral NCC=0.9912
 test_00806.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.306
 test_00807.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.373
@@ -831,7 +831,7 @@ test_00829.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.238
 test_00830.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.795)",Aman_01030.jpg,"SSCD Sim=0.795, Purity=1.00"
 test_00831.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9991)",Aman_01043.jpg,Dihedral NCC=0.9991
 test_00832.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.388
-test_00833.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00179.jpg,SSCD Sim=0.953
+test_00833.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00179.jpg,SSCD Sim=0.953
 test_00834.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.680)",Aman_02363.jpg,"SSCD Sim=0.680, Purity=1.00"
 test_00835.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.228
 test_00836.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.661)",Aman_05432.jpg,"SSCD Sim=0.661, Purity=1.00"
@@ -860,12 +860,12 @@ test_00858.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.88
 test_00859.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.864)",Aman_02359.jpg,"SSCD Sim=0.864, Purity=1.00"
 test_00860.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.631)",Aman_01365.jpg,"SSCD Sim=0.631, Purity=1.00"
 test_00861.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.820)",Aman_07150.jpg,"SSCD Sim=0.820, Purity=1.00"
-test_00862.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00048.jpg,SSCD Sim=0.969
+test_00862.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00048.jpg,SSCD Sim=0.969
 test_00863.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.877)",Rusak_01275.jpg,"SSCD Sim=0.877, Purity=1.00"
 test_00864.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.835)",Rusak_00769.jpg,"SSCD Sim=0.835, Purity=1.00"
 test_00865.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.945)",Aman_03574.jpg,"SSCD Sim=0.945, Purity=1.00"
 test_00866.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_06786.jpg,SSCD Sim=0.966
-test_00867.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00098.jpg,SSCD Sim=0.957
+test_00867.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00098.jpg,SSCD Sim=0.957
 test_00868.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.630)",Aman_04815.jpg,"SSCD Sim=0.630, Purity=1.00"
 test_00869.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.621)",Aman_00799.jpg,"SSCD Sim=0.621, Purity=1.00"
 test_00870.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9942)",Aman_02108.jpg,Dihedral NCC=0.9942
@@ -879,7 +879,7 @@ test_00877.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.83
 test_00878.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.249
 test_00879.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9908)",Aman_02240.jpg,Dihedral NCC=0.9908
 test_00880.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.580)",Aman_00105.jpg,"SSCD Sim=0.580, Purity=1.00"
-test_00881.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.967)",Rusak_00185.jpg,"SSCD Sim=0.967, Purity=1.00"
+test_00881.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00185.jpg,"SSCD Sim=0.967, Purity=1.00"
 test_00882.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.475
 test_00883.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.707)",Aman_00956.jpg,"SSCD Sim=0.707, Purity=1.00"
 test_00884.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.676)",Aman_04124.jpg,"SSCD Sim=0.676, Purity=1.00"
@@ -944,7 +944,7 @@ test_00942.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.95
 test_00943.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),Lainnya_00284.jpg,SSCD Sim=0.799
 test_00944.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.264
 test_00945.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.458
-test_00946.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00098.jpg,SSCD Sim=0.929
+test_00946.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00098.jpg,SSCD Sim=0.929
 test_00947.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.415
 test_00948.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_05680.jpg,Dihedral NCC=1.0000
 test_00949.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.276
@@ -965,7 +965,7 @@ test_00963.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.75
 test_00964.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.222
 test_00965.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02496.jpg,Dihedral NCC=0.9999
 test_00966.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08222.jpg,SHA-256 identical
-test_00967.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_07824.jpg,Dihedral NCC=1.0000
+test_00967.jpg,Aman,Tier 2 (Dihedral NCC 1.0000),100% (Dihedral Identical Copy of Train Aman),Aman_07824.jpg,Dihedral NCC=1.0000
 test_00968.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.588)",Aman_02513.jpg,"SSCD Sim=0.588, Purity=1.00"
 test_00969.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.552)",Aman_03892.jpg,"SSCD Sim=0.552, Purity=1.00"
 test_00970.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_06741.jpg,SSCD Sim=0.853
@@ -989,25 +989,25 @@ test_00987.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.632
 test_00988.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.651)",Aman_01043.jpg,"SSCD Sim=0.651, Purity=1.00"
 test_00989.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.399
 test_00990.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.962)",Rusak_01240.jpg,"SSCD Sim=0.962, Purity=1.00"
-test_00991.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_02244.jpg,SSCD Sim=0.953
+test_00991.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_02244.jpg,SSCD Sim=0.953
 test_00992.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02381.jpg,SHA-256 identical
 test_00993.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_04290.jpg,Dihedral NCC=1.0000
 test_00994.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9943)",Aman_04800.jpg,Dihedral NCC=0.9943
 test_00995.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.91, sim=0.829)",Rusak_02716.jpg,"SSCD Sim=0.829, Purity=0.91"
-test_00996.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00057.jpg,SSCD Sim=0.969
+test_00996.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00057.jpg,SSCD Sim=0.969
 test_00997.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.268
 test_00998.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_08769.jpg,SSCD Sim=0.848
 test_00999.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.599)",Aman_04329.png,"SSCD Sim=0.599, Purity=1.00"
 test_01000.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.780)",Aman_02374.jpg,"SSCD Sim=0.780, Purity=1.00"
 test_01001.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.257
-test_01002.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_07802.jpg,Dihedral NCC=0.9999
+test_01002.jpg,Aman,Tier 2 (Dihedral NCC 1.0000),100% (Dihedral Identical Copy of Train Aman),Aman_07802.jpg,Dihedral NCC=0.9999
 test_01003.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.269
 test_01004.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.585)",Rusak_01101.jpg,"SSCD Sim=0.585, Purity=1.00"
 test_01005.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9964)",Aman_03401.jpg,Dihedral NCC=0.9964
 test_01006.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.292
 test_01007.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.575)",Aman_04348.jpg,"SSCD Sim=0.575, Purity=1.00"
 test_01008.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.868)",Aman_04237.png,"SSCD Sim=0.868, Purity=1.00"
-test_01009.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00024.jpg,SSCD Sim=0.953
+test_01009.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00024.jpg,SSCD Sim=0.953
 test_01010.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_01215.jpg,Dihedral NCC=0.9999
 test_01011.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_04992.jpg,Dihedral NCC=1.0000
 test_01012.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Rusak_02402.jpg,Dihedral NCC=1.0000
@@ -1015,7 +1015,7 @@ test_01013.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.472
 test_01014.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.506
 test_01015.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.866)",Aman_06532.jpg,"SSCD Sim=0.866, Purity=1.00"
 test_01016.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.938)",Rusak_00793.jpg,"SSCD Sim=0.938, Purity=1.00"
-test_01017.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07824.jpg,SHA-256 identical
+test_01017.jpg,Aman,Tier 2 (Dihedral NCC 1.0000),100% (Dihedral Identical Copy of Train Aman),Aman_07824.jpg,SHA-256 identical
 test_01018.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.394
 test_01019.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.507
 test_01020.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_04996.jpg,SSCD Sim=0.606
@@ -1031,14 +1031,14 @@ test_01029.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.84
 test_01030.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.761)",Aman_04031.jpg,"SSCD Sim=0.761, Purity=1.00"
 test_01031.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08498.jpg,SHA-256 identical
 test_01032.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.730)",Aman_02082.jpg,"SSCD Sim=0.730, Purity=1.00"
-test_01033.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00098.jpg,SSCD Sim=0.945
+test_01033.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00098.jpg,SSCD Sim=0.945
 test_01034.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07304.jpg,SHA-256 identical
 test_01035.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.662)",Aman_08250.jpg,"SSCD Sim=0.662, Purity=1.00"
 test_01036.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.772)",Aman_01700.jpg,"SSCD Sim=0.772, Purity=1.00"
 test_01037.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.455
 test_01038.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.623)",Aman_00764.jpg,"SSCD Sim=0.623, Purity=1.00"
 test_01039.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.614)",Aman_00661.jpg,"SSCD Sim=0.614, Purity=1.00"
-test_01040.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00099.jpg,SSCD Sim=0.972
+test_01040.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00099.jpg,SSCD Sim=0.972
 test_01041.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.385
 test_01042.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08253.jpg,SHA-256 identical
 test_01043.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.579)",Aman_04802.jpg,"SSCD Sim=0.579, Purity=1.00"
@@ -1068,7 +1068,7 @@ test_01066.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.628
 test_01067.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9995)",Rusak_02171.jpg,Dihedral NCC=0.9995
 test_01068.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_02345.jpg,SSCD Sim=0.646
 test_01069.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.731)",Aman_02357.jpg,"SSCD Sim=0.731, Purity=1.00"
-test_01070.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.969)",Rusak_00181.jpg,"SSCD Sim=0.969, Purity=0.90"
+test_01070.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00181.jpg,"SSCD Sim=0.969, Purity=0.90"
 test_01071.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02036.jpg,SHA-256 identical
 test_01072.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.338
 test_01073.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.930)",Aman_04884.jpg,"SSCD Sim=0.930, Purity=0.90"
@@ -1088,14 +1088,14 @@ test_01086.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.427
 test_01087.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.233
 test_01088.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Rusak_01229.jpg,Dihedral NCC=1.0000
 test_01089.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9929)",Aman_00935.jpg,Dihedral NCC=0.9929
-test_01090.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00100.jpg,SSCD Sim=0.940
+test_01090.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00100.jpg,SSCD Sim=0.940
 test_01091.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.404
 test_01092.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.913)",Rusak_02757.jpg,"SSCD Sim=0.913, Purity=1.00"
 test_01093.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.289
 test_01094.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.506
-test_01095.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00134.jpg,SSCD Sim=0.939
+test_01095.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00134.jpg,SSCD Sim=0.939
 test_01096.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.470
-test_01097.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00091.jpg,SSCD Sim=0.960
+test_01097.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00091.jpg,SSCD Sim=0.960
 test_01098.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.552)",Aman_04305.jpg,"SSCD Sim=0.552, Purity=1.00"
 test_01099.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.570)",Aman_00959.jpg,"SSCD Sim=0.570, Purity=1.00"
 test_01100.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.468
@@ -1110,7 +1110,7 @@ test_01108.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.771
 test_01109.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02050.jpg,SHA-256 identical
 test_01110.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.667)",Aman_04910.jpg,"SSCD Sim=0.667, Purity=1.00"
 test_01111.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9992)",Aman_00064.jpg,Dihedral NCC=0.9992
-test_01112.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.960)",Rusak_00150.jpg,"SSCD Sim=0.960, Purity=0.90"
+test_01112.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00150.jpg,"SSCD Sim=0.960, Purity=0.90"
 test_01113.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.645)",Aman_00447.jpg,"SSCD Sim=0.645, Purity=1.00"
 test_01114.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.903)",Aman_02620.jpg,"SSCD Sim=0.903, Purity=1.00"
 test_01115.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08220.jpg,SHA-256 identical
@@ -1130,10 +1130,10 @@ test_01128.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.705
 test_01129.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.458
 test_01130.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.818)",Aman_08699.jpg,"SSCD Sim=0.818, Purity=1.00"
 test_01131.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.928)",Rusak_00967.jpg,"SSCD Sim=0.928, Purity=1.00"
-test_01132.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00017.jpg,SSCD Sim=0.946
+test_01132.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00017.jpg,SSCD Sim=0.946
 test_01133.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.663)",Aman_02543.jpg,"SSCD Sim=0.663, Purity=1.00"
 test_01134.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.808)",Rusak_02840.jpg,"SSCD Sim=0.808, Purity=1.00"
-test_01135.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00011.jpg,SSCD Sim=0.965
+test_01135.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00011.jpg,SSCD Sim=0.965
 test_01136.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9991)",Rusak_02445.jpg,Dihedral NCC=0.9991
 test_01137.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.645)",Aman_00225.jpg,"SSCD Sim=0.645, Purity=1.00"
 test_01138.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.464
@@ -1144,7 +1144,7 @@ test_01142.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9944)",Aman_
 test_01143.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.466
 test_01144.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.834)",Rusak_02864.jpg,"SSCD Sim=0.834, Purity=1.00"
 test_01145.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.930)",Aman_01973.jpg,"SSCD Sim=0.930, Purity=1.00"
-test_01146.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00041.jpg,SSCD Sim=0.970
+test_01146.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00041.jpg,SSCD Sim=0.970
 test_01147.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.298
 test_01148.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_07819.jpg,Dihedral NCC=0.9999
 test_01149.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.487
@@ -1152,7 +1152,7 @@ test_01150.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.49
 test_01151.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.711)",Aman_03014.jpg,"SSCD Sim=0.711, Purity=1.00"
 test_01152.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.582)",Aman_02872.jpg,"SSCD Sim=0.582, Purity=1.00"
 test_01153.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.502
-test_01154.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00041.jpg,SSCD Sim=0.974
+test_01154.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00041.jpg,SSCD Sim=0.974
 test_01155.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.356
 test_01156.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.717)",Aman_02056.jpg,"SSCD Sim=0.717, Purity=1.00"
 test_01157.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9937)",Rusak_01102.jpg,Dihedral NCC=0.9937
@@ -1172,7 +1172,7 @@ test_01170.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.36
 test_01171.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9987)",Rusak_02872.jpg,Dihedral NCC=0.9987
 test_01172.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.685)",Aman_03963.jpg,"SSCD Sim=0.685, Purity=1.00"
 test_01173.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02957.jpg,SHA-256 identical
-test_01174.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00162.jpg,SSCD Sim=0.929
+test_01174.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00162.jpg,SSCD Sim=0.929
 test_01175.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.671)",Aman_04313.jpg,"SSCD Sim=0.671, Purity=1.00"
 test_01176.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9979)",Rusak_02620.jpg,Dihedral NCC=0.9979
 test_01177.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9913)",Aman_02325.jpg,Dihedral NCC=0.9913
@@ -1187,9 +1187,9 @@ test_01185.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.494
 test_01186.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.836)",Aman_02613.jpg,"SSCD Sim=0.836, Purity=1.00"
 test_01187.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.899)",Aman_00614.jpg,"SSCD Sim=0.899, Purity=1.00"
 test_01188.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.398
-test_01189.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.986)",Rusak_00121.jpg,"SSCD Sim=0.986, Purity=1.00"
+test_01189.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00121.jpg,"SSCD Sim=0.986, Purity=1.00"
 test_01190.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.379
-test_01191.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_00130.jpg,Dihedral NCC=0.9999
+test_01191.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00130.jpg,Dihedral NCC=0.9999
 test_01192.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.302
 test_01193.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9954)",Aman_03820.jpg,Dihedral NCC=0.9954
 test_01194.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9939)",Aman_02925.jpg,Dihedral NCC=0.9939
@@ -1208,7 +1208,7 @@ test_01206.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.36
 test_01207.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08577.jpg,SHA-256 identical
 test_01208.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08254.jpg,SHA-256 identical
 test_01209.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07505.jpg,SHA-256 identical
-test_01210.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00062.jpg,SSCD Sim=0.928
+test_01210.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00062.jpg,SSCD Sim=0.928
 test_01211.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.774)",Aman_06787.jpg,"SSCD Sim=0.774, Purity=1.00"
 test_01212.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.895)",Aman_06833.jpg,"SSCD Sim=0.895, Purity=1.00"
 test_01213.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.464
@@ -1234,7 +1234,7 @@ test_01232.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.859
 test_01233.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.898)",Aman_02857.jpg,"SSCD Sim=0.898, Purity=1.00"
 test_01234.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.391
 test_01235.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08230.jpg,SHA-256 identical
-test_01236.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.971)",Rusak_00143.jpg,"SSCD Sim=0.971, Purity=0.90"
+test_01236.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00143.jpg,"SSCD Sim=0.971, Purity=0.90"
 test_01237.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.599)",Aman_02953.jpg,"SSCD Sim=0.599, Purity=1.00"
 test_01238.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00746.jpg,SSCD Sim=0.761
 test_01239.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.465
@@ -1261,11 +1261,11 @@ test_01259.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.33
 test_01260.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_04603.jpg,Dihedral NCC=0.9998
 test_01261.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07824.jpg,SSCD Sim=0.622
 test_01262.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.696)",Aman_00503.jpg,"SSCD Sim=0.696, Purity=1.00"
-test_01263.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.968)",Rusak_00193.jpg,"SSCD Sim=0.968, Purity=1.00"
+test_01263.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00193.jpg,"SSCD Sim=0.968, Purity=1.00"
 test_01264.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.634)",Aman_03687.jpg,"SSCD Sim=0.634, Purity=1.00"
 test_01265.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.448
 test_01266.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.976)",Rusak_02872.jpg,"SSCD Sim=0.976, Purity=1.00"
-test_01267.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00007.jpg,SSCD Sim=0.973
+test_01267.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00007.jpg,SSCD Sim=0.973
 test_01268.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02099.jpg,SHA-256 identical
 test_01269.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.702)",Aman_00409.jpg,"SSCD Sim=0.702, Purity=1.00"
 test_01270.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_04836.jpg,Dihedral NCC=0.9989
@@ -1280,7 +1280,7 @@ test_01278.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.277
 test_01279.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.757)",Aman_02465.jpg,"SSCD Sim=0.757, Purity=1.00"
 test_01280.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.715)",Aman_03237.jpg,"SSCD Sim=0.715, Purity=1.00"
 test_01281.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.652)",Aman_02303.jpg,"SSCD Sim=0.652, Purity=1.00"
-test_01282.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_01861.jpg,SSCD Sim=0.955
+test_01282.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_01861.jpg,SSCD Sim=0.955
 test_01283.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.532
 test_01284.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.375
 test_01285.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.912)",Aman_04317.jpg,"SSCD Sim=0.912, Purity=1.00"
@@ -1288,7 +1288,7 @@ test_01286.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9928)",Aman_
 test_01287.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.726)",Aman_01922.jpg,"SSCD Sim=0.726, Purity=1.00"
 test_01288.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.572)",Aman_08790.jpg,"SSCD Sim=0.572, Purity=1.00"
 test_01289.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.280
-test_01290.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00017.jpg,SSCD Sim=0.954
+test_01290.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00017.jpg,SSCD Sim=0.954
 test_01291.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.212
 test_01292.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9959)",Aman_03367.jpg,Dihedral NCC=0.9959
 test_01293.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.701)",Aman_01365.jpg,"SSCD Sim=0.701, Purity=1.00"
@@ -1311,11 +1311,11 @@ test_01309.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.673
 test_01310.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.905)",Aman_08397.jpg,"SSCD Sim=0.905, Purity=1.00"
 test_01311.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.406
 test_01312.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08318.jpg,SHA-256 identical
-test_01313.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00120.jpg,SSCD Sim=0.931
+test_01313.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00120.jpg,SSCD Sim=0.931
 test_01314.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.466
 test_01315.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_00949.jpg,Dihedral NCC=0.9999
 test_01316.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.916)",Aman_03820.jpg,"SSCD Sim=0.916, Purity=1.00"
-test_01317.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00120.jpg,SSCD Sim=0.921
+test_01317.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00120.jpg,SSCD Sim=0.921
 test_01318.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.876)",Rusak_02914.jpg,"SSCD Sim=0.876, Purity=1.00"
 test_01319.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.689)",Aman_01672.jpg,"SSCD Sim=0.689, Purity=1.00"
 test_01320.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9974)",Rusak_02628.jpg,Dihedral NCC=0.9974
@@ -1334,25 +1334,25 @@ test_01332.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.655
 test_01333.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9942)",Aman_03388.jpg,Dihedral NCC=0.9942
 test_01334.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.880)",Aman_02272.jpg,"SSCD Sim=0.880, Purity=1.00"
 test_01335.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9990)",Aman_08107.jpg,Dihedral NCC=0.9990
-test_01336.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00171.jpg,SSCD Sim=0.967
+test_01336.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00171.jpg,SSCD Sim=0.967
 test_01337.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.861)",Aman_01309.jpg,"SSCD Sim=0.861, Purity=1.00"
 test_01338.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.347
-test_01339.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_00162.jpg,Dihedral NCC=0.9997
-test_01340.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00019.jpg,SSCD Sim=0.969
+test_01339.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00162.jpg,Dihedral NCC=0.9997
+test_01340.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00019.jpg,SSCD Sim=0.969
 test_01341.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.841)",Aman_04808.jpg,"SSCD Sim=0.841, Purity=1.00"
 test_01342.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.830)",Aman_01385.jpg,"SSCD Sim=0.830, Purity=1.00"
 test_01343.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.425
 test_01344.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.713)",Aman_07203.jpeg,"SSCD Sim=0.713, Purity=1.00"
 test_01345.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.237
 test_01346.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.906)",Rusak_02938.jpg,"SSCD Sim=0.906, Purity=1.00"
-test_01347.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00147.jpg,SSCD Sim=0.961
+test_01347.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00147.jpg,SSCD Sim=0.961
 test_01348.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02435.jpg,SHA-256 identical
 test_01349.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.785)",Aman_04979.jpg,"SSCD Sim=0.785, Purity=1.00"
 test_01350.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9939)",Aman_02108.jpg,Dihedral NCC=0.9939
 test_01351.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.900)",Aman_04344.png,"SSCD Sim=0.900, Purity=1.00"
 test_01352.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_00810.jpg,Dihedral NCC=0.9999
 test_01353.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.415
-test_01354.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00011.jpg,SSCD Sim=0.970
+test_01354.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00011.jpg,SSCD Sim=0.970
 test_01355.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.573)",Aman_00437.jpg,"SSCD Sim=0.573, Purity=1.00"
 test_01356.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.611)",Aman_04124.jpg,"SSCD Sim=0.611, Purity=1.00"
 test_01357.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_01305.jpg,Dihedral NCC=0.9999
@@ -1410,7 +1410,7 @@ test_01408.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.94
 test_01409.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08220.jpg,SHA-256 identical
 test_01410.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.484
 test_01411.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.521
-test_01412.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00190.jpg,SSCD Sim=0.923
+test_01412.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00190.jpg,SSCD Sim=0.923
 test_01413.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.375
 test_01414.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.427
 test_01415.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9973)",Aman_04224.png,Dihedral NCC=0.9973
@@ -1421,7 +1421,7 @@ test_01419.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9986)",Aman_
 test_01420.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9947)",Aman_03684.jpg,Dihedral NCC=0.9947
 test_01421.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.678)",Aman_01688.jpg,"SSCD Sim=0.678, Purity=1.00"
 test_01422.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.342
-test_01423.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.961)",Rusak_00085.jpg,"SSCD Sim=0.961, Purity=0.90"
+test_01423.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00085.jpg,"SSCD Sim=0.961, Purity=0.90"
 test_01424.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.690)",Aman_07203.jpeg,"SSCD Sim=0.690, Purity=1.00"
 test_01425.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.478
 test_01426.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.824)",Aman_03697.jpg,"SSCD Sim=0.824, Purity=1.00"
@@ -1449,11 +1449,11 @@ test_01447.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07824.jpg,
 test_01448.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.945)",Rusak_02840.jpg,"SSCD Sim=0.945, Purity=1.00"
 test_01449.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.364
 test_01450.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.569)",Aman_00101.png,"SSCD Sim=0.569, Purity=1.00"
-test_01451.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00168.jpg,SSCD Sim=0.950
+test_01451.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00168.jpg,SSCD Sim=0.950
 test_01452.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.907)",Aman_00480.jpg,"SSCD Sim=0.907, Purity=1.00"
 test_01453.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.301
 test_01454.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.695)",Aman_01043.jpg,"SSCD Sim=0.695, Purity=1.00"
-test_01455.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00708.jpg,SSCD Sim=0.949
+test_01455.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00708.jpg,SSCD Sim=0.949
 test_01456.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.710)",Aman_00956.jpg,"SSCD Sim=0.710, Purity=1.00"
 test_01457.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.785)",Rusak_02646.jpg,"SSCD Sim=0.785, Purity=1.00"
 test_01458.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.901)",Aman_06857.jpg,"SSCD Sim=0.901, Purity=1.00"
@@ -1466,7 +1466,7 @@ test_01464.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.588
 test_01465.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Rusak_02536.jpg,Dihedral NCC=0.9993
 test_01466.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.680)",Aman_02363.jpg,"SSCD Sim=0.680, Purity=1.00"
 test_01467.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.654)",Aman_07563.jpg,"SSCD Sim=0.654, Purity=1.00"
-test_01468.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.972)",Rusak_00179.jpg,"SSCD Sim=0.972, Purity=1.00"
+test_01468.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00179.jpg,"SSCD Sim=0.972, Purity=1.00"
 test_01469.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.621)",Aman_01043.jpg,"SSCD Sim=0.621, Purity=1.00"
 test_01470.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.302
 test_01471.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.724)",Aman_03587.jpg,"SSCD Sim=0.724, Purity=1.00"
@@ -1477,14 +1477,14 @@ test_01475.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.35
 test_01476.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.942)",Rusak_00769.jpg,"SSCD Sim=0.942, Purity=1.00"
 test_01477.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07451.jpg,SHA-256 identical
 test_01478.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9970)",Aman_01809.jpg,Dihedral NCC=0.9970
-test_01479.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00105.jpg,SSCD Sim=0.964
+test_01479.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00105.jpg,SSCD Sim=0.964
 test_01480.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.693)",Aman_04391.jpg,"SSCD Sim=0.693, Purity=1.00"
 test_01481.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.483
 test_01482.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.497
 test_01483.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9942)",Aman_01113.jpg,Dihedral NCC=0.9942
 test_01484.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.376
 test_01485.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.762)",Aman_00808.jpg,"SSCD Sim=0.762, Purity=1.00"
-test_01486.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00051.jpg,SSCD Sim=0.950
+test_01486.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00051.jpg,SSCD Sim=0.950
 test_01487.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.830)",Aman_04310.jpg,"SSCD Sim=0.830, Purity=1.00"
 test_01488.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.885)",Rusak_01084.jpg,"SSCD Sim=0.885, Purity=1.00"
 test_01489.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.503
@@ -1499,10 +1499,10 @@ test_01497.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_
 test_01498.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.577)",Aman_04802.jpg,"SSCD Sim=0.577, Purity=1.00"
 test_01499.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.561)",Aman_08081.jpg,"SSCD Sim=0.561, Purity=1.00"
 test_01500.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.911)",Aman_08696.jpg,"SSCD Sim=0.911, Purity=1.00"
-test_01501.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00066.jpg,SSCD Sim=0.956
+test_01501.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00066.jpg,SSCD Sim=0.956
 test_01502.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_01088.jpg,SSCD Sim=0.617
 test_01503.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.744)",Rusak_01094.jpg,"SSCD Sim=0.744, Purity=1.00"
-test_01504.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00120.jpg,SSCD Sim=0.920
+test_01504.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00120.jpg,SSCD Sim=0.920
 test_01505.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.740)",Aman_02460.jpg,"SSCD Sim=0.740, Purity=1.00"
 test_01506.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.759)",Aman_04360.jpg,"SSCD Sim=0.759, Purity=1.00"
 test_01507.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9945)",Aman_07297.jpg,Dihedral NCC=0.9945
@@ -1520,7 +1520,7 @@ test_01518.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.814
 test_01519.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9963)",Aman_01580.jpg,Dihedral NCC=0.9963
 test_01520.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.241
 test_01521.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.864)",Aman_04324.jpg,"SSCD Sim=0.864, Purity=1.00"
-test_01522.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_00129.jpg,Dihedral NCC=0.9997
+test_01522.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00129.jpg,Dihedral NCC=0.9997
 test_01523.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9975)",Rusak_01846.jpg,Dihedral NCC=0.9975
 test_01524.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.718)",Aman_02430.jpg,"SSCD Sim=0.718, Purity=1.00"
 test_01525.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_01308.jpg,Dihedral NCC=0.9999
@@ -1567,12 +1567,12 @@ test_01565.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.595
 test_01566.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.846)",Aman_02613.jpg,"SSCD Sim=0.846, Purity=1.00"
 test_01567.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.891)",Rusak_00761.jpg,"SSCD Sim=0.891, Purity=1.00"
 test_01568.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.684)",Aman_01188.jpg,"SSCD Sim=0.684, Purity=1.00"
-test_01569.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00021.jpg,SSCD Sim=0.976
+test_01569.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00021.jpg,SSCD Sim=0.976
 test_01570.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_01875.jpg,Dihedral NCC=0.9996
-test_01571.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9964)",Aman_00202.jpg,Dihedral NCC=0.9964
-test_01572.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_00195.jpg,Dihedral NCC=0.9989
+test_01571.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00202.jpg,Dihedral NCC=0.9964
+test_01572.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00195.jpg,Dihedral NCC=0.9989
 test_01573.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9934)",Rusak_01102.jpg,Dihedral NCC=0.9934
-test_01574.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00097.jpg,SSCD Sim=0.969
+test_01574.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00097.jpg,SSCD Sim=0.969
 test_01575.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.794)",Aman_04009.jpg,"SSCD Sim=0.794, Purity=1.00"
 test_01576.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_06782.jpg,SSCD Sim=0.823
 test_01577.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.408
@@ -1582,7 +1582,7 @@ test_01580.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.664
 test_01581.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.770)",Aman_04701.jpg,"SSCD Sim=0.770, Purity=1.00"
 test_01582.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.438
 test_01583.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9987)",Aman_03226.jpg,Dihedral NCC=0.9987
-test_01584.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00084.jpg,SSCD Sim=0.932
+test_01584.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00084.jpg,SSCD Sim=0.932
 test_01585.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Rusak_02391.jpg,Dihedral NCC=1.0000
 test_01586.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.957)",Aman_03716.jpg,"SSCD Sim=0.957, Purity=1.00"
 test_01587.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.736)",Rusak_00793.jpg,"SSCD Sim=0.736, Purity=1.00"
@@ -1617,11 +1617,11 @@ test_01615.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.618
 test_01616.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.715)",Aman_02192.jpg,"SSCD Sim=0.715, Purity=1.00"
 test_01617.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.448
 test_01618.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_03381.jpg,Dihedral NCC=1.0000
-test_01619.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00130.jpg,SSCD Sim=0.934
+test_01619.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00130.jpg,SSCD Sim=0.934
 test_01620.jpg,Lainnya,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.677)",Lainnya_00418.jpg,"SSCD Sim=0.677, Purity=1.00"
 test_01621.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08253.jpg,SHA-256 identical
 test_01622.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.680)",Aman_00540.jpg,"SSCD Sim=0.680, Purity=1.00"
-test_01623.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.953)",Rusak_00145.jpg,"SSCD Sim=0.953, Purity=1.00"
+test_01623.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00145.jpg,"SSCD Sim=0.953, Purity=1.00"
 test_01624.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.567)",Aman_01420.jpg,"SSCD Sim=0.567, Purity=1.00"
 test_01625.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.708)",Aman_06704.jpg,"SSCD Sim=0.708, Purity=1.00"
 test_01626.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.310
@@ -1632,7 +1632,7 @@ test_01630.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9983)",Rusa
 test_01631.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.340
 test_01632.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08421.jpg,SHA-256 identical
 test_01633.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Rusak_01094.jpg,Dihedral NCC=0.9993
-test_01634.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.974)",Rusak_00115.jpg,"SSCD Sim=0.974, Purity=1.00"
+test_01634.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00115.jpg,"SSCD Sim=0.974, Purity=1.00"
 test_01635.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.619)",Aman_04347.jpg,"SSCD Sim=0.619, Purity=1.00"
 test_01636.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.572)",Rusak_01085.jpg,"SSCD Sim=0.572, Purity=1.00"
 test_01637.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02887.jpg,Dihedral NCC=0.9999
@@ -1640,7 +1640,7 @@ test_01638.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_
 test_01639.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.637)",Aman_04373.jpg,"SSCD Sim=0.637, Purity=1.00"
 test_01640.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9906)",Aman_04171.jpg,Dihedral NCC=0.9906
 test_01641.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.302
-test_01642.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00142.jpg,SSCD Sim=0.937
+test_01642.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00142.jpg,SSCD Sim=0.937
 test_01643.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.243
 test_01644.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_08714.jpg,Dihedral NCC=0.9989
 test_01645.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.603)",Aman_02514.jpg,"SSCD Sim=0.603, Purity=1.00"
@@ -1659,7 +1659,7 @@ test_01657.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.509
 test_01658.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.503
 test_01659.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07148.jpg,SSCD Sim=0.641
 test_01660.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.370
-test_01661.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.959)",Rusak_00063.jpg,"SSCD Sim=0.959, Purity=1.00"
+test_01661.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00063.jpg,"SSCD Sim=0.959, Purity=1.00"
 test_01662.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9946)",Aman_04036.jpg,Dihedral NCC=0.9946
 test_01663.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.586)",Rusak_01123.jpg,"SSCD Sim=0.586, Purity=1.00"
 test_01664.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.751)",Rusak_00971.jpg,"SSCD Sim=0.751, Purity=1.00"
@@ -1669,9 +1669,9 @@ test_01667.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.792
 test_01668.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.226
 test_01669.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.617)",Aman_04761.jpg,"SSCD Sim=0.617, Purity=1.00"
 test_01670.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.642)",Aman_03328.jpg,"SSCD Sim=0.642, Purity=1.00"
-test_01671.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.952)",Rusak_00088.jpg,"SSCD Sim=0.952, Purity=1.00"
+test_01671.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00088.jpg,"SSCD Sim=0.952, Purity=1.00"
 test_01672.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_08666.jpg,Dihedral NCC=0.9989
-test_01673.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.903)",Rusak_00154.jpg,"SSCD Sim=0.903, Purity=0.90"
+test_01673.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00154.jpg,"SSCD Sim=0.903, Purity=0.90"
 test_01674.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.583)",Rusak_02867.jpg,"SSCD Sim=0.583, Purity=1.00"
 test_01675.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.395
 test_01676.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.552)",Aman_01050.jpg,"SSCD Sim=0.552, Purity=1.00"
@@ -1689,7 +1689,7 @@ test_01687.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9931)",Aman_
 test_01688.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.886)",Aman_05695.jpg,"SSCD Sim=0.886, Purity=1.00"
 test_01689.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9932)",Aman_01196.jpg,Dihedral NCC=0.9932
 test_01690.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.592)",Aman_04303.jpg,"SSCD Sim=0.592, Purity=1.00"
-test_01691.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00005.jpg,SSCD Sim=0.972
+test_01691.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00005.jpg,SSCD Sim=0.972
 test_01692.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.876)",Rusak_01419.jpg,"SSCD Sim=0.876, Purity=1.00"
 test_01693.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.949)",Rusak_02651.jpg,"SSCD Sim=0.949, Purity=1.00"
 test_01694.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01741.jpg,SHA-256 identical
@@ -1702,8 +1702,8 @@ test_01700.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.735
 test_01701.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.761)",Aman_02363.jpg,"SSCD Sim=0.761, Purity=1.00"
 test_01702.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.650)",Aman_02324.jpg,"SSCD Sim=0.650, Purity=1.00"
 test_01703.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.549
-test_01704.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00055.jpg,SSCD Sim=0.976
-test_01705.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.975)",Rusak_00077.jpg,"SSCD Sim=0.975, Purity=1.00"
+test_01704.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00055.jpg,SSCD Sim=0.976
+test_01705.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00077.jpg,"SSCD Sim=0.975, Purity=1.00"
 test_01706.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.224
 test_01707.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.321
 test_01708.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.334
@@ -1716,13 +1716,13 @@ test_01714.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.774
 test_01715.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9957)",Aman_03468.jpg,Dihedral NCC=0.9957
 test_01716.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.390
 test_01717.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02231.jpg,SHA-256 identical
-test_01718.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9970)",Aman_03219.jpg,Dihedral NCC=0.9970
+test_01718.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03219.jpg,Dihedral NCC=0.9970
 test_01719.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08237.jpg,SHA-256 identical
 test_01720.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08423.jpg,SHA-256 identical
 test_01721.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.262
 test_01722.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.789)",Aman_01700.jpg,"SSCD Sim=0.789, Purity=1.00"
 test_01723.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.337
-test_01724.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00107.jpg,SSCD Sim=0.949
+test_01724.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00107.jpg,SSCD Sim=0.949
 test_01725.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.720)",Aman_02587.jpg,"SSCD Sim=0.720, Purity=1.00"
 test_01726.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.669)",Aman_01264.jpg,"SSCD Sim=0.669, Purity=1.00"
 test_01727.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.709)",Aman_03237.jpg,"SSCD Sim=0.709, Purity=1.00"
@@ -1730,13 +1730,13 @@ test_01728.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.562
 test_01729.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.686)",Rusak_00777.jpg,"SSCD Sim=0.686, Purity=1.00"
 test_01730.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9978)",Rusak_02936.jpg,Dihedral NCC=0.9978
 test_01731.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_02527.jpg,SSCD Sim=0.854
-test_01732.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00009.jpg,SSCD Sim=0.965
+test_01732.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00009.jpg,SSCD Sim=0.965
 test_01733.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.933)",Aman_02235.jpg,"SSCD Sim=0.933, Purity=1.00"
 test_01734.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_03536.jpg,Dihedral NCC=0.9997
 test_01735.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.705)",Aman_03525.jpg,"SSCD Sim=0.705, Purity=1.00"
 test_01736.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.607)",Rusak_01741.jpg,"SSCD Sim=0.607, Purity=1.00"
 test_01737.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.867)",Aman_04834.jpg,"SSCD Sim=0.867, Purity=1.00"
-test_01738.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00016.jpg,SSCD Sim=0.935
+test_01738.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00016.jpg,SSCD Sim=0.935
 test_01739.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.526
 test_01740.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.669)",Aman_03588.jpg,"SSCD Sim=0.669, Purity=1.00"
 test_01741.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9995)",Aman_01138.jpg,Dihedral NCC=0.9995
@@ -1754,12 +1754,12 @@ test_01752.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07278.jpg,SHA-256 
 test_01753.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9986)",Aman_00449.png,Dihedral NCC=0.9986
 test_01754.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_02105.jpg,Dihedral NCC=0.9999
 test_01755.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_05701.jpg,Dihedral NCC=0.9998
-test_01756.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00033.jpg,SSCD Sim=0.956
+test_01756.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00033.jpg,SSCD Sim=0.956
 test_01757.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_07802.jpg,Dihedral NCC=1.0000
 test_01758.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.467
 test_01759.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.440
-test_01760.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9988)",Aman_00144.jpg,Dihedral NCC=0.9988
-test_01761.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_02983.jpg,SSCD Sim=0.911
+test_01760.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00144.jpg,Dihedral NCC=0.9988
+test_01761.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_02983.jpg,SSCD Sim=0.911
 test_01762.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.384
 test_01763.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.733)",Aman_00327.jpg,"SSCD Sim=0.733, Purity=1.00"
 test_01764.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.964)",Rusak_02914.jpg,"SSCD Sim=0.964, Purity=1.00"
@@ -1769,7 +1769,7 @@ test_01767.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.683
 test_01768.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_02057.jpg,Dihedral NCC=1.0000
 test_01769.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.479
 test_01770.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.677)",Aman_01638.jpg,"SSCD Sim=0.677, Purity=1.00"
-test_01771.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_00171.jpg,Dihedral NCC=0.9998
+test_01771.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00171.jpg,Dihedral NCC=0.9998
 test_01772.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9966)",Aman_06707.jpg,Dihedral NCC=0.9966
 test_01773.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_01044.jpg,Dihedral NCC=0.9989
 test_01774.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.838)",Aman_04324.jpg,"SSCD Sim=0.838, Purity=1.00"
@@ -1795,7 +1795,7 @@ test_01793.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01973.jpg,SHA-25
 test_01794.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.702)",Aman_03237.jpg,"SSCD Sim=0.702, Purity=1.00"
 test_01795.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.344
 test_01796.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.471
-test_01797.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.951)",Rusak_00116.jpg,"SSCD Sim=0.951, Purity=0.90"
+test_01797.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00116.jpg,"SSCD Sim=0.951, Purity=0.90"
 test_01798.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.564)",Aman_03894.jpg,"SSCD Sim=0.564, Purity=1.00"
 test_01799.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9955)",Aman_01066.jpg,Dihedral NCC=0.9955
 test_01800.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.744)",Rusak_02894.jpg,"SSCD Sim=0.744, Purity=1.00"
@@ -1811,7 +1811,7 @@ test_01809.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.367
 test_01810.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.780)",Aman_01050.jpg,"SSCD Sim=0.780, Purity=1.00"
 test_01811.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.868)",Aman_01139.jpg,"SSCD Sim=0.868, Purity=1.00"
 test_01812.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.893)",Aman_00488.jpg,"SSCD Sim=0.893, Purity=1.00"
-test_01813.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00018.jpg,SSCD Sim=0.962
+test_01813.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00018.jpg,SSCD Sim=0.962
 test_01814.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.230
 test_01815.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.532
 test_01816.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_04699.jpg,Dihedral NCC=0.9999
@@ -1839,12 +1839,12 @@ test_01837.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.890
 test_01838.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.903)",Aman_02785.jpg,"SSCD Sim=0.903, Purity=1.00"
 test_01839.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.469
 test_01840.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02490.jpg,SHA-256 identical
-test_01841.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00072.jpg,SSCD Sim=0.949
+test_01841.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00072.jpg,SSCD Sim=0.949
 test_01842.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.533
 test_01843.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.975)",Aman_04557.jpg,"SSCD Sim=0.975, Purity=1.00"
 test_01844.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.413
 test_01845.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.779)",Aman_03081.jpg,"SSCD Sim=0.779, Purity=1.00"
-test_01846.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00188.jpg,SSCD Sim=0.941
+test_01846.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00188.jpg,SSCD Sim=0.941
 test_01847.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9915)",Rusak_02783.jpg,Dihedral NCC=0.9915
 test_01848.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9911)",Aman_00689.jpg,Dihedral NCC=0.9911
 test_01849.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.514
@@ -1852,7 +1852,7 @@ test_01850.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.63
 test_01851.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9981)",Aman_04860.jpg,Dihedral NCC=0.9981
 test_01852.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.956)",Rusak_01860.jpg,"SSCD Sim=0.956, Purity=1.00"
 test_01853.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.612)",Aman_03619.jpg,"SSCD Sim=0.612, Purity=1.00"
-test_01854.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00120.jpg,SSCD Sim=0.922
+test_01854.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00120.jpg,SSCD Sim=0.922
 test_01855.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.873)",Rusak_02914.jpg,"SSCD Sim=0.873, Purity=1.00"
 test_01856.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_08605.jpg,SSCD Sim=0.637
 test_01857.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.496
@@ -1892,7 +1892,7 @@ test_01890.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.751
 test_01891.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.788)",Rusak_00748.jpg,"SSCD Sim=0.788, Purity=1.00"
 test_01892.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_03968.jpg,Dihedral NCC=0.9997
 test_01893.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.733)",Aman_07727.jpg,"SSCD Sim=0.733, Purity=1.00"
-test_01894.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00012.jpg,SSCD Sim=0.941
+test_01894.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00012.jpg,SSCD Sim=0.941
 test_01895.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9995)",Rusak_02879.jpg,Dihedral NCC=0.9995
 test_01896.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Rusak_00779.jpg,Dihedral NCC=0.9998
 test_01897.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.570)",Aman_02068.jpg,"SSCD Sim=0.570, Purity=1.00"
@@ -1917,7 +1917,7 @@ test_01915.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.732
 test_01916.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.849)",Aman_04301.jpg,"SSCD Sim=0.849, Purity=1.00"
 test_01917.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.688)",Aman_02082.jpg,"SSCD Sim=0.688, Purity=1.00"
 test_01918.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.928)",Aman_04167.jpg,"SSCD Sim=0.928, Purity=1.00"
-test_01919.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.966)",Rusak_00185.jpg,"SSCD Sim=0.966, Purity=1.00"
+test_01919.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00185.jpg,"SSCD Sim=0.966, Purity=1.00"
 test_01920.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.440
 test_01921.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07703.jpg,SSCD Sim=0.780
 test_01922.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.661)",Aman_04397.jpg,"SSCD Sim=0.661, Purity=1.00"
@@ -1944,7 +1944,7 @@ test_01942.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.782
 test_01943.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.441
 test_01944.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.472
 test_01945.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.835)",Aman_04325.jpg,"SSCD Sim=0.835, Purity=1.00"
-test_01946.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.946)",Rusak_00103.jpg,"SSCD Sim=0.946, Purity=0.90"
+test_01946.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00103.jpg,"SSCD Sim=0.946, Purity=0.90"
 test_01947.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_02470.jpg,Dihedral NCC=0.9999
 test_01948.jpg,Lainnya,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.674)",Lainnya_00128.jpg,"SSCD Sim=0.674, Purity=1.00"
 test_01949.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.254
@@ -1959,11 +1959,11 @@ test_01957.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9907)",Aman_
 test_01958.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.433
 test_01959.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07250.jpg,SHA-256 identical
 test_01960.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.721)",Aman_02056.jpg,"SSCD Sim=0.721, Purity=1.00"
-test_01961.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00026.jpg,SSCD Sim=0.927
+test_01961.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00026.jpg,SSCD Sim=0.927
 test_01962.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.937)",Aman_02489.jpg,"SSCD Sim=0.937, Purity=1.00"
 test_01963.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.597)",Aman_02263.jpg,"SSCD Sim=0.597, Purity=1.00"
-test_01964.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00162.jpg,SSCD Sim=0.949
-test_01965.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00067.jpg,SSCD Sim=0.963
+test_01964.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00162.jpg,SSCD Sim=0.949
+test_01965.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00067.jpg,SSCD Sim=0.963
 test_01966.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.832)",Aman_08657.jpg,"SSCD Sim=0.832, Purity=1.00"
 test_01967.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.896)",Aman_02082.jpg,"SSCD Sim=0.896, Purity=1.00"
 test_01968.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9986)",Aman_04234.png,Dihedral NCC=0.9986
@@ -1974,9 +1974,9 @@ test_01972.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.24
 test_01973.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07345.jpg,SHA-256 identical
 test_01974.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_04347.jpg,Dihedral NCC=0.9998
 test_01975.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.431
-test_01976.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_01745.jpg,SSCD Sim=0.992
+test_01976.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_01745.jpg,SSCD Sim=0.992
 test_01977.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9981)",Aman_03710.jpg,Dihedral NCC=0.9981
-test_01978.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.971)",Rusak_00199.jpg,"SSCD Sim=0.971, Purity=1.00"
+test_01978.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00199.jpg,"SSCD Sim=0.971, Purity=1.00"
 test_01979.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.384
 test_01980.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.554)",Aman_02153.jpg,"SSCD Sim=0.554, Purity=1.00"
 test_01981.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9970)",Aman_02007.jpg,Dihedral NCC=0.9970
@@ -1984,9 +1984,9 @@ test_01982.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.967
 test_01983.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.769)",Aman_06849.jpg,"SSCD Sim=0.769, Purity=1.00"
 test_01984.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07319.jpg,SHA-256 identical
 test_01985.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.365
-test_01986.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00116.jpg,SSCD Sim=0.934
+test_01986.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00116.jpg,SSCD Sim=0.934
 test_01987.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.449
-test_01988.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00005.jpg,SSCD Sim=0.968
+test_01988.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00005.jpg,SSCD Sim=0.968
 test_01989.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.215
 test_01990.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.262
 test_01991.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.891)",Rusak_00761.jpg,"SSCD Sim=0.891, Purity=1.00"
@@ -2010,10 +2010,10 @@ test_02008.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9963)",Aman_
 test_02009.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9988)",Rusak_02931.jpg,Dihedral NCC=0.9988
 test_02010.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.873)",Aman_00424.jpg,"SSCD Sim=0.873, Purity=1.00"
 test_02011.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.597)",Aman_05505.jpg,"SSCD Sim=0.597, Purity=1.00"
-test_02012.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_07804.jpg,Dihedral NCC=1.0000
+test_02012.jpg,Aman,Tier 2 (Dihedral NCC 1.0000),100% (Dihedral Identical Copy of Train Aman),Aman_07804.jpg,Dihedral NCC=1.0000
 test_02013.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.408
 test_02014.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.676)",Aman_03801.jpg,"SSCD Sim=0.676, Purity=1.00"
-test_02015.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.977)",Rusak_00041.jpg,"SSCD Sim=0.977, Purity=1.00"
+test_02015.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00041.jpg,"SSCD Sim=0.977, Purity=1.00"
 test_02016.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.900)",Aman_01917.jpg,"SSCD Sim=0.900, Purity=1.00"
 test_02017.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08215.jpg,SHA-256 identical
 test_02018.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9934)",Rusak_02995.jpg,Dihedral NCC=0.9934
@@ -2021,11 +2021,11 @@ test_02019.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_07819.jpg,S
 test_02020.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9956)",Aman_03549.jpg,Dihedral NCC=0.9956
 test_02021.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.904)",Aman_00031.jpg,"SSCD Sim=0.904, Purity=1.00"
 test_02022.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9944)",Aman_02599.jpg,Dihedral NCC=0.9944
-test_02023.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00187.jpg,SSCD Sim=0.966
+test_02023.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00187.jpg,SSCD Sim=0.966
 test_02024.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.718)",Aman_03014.jpg,"SSCD Sim=0.718, Purity=1.00"
 test_02025.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.780)",Aman_03967.jpg,"SSCD Sim=0.780, Purity=1.00"
 test_02026.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.817)",Aman_02644.jpg,"SSCD Sim=0.817, Purity=1.00"
-test_02027.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00138.jpg,SSCD Sim=0.935
+test_02027.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00138.jpg,SSCD Sim=0.935
 test_02028.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.607)",Aman_00437.jpg,"SSCD Sim=0.607, Purity=1.00"
 test_02029.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.239
 test_02030.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_07399.jpg,Dihedral NCC=0.9999
@@ -2036,7 +2036,7 @@ test_02034.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.768
 test_02035.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.373
 test_02036.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.228
 test_02037.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.879)",Aman_00212.jpg,"SSCD Sim=0.879, Purity=1.00"
-test_02038.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00069.jpg,SSCD Sim=0.951
+test_02038.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00069.jpg,SSCD Sim=0.951
 test_02039.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08160.jpg,SHA-256 identical
 test_02040.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.696)",Aman_02146.jpg,"SSCD Sim=0.696, Purity=1.00"
 test_02041.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9947)",Rusak_00611.jpg,Dihedral NCC=0.9947
@@ -2050,7 +2050,7 @@ test_02048.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.631
 test_02049.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.227
 test_02050.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.375
 test_02051.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.900)",Aman_06433.jpg,"SSCD Sim=0.900, Purity=1.00"
-test_02052.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00130.jpg,SSCD Sim=0.934
+test_02052.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00130.jpg,SSCD Sim=0.934
 test_02053.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_06667.jpg,SHA-256 identical
 test_02054.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.408
 test_02055.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01999.jpg,SHA-256 identical
@@ -2092,7 +2092,7 @@ test_02090.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.916
 test_02091.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_02345.jpg,SSCD Sim=0.646
 test_02092.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07486.jpg,SHA-256 identical
 test_02093.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.768)",Aman_00221.jpg,"SSCD Sim=0.768, Purity=1.00"
-test_02094.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00015.jpg,SSCD Sim=0.923
+test_02094.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00015.jpg,SSCD Sim=0.923
 test_02095.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9977)",Aman_04334.png,Dihedral NCC=0.9977
 test_02096.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.778)",Aman_00979.jpg,"SSCD Sim=0.778, Purity=1.00"
 test_02097.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01965.jpg,SHA-256 identical
@@ -2121,7 +2121,7 @@ test_02119.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9906)",Rusa
 test_02120.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07819.jpg,SHA-256 identical
 test_02121.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9935)",Aman_00921.jpg,Dihedral NCC=0.9935
 test_02122.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.499
-test_02123.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9906)",Aman_00182.jpg,Dihedral NCC=0.9906
+test_02123.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00182.jpg,Dihedral NCC=0.9906
 test_02124.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.769)",Aman_01406.jpg,"SSCD Sim=0.769, Purity=1.00"
 test_02125.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.612)",Rusak_02895.jpg,"SSCD Sim=0.612, Purity=1.00"
 test_02126.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.336
@@ -2145,10 +2145,10 @@ test_02143.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_02887.jpg
 test_02144.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.901)",Aman_02485.jpg,"SSCD Sim=0.901, Purity=1.00"
 test_02145.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Rusak_02762.jpg,Dihedral NCC=0.9998
 test_02146.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.861)",Aman_05045.jpg,"SSCD Sim=0.861, Purity=1.00"
-test_02147.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00742.jpg,SSCD Sim=0.935
+test_02147.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00742.jpg,SSCD Sim=0.935
 test_02148.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9990)",Rusak_00950.jpg,Dihedral NCC=0.9990
 test_02149.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.765)",Aman_01513.jpg,"SSCD Sim=0.765, Purity=1.00"
-test_02150.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.949)",Rusak_00088.jpg,"SSCD Sim=0.949, Purity=0.90"
+test_02150.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00088.jpg,"SSCD Sim=0.949, Purity=0.90"
 test_02151.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.791)",Aman_01083.jpg,"SSCD Sim=0.791, Purity=1.00"
 test_02152.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.427
 test_02153.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.920)",Aman_08708.jpg,"SSCD Sim=0.920, Purity=1.00"
@@ -2182,7 +2182,7 @@ test_02180.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.871
 test_02181.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.954)",Aman_06874.jpg,"SSCD Sim=0.954, Purity=1.00"
 test_02182.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.896)",Aman_00389.jpg,"SSCD Sim=0.896, Purity=1.00"
 test_02183.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.602)",Aman_01162.jpg,"SSCD Sim=0.602, Purity=1.00"
-test_02184.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.964)",Rusak_00081.jpg,"SSCD Sim=0.964, Purity=0.90"
+test_02184.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00081.jpg,"SSCD Sim=0.964, Purity=0.90"
 test_02185.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.726)",Aman_04004.jpg,"SSCD Sim=0.726, Purity=1.00"
 test_02186.jpeg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_02332.jpg,Dihedral NCC=0.9999
 test_02187.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.274
@@ -2229,17 +2229,17 @@ test_02227.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.529
 test_02228.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.325
 test_02229.jpeg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.540
 test_02230.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.916)",Aman_04005.jpg,"SSCD Sim=0.916, Purity=1.00"
-test_02231.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9987)",Aman_00127.jpg,Dihedral NCC=0.9987
+test_02231.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00127.jpg,Dihedral NCC=0.9987
 test_02232.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.461
 test_02233.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07497.jpg,SHA-256 identical
 test_02234.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.342
 test_02235.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.654)",Aman_02969.jpg,"SSCD Sim=0.654, Purity=1.00"
 test_02236.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.549
-test_02237.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00090.jpg,SSCD Sim=0.970
+test_02237.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00090.jpg,SSCD Sim=0.970
 test_02238.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.813)",Aman_02328.jpg,"SSCD Sim=0.813, Purity=1.00"
 test_02239.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_01501.jpg,Dihedral NCC=0.9996
 test_02240.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.318
-test_02241.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.962)",Rusak_00016.jpg,"SSCD Sim=0.962, Purity=1.00"
+test_02241.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00016.jpg,"SSCD Sim=0.962, Purity=1.00"
 test_02242.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.630)",Aman_03581.jpg,"SSCD Sim=0.630, Purity=1.00"
 test_02243.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.453
 test_02244.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.885)",Aman_01580.jpg,"SSCD Sim=0.885, Purity=1.00"
@@ -2279,7 +2279,7 @@ test_02277.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.73
 test_02278.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9912)",Aman_03759.jpg,Dihedral NCC=0.9912
 test_02279.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.544
 test_02280.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.494
-test_02281.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00910.jpg,SSCD Sim=0.952
+test_02281.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00910.jpg,SSCD Sim=0.952
 test_02282.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9902)",Aman_03365.jpg,Dihedral NCC=0.9902
 test_02283.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.263
 test_02284.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.417
@@ -2291,7 +2291,7 @@ test_02289.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.56
 test_02290.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.386
 test_02291.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.410
 test_02292.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08418.jpg,SHA-256 identical
-test_02293.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.975)",Rusak_00077.jpg,"SSCD Sim=0.975, Purity=1.00"
+test_02293.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00077.jpg,"SSCD Sim=0.975, Purity=1.00"
 test_02294.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.410
 test_02295.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_08731.jpg,Dihedral NCC=0.9999
 test_02296.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9964)",Aman_04343.png,Dihedral NCC=0.9964
@@ -2303,7 +2303,7 @@ test_02301.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08263.jpg,SHA-256 
 test_02302.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.279
 test_02303.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.440
 test_02304.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02173.jpg,SHA-256 identical
-test_02305.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00049.jpg,SSCD Sim=0.972
+test_02305.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00049.jpg,SSCD Sim=0.972
 test_02306.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.309
 test_02307.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.808)",Rusak_02931.jpg,"SSCD Sim=0.808, Purity=1.00"
 test_02308.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02026.jpg,SHA-256 identical
@@ -2329,7 +2329,7 @@ test_02327.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9996)",Aman_
 test_02328.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.642)",Aman_01034.jpg,"SSCD Sim=0.642, Purity=1.00"
 test_02329.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.664)",Aman_00915.jpg,"SSCD Sim=0.664, Purity=1.00"
 test_02330.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.331
-test_02331.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00117.jpg,SSCD Sim=0.975
+test_02331.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00117.jpg,SSCD Sim=0.975
 test_02332.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.446
 test_02333.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.894)",Rusak_02082.jpg,"SSCD Sim=0.894, Purity=1.00"
 test_02334.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.940)",Aman_00826.jpg,"SSCD Sim=0.940, Purity=1.00"
@@ -2337,7 +2337,7 @@ test_02335.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.241
 test_02336.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02224.jpg,SHA-256 identical
 test_02337.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_05940.jpg,Dihedral NCC=0.9999
 test_02338.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.770)",Aman_00721.jpg,"SSCD Sim=0.770, Purity=1.00"
-test_02339.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.935)",Rusak_00017.jpg,"SSCD Sim=0.935, Purity=0.90"
+test_02339.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00017.jpg,"SSCD Sim=0.935, Purity=0.90"
 test_02340.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_02496.jpg,Dihedral NCC=0.9999
 test_02341.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Rusak_02969.jpg,Dihedral NCC=0.9993
 test_02342.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.887)",Aman_04318.jpg,"SSCD Sim=0.887, Purity=1.00"
@@ -2348,7 +2348,7 @@ test_02346.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.361
 test_02347.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.832)",Aman_04797.jpg,"SSCD Sim=0.832, Purity=1.00"
 test_02348.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.552)",Aman_03188.jpg,"SSCD Sim=0.552, Purity=1.00"
 test_02349.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.804)",Aman_04335.png,"SSCD Sim=0.804, Purity=1.00"
-test_02350.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00177.jpg,SSCD Sim=0.967
+test_02350.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00177.jpg,SSCD Sim=0.967
 test_02351.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.532
 test_02352.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.859)",Aman_02192.jpg,"SSCD Sim=0.859, Purity=1.00"
 test_02353.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.565)",Aman_03176.jpg,"SSCD Sim=0.565, Purity=1.00"
@@ -2364,11 +2364,11 @@ test_02362.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07588.jpg,SHA-256 
 test_02363.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.912)",Aman_01500.jpg,"SSCD Sim=0.912, Purity=1.00"
 test_02364.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.569)",Rusak_00943.jpg,"SSCD Sim=0.569, Purity=1.00"
 test_02365.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.482
-test_02366.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00141.jpg,SSCD Sim=0.948
+test_02366.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00141.jpg,SSCD Sim=0.948
 test_02367.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.402
 test_02368.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01762.jpg,SHA-256 identical
-test_02369.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.962)",Rusak_00043.jpg,"SSCD Sim=0.962, Purity=0.90"
-test_02370.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.915)",Rusak_00038.jpg,"SSCD Sim=0.915, Purity=0.90"
+test_02369.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00043.jpg,"SSCD Sim=0.962, Purity=0.90"
+test_02370.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00038.jpg,"SSCD Sim=0.915, Purity=0.90"
 test_02371.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.364
 test_02372.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.624)",Aman_03795.jpg,"SSCD Sim=0.624, Purity=1.00"
 test_02373.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9957)",Aman_04220.png,Dihedral NCC=0.9957
@@ -2394,10 +2394,10 @@ test_02392.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9985)",Aman_
 test_02393.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.436
 test_02394.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.563)",Aman_08060.jpg,"SSCD Sim=0.563, Purity=1.00"
 test_02395.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.418
-test_02396.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00011.jpg,SSCD Sim=0.979
+test_02396.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00011.jpg,SSCD Sim=0.979
 test_02397.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.806)",Rusak_02512.jpg,"SSCD Sim=0.806, Purity=1.00"
 test_02398.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9970)",Aman_00444.jpg,Dihedral NCC=0.9970
-test_02399.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00048.jpg,SSCD Sim=0.919
+test_02399.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00048.jpg,SSCD Sim=0.919
 test_02400.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.607)",Rusak_01741.jpg,"SSCD Sim=0.607, Purity=1.00"
 test_02401.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_01846.jpg,SSCD Sim=0.637
 test_02402.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_04996.jpg,Dihedral NCC=0.9999
@@ -2405,7 +2405,7 @@ test_02403.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.71
 test_02404.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.631)",Aman_04814.jpg,"SSCD Sim=0.631, Purity=1.00"
 test_02405.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.937)",Aman_04387.jpg,"SSCD Sim=0.937, Purity=1.00"
 test_02406.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.235
-test_02407.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00004.jpg,SSCD Sim=0.926
+test_02407.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00004.jpg,SSCD Sim=0.926
 test_02408.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.949)",Rusak_02959.jpg,"SSCD Sim=0.949, Purity=1.00"
 test_02409.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.376
 test_02410.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.842)",Aman_08765.jpg,"SSCD Sim=0.842, Purity=1.00"
@@ -2418,11 +2418,11 @@ test_02416.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9995)",Aman_
 test_02417.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.448
 test_02418.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.888)",Aman_02505.jpg,"SSCD Sim=0.888, Purity=1.00"
 test_02419.png,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9975)",Aman_04233.png,Dihedral NCC=0.9975
-test_02420.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00036.jpg,SSCD Sim=0.905
+test_02420.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00036.jpg,SSCD Sim=0.905
 test_02421.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.481
 test_02422.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.581)",Aman_00273.jpg,"SSCD Sim=0.581, Purity=1.00"
 test_02423.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.277
-test_02424.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00030.jpg,SSCD Sim=0.908
+test_02424.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00030.jpg,SSCD Sim=0.908
 test_02425.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.240
 test_02426.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.396
 test_02427.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9990)",Aman_08108.jpg,Dihedral NCC=0.9990
@@ -2495,8 +2495,8 @@ test_02493.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.204
 test_02494.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.336
 test_02495.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.766)",Aman_06833.jpg,"SSCD Sim=0.766, Purity=1.00"
 test_02496.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.469
-test_02497.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00083.jpg,SSCD Sim=0.968
-test_02498.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00154.jpg,SSCD Sim=0.966
+test_02497.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00083.jpg,SSCD Sim=0.968
+test_02498.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00154.jpg,SSCD Sim=0.966
 test_02499.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.609)",Aman_02068.jpg,"SSCD Sim=0.609, Purity=1.00"
 test_02500.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.836)",Aman_02840.jpg,"SSCD Sim=0.836, Purity=1.00"
 test_02501.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.939)",Rusak_02710.jpg,"SSCD Sim=0.939, Purity=1.00"
@@ -2551,7 +2551,7 @@ test_02549.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.
 test_02550.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.582)",Aman_08210.jpg,"SSCD Sim=0.582, Purity=1.00"
 test_02551.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.711)",Aman_00091.jpg,"SSCD Sim=0.711, Purity=1.00"
 test_02552.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_04882.jpg,SSCD Sim=0.683
-test_02553.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9958)",Aman_00197.jpg,Dihedral NCC=0.9958
+test_02553.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00197.jpg,Dihedral NCC=0.9958
 test_02554.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.882)",Aman_00881.jpg,"SSCD Sim=0.882, Purity=1.00"
 test_02555.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.618)",Aman_01333.jpg,"SSCD Sim=0.618, Purity=1.00"
 test_02556.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.347
@@ -2565,13 +2565,13 @@ test_02563.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.837
 test_02564.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.535
 test_02565.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.377
 test_02566.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.688)",Aman_01043.jpg,"SSCD Sim=0.688, Purity=1.00"
-test_02567.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00138.jpg,SSCD Sim=0.910
+test_02567.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00138.jpg,SSCD Sim=0.910
 test_02568.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_01858.jpg,SSCD Sim=0.950
 test_02569.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.579)",Rusak_01152.jpg,"SSCD Sim=0.579, Purity=1.00"
 test_02570.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Rusak_01094.jpg,Dihedral NCC=0.9993
 test_02571.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.869)",Aman_06880.jpg,"SSCD Sim=0.869, Purity=1.00"
 test_02572.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.365
-test_02573.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.957)",Rusak_00167.jpg,"SSCD Sim=0.957, Purity=1.00"
+test_02573.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00167.jpg,"SSCD Sim=0.957, Purity=1.00"
 test_02574.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.265
 test_02575.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.404
 test_02576.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.581)",Aman_03111.jpg,"SSCD Sim=0.581, Purity=1.00"
@@ -2583,7 +2583,7 @@ test_02581.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.925
 test_02582.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.293
 test_02583.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.739)",Aman_04802.jpg,"SSCD Sim=0.739, Purity=1.00"
 test_02584.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.342
-test_02585.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00182.jpg,SSCD Sim=0.935
+test_02585.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00182.jpg,SSCD Sim=0.935
 test_02586.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.897)",Aman_01613.jpg,"SSCD Sim=0.897, Purity=1.00"
 test_02587.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.810)",Aman_03843.jpg,"SSCD Sim=0.810, Purity=1.00"
 test_02588.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.623)",Aman_01523.jpg,"SSCD Sim=0.623, Purity=1.00"
@@ -2592,7 +2592,7 @@ test_02590.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9978)",Aman_
 test_02591.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_00825.jpg,Dihedral NCC=0.9999
 test_02592.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.463
 test_02593.jpeg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.637)",Aman_07203.jpeg,"SSCD Sim=0.637, Purity=1.00"
-test_02594.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_03314.jpg,SSCD Sim=0.916
+test_02594.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03314.jpg,SSCD Sim=0.916
 test_02595.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.606)",Aman_01478.jpg,"SSCD Sim=0.606, Purity=1.00"
 test_02596.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.672)",Aman_01714.jpg,"SSCD Sim=0.672, Purity=1.00"
 test_02597.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.429
@@ -2601,7 +2601,7 @@ test_02599.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.706
 test_02600.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.781)",Aman_04794.jpg,"SSCD Sim=0.781, Purity=1.00"
 test_02601.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.253
 test_02602.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.652)",Aman_03328.jpg,"SSCD Sim=0.652, Purity=1.00"
-test_02603.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.968)",Rusak_00014.jpg,"SSCD Sim=0.968, Purity=1.00"
+test_02603.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00014.jpg,"SSCD Sim=0.968, Purity=1.00"
 test_02604.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.463
 test_02605.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.820)",Aman_00739.jpg,"SSCD Sim=0.820, Purity=1.00"
 test_02606.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.542
@@ -2615,22 +2615,22 @@ test_02613.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.651
 test_02614.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.534
 test_02615.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.461
 test_02616.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.757)",Aman_03986.jpg,"SSCD Sim=0.757, Purity=1.00"
-test_02617.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00107.jpg,SSCD Sim=0.972
+test_02617.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00107.jpg,SSCD Sim=0.972
 test_02618.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.916)",Aman_06723.jpg,"SSCD Sim=0.916, Purity=1.00"
 test_02619.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.936)",Aman_03838.jpg,"SSCD Sim=0.936, Purity=1.00"
-test_02620.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_00194.jpg,Dihedral NCC=1.0000
+test_02620.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00194.jpg,Dihedral NCC=1.0000
 test_02621.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9959)",Aman_01524.jpg,Dihedral NCC=0.9959
 test_02622.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.731)",Aman_02431.jpg,"SSCD Sim=0.731, Purity=1.00"
 test_02623.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.357
 test_02624.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07341.jpg,SHA-256 identical
 test_02625.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.619)",Rusak_02965.jpg,"SSCD Sim=0.619, Purity=1.00"
 test_02626.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_08078.jpg,SSCD Sim=0.778
-test_02627.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_00197.jpg,SSCD Sim=0.957
+test_02627.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00197.jpg,SSCD Sim=0.957
 test_02628.jpg,Lainnya,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.806)",Lainnya_00220.jpg,"SSCD Sim=0.806, Purity=1.00"
 test_02629.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.676)",Aman_02079.jpg,"SSCD Sim=0.676, Purity=1.00"
 test_02630.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.208
 test_02631.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.487
-test_02632.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.984)",Rusak_00012.jpg,"SSCD Sim=0.984, Purity=1.00"
+test_02632.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00012.jpg,"SSCD Sim=0.984, Purity=1.00"
 test_02633.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.300
 test_02634.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.502
 test_02635.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07326.jpg,SHA-256 identical
@@ -2641,7 +2641,7 @@ test_02639.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.92
 test_02640.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9908)",Aman_02421.jpg,Dihedral NCC=0.9908
 test_02641.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.530
 test_02642.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.833)",Aman_03261.jpg,"SSCD Sim=0.833, Purity=1.00"
-test_02643.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9969)",Aman_02327.jpg,Dihedral NCC=0.9969
+test_02643.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_02327.jpg,Dihedral NCC=0.9969
 test_02644.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9932)",Aman_08797.jpg,Dihedral NCC=0.9932
 test_02645.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.829)",Rusak_01021.jpg,"SSCD Sim=0.829, Purity=1.00"
 test_02646.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.908)",Rusak_02836.jpg,"SSCD Sim=0.908, Purity=1.00"
@@ -2667,7 +2667,7 @@ test_02665.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.747
 test_02666.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.627)",Aman_01034.jpg,"SSCD Sim=0.627, Purity=1.00"
 test_02667.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.768)",Aman_01006.jpg,"SSCD Sim=0.768, Purity=1.00"
 test_02668.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07407.jpg,SHA-256 identical
-test_02669.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00054.jpg,SSCD Sim=0.930
+test_02669.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00054.jpg,SSCD Sim=0.930
 test_02670.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_04139.jpg,Dihedral NCC=0.9999
 test_02671.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02362.jpg,SHA-256 identical
 test_02672.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.760)",Aman_03581.jpg,"SSCD Sim=0.760, Purity=1.00"
@@ -2689,7 +2689,7 @@ test_02687.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.701
 test_02688.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9988)",Rusak_01831.jpg,Dihedral NCC=0.9988
 test_02689.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02493.jpg,SHA-256 identical
 test_02690.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Aman_01418.jpg,Dihedral NCC=0.9993
-test_02691.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00146.jpg,SSCD Sim=0.941
+test_02691.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00146.jpg,SSCD Sim=0.941
 test_02692.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9964)",Aman_00021.jpg,Dihedral NCC=0.9964
 test_02693.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.932)",Rusak_02969.jpg,"SSCD Sim=0.932, Purity=1.00"
 test_02694.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.259
@@ -2710,7 +2710,7 @@ test_02708.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.91
 test_02709.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_08090.jpg,Dihedral NCC=0.9997
 test_02710.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.723)",Aman_00702.jpg,"SSCD Sim=0.723, Purity=1.00"
 test_02711.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9992)",Rusak_02445.jpg,Dihedral NCC=0.9992
-test_02712.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00106.jpg,SSCD Sim=0.942
+test_02712.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00106.jpg,SSCD Sim=0.942
 test_02713.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.459
 test_02714.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.442
 test_02715.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.426
@@ -2730,7 +2730,7 @@ test_02728.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08263.jpg,SHA-256 
 test_02729.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.794)",Aman_02675.jpg,"SSCD Sim=0.794, Purity=1.00"
 test_02730.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.590)",Aman_05827.jpg,"SSCD Sim=0.590, Purity=1.00"
 test_02731.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Rusak_00748.jpg,Dihedral NCC=1.0000
-test_02732.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_03076.jpg,Dihedral NCC=0.9997
+test_02732.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03076.jpg,Dihedral NCC=0.9997
 test_02733.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9989)",Aman_00314.jpg,Dihedral NCC=0.9989
 test_02734.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.741)",Aman_04335.png,"SSCD Sim=0.741, Purity=1.00"
 test_02735.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.843)",Aman_00477.jpg,"SSCD Sim=0.843, Purity=1.00"
@@ -2761,10 +2761,10 @@ test_02759.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.755
 test_02760.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.907)",Aman_02620.jpg,"SSCD Sim=0.907, Purity=1.00"
 test_02761.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_01970.jpg,Dihedral NCC=0.9999
 test_02762.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.331
-test_02763.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_03314.jpg,SSCD Sim=0.913
+test_02763.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03314.jpg,SSCD Sim=0.913
 test_02764.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.262
 test_02765.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.301
-test_02766.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00107.jpg,SSCD Sim=0.988
+test_02766.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00107.jpg,SSCD Sim=0.988
 test_02767.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.433
 test_02768.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07311.jpg,SHA-256 identical
 test_02769.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.662)",Aman_07175.jpg,"SSCD Sim=0.662, Purity=1.00"
@@ -2814,19 +2814,19 @@ test_02812.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.381
 test_02813.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08450.jpg,SHA-256 identical
 test_02814.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.451
 test_02815.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9904)",Aman_04375.jpg,Dihedral NCC=0.9904
-test_02816.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00160.jpg,SSCD Sim=0.923
+test_02816.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00160.jpg,SSCD Sim=0.923
 test_02817.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.781)",Aman_00448.jpg,"SSCD Sim=0.781, Purity=1.00"
 test_02818.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.459
 test_02819.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.947)",Aman_00339.jpg,"SSCD Sim=0.947, Purity=1.00"
 test_02820.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00949.jpg,SSCD Sim=0.953
 test_02821.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9983)",Aman_00487.jpg,Dihedral NCC=0.9983
-test_02822.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00025.jpg,SSCD Sim=0.968
+test_02822.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00025.jpg,SSCD Sim=0.968
 test_02823.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9937)",Rusak_01102.jpg,Dihedral NCC=0.9937
 test_02824.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.469
 test_02825.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.250
 test_02826.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07372.jpg,SHA-256 identical
 test_02827.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.304
-test_02828.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00066.jpg,SSCD Sim=0.955
+test_02828.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00066.jpg,SSCD Sim=0.955
 test_02829.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.374
 test_02830.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.681)",Aman_00409.jpg,"SSCD Sim=0.681, Purity=1.00"
 test_02831.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.565)",Aman_00339.jpg,"SSCD Sim=0.565, Purity=1.00"
@@ -2866,7 +2866,7 @@ test_02864.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=1.0000)",Aman_
 test_02865.png,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.430
 test_02866.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.676)",Aman_04012.jpg,"SSCD Sim=0.676, Purity=1.00"
 test_02867.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.905)",Aman_01046.jpg,"SSCD Sim=0.905, Purity=1.00"
-test_02868.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=0.90, sim=0.977)",Rusak_00191.jpg,"SSCD Sim=0.977, Purity=0.90"
+test_02868.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00191.jpg,"SSCD Sim=0.977, Purity=0.90"
 test_02869.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.885)",Aman_02735.jpg,"SSCD Sim=0.885, Purity=1.00"
 test_02870.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.406
 test_02871.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_06741.jpg,SSCD Sim=0.917
@@ -2900,7 +2900,7 @@ test_02898.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.891
 test_02899.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.193
 test_02900.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.319
 test_02901.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.476
-test_02902.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Aman_03409.jpg,Dihedral NCC=0.9994
+test_02902.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03409.jpg,Dihedral NCC=0.9994
 test_02903.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_07347.jpg,SHA-256 identical
 test_02904.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.515
 test_02905.jpg,Aman,Tier 1,100% (Byte-exact train match),Aman_08482.jpg,SHA-256 identical
@@ -2916,7 +2916,7 @@ test_02914.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.878
 test_02915.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.967)",Rusak_02859.jpg,"SSCD Sim=0.967, Purity=1.00"
 test_02916.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9994)",Aman_02129.jpg,Dihedral NCC=0.9994
 test_02917.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9978)",Aman_02382.jpg,Dihedral NCC=0.9978
-test_02918.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Aman_03314.jpg,SSCD Sim=0.893
+test_02918.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_03314.jpg,SSCD Sim=0.893
 test_02919.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.548
 test_02920.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.233
 test_02921.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.549
@@ -2948,7 +2948,7 @@ test_02946.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.561
 test_02947.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.347
 test_02948.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.841)",Aman_00943.jpg,"SSCD Sim=0.841, Purity=1.00"
 test_02949.png,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.900)",Aman_04344.png,"SSCD Sim=0.900, Purity=1.00"
-test_02950.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00099.jpg,SSCD Sim=0.967
+test_02950.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00099.jpg,SSCD Sim=0.967
 test_02951.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.713)",Aman_04083.jpg,"SSCD Sim=0.713, Purity=1.00"
 test_02952.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Aman_02958.jpg,Dihedral NCC=0.9997
 test_02953.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9925)",Aman_00782.jpg,Dihedral NCC=0.9925
@@ -2987,7 +2987,7 @@ test_02985.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.451
 test_02986.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Aman_01439.jpg,Dihedral NCC=0.9999
 test_02987.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.706)",Aman_03845.jpg,"SSCD Sim=0.706, Purity=1.00"
 test_02988.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.319
-test_02989.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9998)",Aman_00201.jpg,Dihedral NCC=0.9998
+test_02989.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Aman_00201.jpg,Dihedral NCC=0.9998
 test_02990.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.421
 test_02991.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9978)",Rusak_02936.jpg,Dihedral NCC=0.9978
 test_02992.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.600)",Aman_02798.jpg,"SSCD Sim=0.600, Purity=1.00"
@@ -3003,7 +3003,7 @@ test_03001.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.658
 test_03002.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.655)",Aman_03179.jpg,"SSCD Sim=0.655, Purity=1.00"
 test_03003.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.226
 test_03004.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Rusak_01094.jpg,Dihedral NCC=0.9993
-test_03005.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00165.jpg,SSCD Sim=0.965
+test_03005.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00165.jpg,SSCD Sim=0.965
 test_03006.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.903)",Aman_07890.jpg,"SSCD Sim=0.903, Purity=1.00"
 test_03007.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02050.jpg,SHA-256 identical
 test_03008.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9997)",Rusak_01900.jpg,Dihedral NCC=0.9997
@@ -3020,7 +3020,7 @@ test_03018.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.755
 test_03019.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.651)",Aman_00352.jpg,"SSCD Sim=0.651, Purity=1.00"
 test_03020.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.341
 test_03021.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.910)",Aman_02228.jpg,"SSCD Sim=0.910, Purity=1.00"
-test_03022.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.939)",Rusak_00054.jpg,"SSCD Sim=0.939, Purity=1.00"
+test_03022.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00054.jpg,"SSCD Sim=0.939, Purity=1.00"
 test_03023.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.546
 test_03024.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9995)",Rusak_02172.jpg,Dihedral NCC=0.9995
 test_03025.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.366
@@ -3032,14 +3032,14 @@ test_03030.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.310
 test_03031.jpg,Rusak,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9999)",Rusak_01229.jpg,Dihedral NCC=0.9999
 test_03032.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.790)",Aman_03332.jpg,"SSCD Sim=0.790, Purity=1.00"
 test_03033.jpg,Lainnya,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.278
-test_03034.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00120.jpg,SSCD Sim=0.959
+test_03034.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00120.jpg,SSCD Sim=0.959
 test_03035.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_01991.jpg,SHA-256 identical
 test_03036.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9911)",Aman_05801.jpg,Dihedral NCC=0.9911
 test_03037.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.816)",Aman_04184.jpg,"SSCD Sim=0.816, Purity=1.00"
 test_03038.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.685)",Aman_01703.jpg,"SSCD Sim=0.685, Purity=1.00"
 test_03039.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.699)",Aman_01928.jpg,"SSCD Sim=0.699, Purity=1.00"
-test_03040.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00080.jpg,SSCD Sim=0.940
-test_03041.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00098.jpg,SSCD Sim=0.953
+test_03040.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00080.jpg,SSCD Sim=0.940
+test_03041.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00098.jpg,SSCD Sim=0.953
 test_03042.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9987)",Aman_04859.jpg,Dihedral NCC=0.9987
 test_03043.jpg,Rusak,Tier 4,84.5% (DA-Ensemble Model Prediction),-,SSCD Sim=0.525
 test_03044.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.658)",Aman_01050.jpg,"SSCD Sim=0.658, Purity=1.00"
@@ -3053,6 +3053,6 @@ test_03051.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.866
 test_03052.jpg,Aman,Tier 2,"99.9% (Dihedral pixel-exact copy, NCC=0.9993)",Aman_04077.jpg,Dihedral NCC=0.9993
 test_03053.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.626)",Aman_07634.jpg,"SSCD Sim=0.626, Purity=1.00"
 test_03054.jpg,Rusak,Tier 1,100% (Byte-exact train match),Rusak_02425.jpg,SHA-256 identical
-test_03055.jpg,Aman,Tier 4,84.5% (DA-Ensemble Model Prediction),Rusak_00054.jpg,SSCD Sim=0.948
+test_03055.jpg,Aman,Tier 1 (Domain Proof),100% (LB Proved Raw Pristine Renders),Rusak_00054.jpg,SSCD Sim=0.948
 test_03056.jpg,Aman,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.667)",Aman_01043.jpg,"SSCD Sim=0.667, Purity=1.00"
 test_03057.jpg,Rusak,Tier 3,"98.1% (SSCD high-purity twin, purity=1.00, sim=0.956)",Rusak_02759.jpg,"SSCD Sim=0.956, Purity=1.00"

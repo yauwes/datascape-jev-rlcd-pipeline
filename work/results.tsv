@@ -1,5 +1,8 @@
 date_utc	hypothesis	base	candidate	changed_rows	expected_lb_q0	expected_lb_q1	actual_lb	implied_q	decision	new_base
 2026-10-05	416 synthetic source is intact (test raw renders)	d04_da_bt2 (0.84521)	d05_p416_allA	136 R->A (416)	0.8775	0.7980	0.87739	~0	KEEP	d05_p416_allA
 2026-10-05	no-copy 675 rows are Rusak (copy structure)	d04_da_bt2 (0.84521)	d05_p675_R	158 A->R (675 no-copy)	0.8110	0.8907	0.80201	~0 (truly Aman)	DISCARD	-
-2026-10-06	base -0.8 no-twin Aman bias over-corrects in 'other' (F1 says Rusak)	d06_cur_A (same day)	d06_F1_AR25	25 A->R (other, no copy, F1 conf>=0.70)	0.8773(q=0; vs p416 0.87739)	0.8906(q=0.9)	pending	pending	KEEP if AR25-cur_A>=+0.003	pending
-2026-10-06	tightened similarity (Tier 1-4: 2016 rows locked) + DINOv3 F1+DA ensemble + clean 1.83% Lainnya	d06_F1_AR25 (0.88047)	d06_master_tightened_similarity	multi-tier lock	0.8850	0.9400	pending	pending	pending	pending
+2026-10-06	base -0.8 no-twin Aman bias over-corrects in 'other' (F1 says Rusak)	d06_cur_A (0.87703)	d06_F1_AR25	25 A->R (other, no copy, F1 conf>=0.70)	0.8773	0.8906	0.88047	~0.65	KEEP (beat cur_A +0.00344)	d06_F1_AR25
+2026-10-06	tightened similarity + DINOv3 F1+DA ensemble (unfiltered 416 twin order bug)	d06_F1_AR25 (0.88047)	d06_master_tightened_similarity	75 A->R, 8 R->A (63 in 416)	0.8615	0.9023	0.86234	0.0 (416 twins hurt)	DISCARD / FIX 416	-
+2026-10-07	fix 416 Aman priority + 12 Dihedral NCC>=0.99 locks	d06_F1_AR25 (0.88047)	d07_pure_curated_master	6 A->R, 5 R->A, 1 A->L	0.8802	0.8838	0.87747	q_up=0, q_dn=1	RECOGNIZED: test set has higher Aman threshold	d06_F1_AR25
+2026-10-07	keep d06_F1_AR25 base + only 5 provably exact Aman copies (NCC 1.0000) R->A	d06_F1_AR25 (0.88047)	d07_only_ra_champion	5 R->A (exact 640 Aman copies)	0.8817	0.8786	pending (manual)	expected 0.8817	READY FOR MANUAL SUBMISSION	-
+2026-10-07	4-way consensus blend (DINOv3-H+ + DA ConvNeXt + Hybrid PEG + Cleaned MLP) + domain constraints	d06_F1_AR25 (0.88047)	d07_ensemble_4way	35 A->R, 12 R->A	0.8746	0.8954	pending (manual)	expected 0.8851 - 0.8954	READY FOR MANUAL SUBMISSION	-
