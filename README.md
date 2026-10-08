@@ -11,40 +11,52 @@
 
 ## 0. Checkpoint 10-08: three files for manual upload (read this first)
 
-Built by `python work/make_d09.py` (bit-reproducible here). `d09_vnA` and `d09_otherR` are **disjoint, single-hypothesis edits on `d08_grand_consensus_champion`** (team best, public **0.88789**), so each LB score can be read on its own; `d09_combo` = both + 3 copy fixes. Expected public LB comes from `work/lbdelta.py` against d08.
+Built by `python work/make_d09.py` (bit-reproducible here).
+- `d09_vnA` and `d09_otherR` are **disjoint, single-hypothesis edits on `d08_grand_consensus_champion`** (team best, public **0.88789**), so each score can be read on its own.
+- `d09_combo` = both + 2 copy fixes.
+- Expected public LB comes from `work/lbdelta.py` against d08.
 
 | Rank | File | Change vs d08 | Expected public LB |
 |---|---|---|---|
-| 1 | `submissions/d09_combo.csv` | #2 + #3 + 3 rows where d08 overrode an exact train copy (ncc ≥ 0.99: 2 → Rusak, 1 → Lainnya); 48 rows | **≈ 0.894** (0.888–0.898) |
+| 1 | `submissions/d09_combo.csv` | #2 + #3 + 2 rows where d08 overrode an exact Rusak train copy (ncc 1.0); 46 rows | **≈ 0.894** (0.888–0.898) |
 | 2 | `submissions/d09_vnA.csv` | 24 Rusak → Aman: VN-parcel scans (679×900, 900×675, 900×679) that d08 newly called Rusak | **≈ 0.892** if ≥ 80% are Aman (breakeven ≈ 60% Aman) |
-| 3 | `submissions/d09_otherR.csv` | 21 Aman → Rusak: "other" rows with no copy, never called Rusak by any scored sub, mean P(Rusak) of F1/F2 ≥ 0.25 | **≈ 0.889–0.891** if 50–70% are Rusak (breakeven ≈ 45%) |
+| 3 | `submissions/d09_otherR.csv` | 20 Aman → Rusak: "other" rows with no copy (pixel or SSCD), never called Rusak by any scored sub, mean P(Rusak) of F1/F2 ≥ 0.25 | **≈ 0.889–0.891** if 50–70% are Rusak (breakeven ≈ 45%) |
 
 **Evidence behind each edit:**
 - **VN parcels → Aman.**
   - The same source family was proven on the LB. In 675×900 the train labels are 391 Rusak / 108 Aman, yet flipping its test rows to Rusak cost 0.043 (`d05_p675_R`). In 416×416 the train labels are 211 Rusak / 87 Aman, and all-Aman gained 0.032.
   - 679×900 (train 29 R / 11 A) is the same family. d08 flipped 20 of its 30 test rows to Rusak, driven by the 7B model (F2), which also calls 38% of 675×900 Rusak.
   - F1 says Aman on all of them (mean P(R) 0.06). 4 have exact train copies labelled Aman.
-- **More Rusak in "other".**
-  - `work/lb_regress.py` runs a ridge regression over the 9 scored subs, with VN rows split out. It says d08's non-VN "other" Aman → Rusak flips were nearly all correct (P(gain > 0) = 0.96), although the models gave them only P(R) ≈ 0.66.
-  - So the models under-call Rusak in "other", and `d09_otherR` extends that by one tier.
-- **Lainnya:** no model-driven edit exists. d08's 55 Lainnya rows are all small ~200-px thumbnails, and no other row has P(Lainnya) > 0.2.
+  - The other agent's `d08_vn900_champion` overlaps on about 20 rows and adds a 658×900 row that both models call Rusak. **Do not upload it.**
+- **More Rusak in "other". This depends on vnA being right.**
+  - `work/lb_regress.py` runs a ridge regression over the 9 scored subs, with VN rows split out and given the LB-proven "Aman" prior. It says d08's non-VN "other" Aman → Rusak flips were nearly all correct (P(gain > 0) = 0.96), although the models gave them only P(R) ≈ 0.66.
+  - That reading holds only if the VN flips were wrong, and the fit is strained: one group's estimate exceeds the physical per-row maximum, and the fit misses `d06_cur_A` by −0.0024.
+  - otherR's own edge is thin: +0.0008 at q = 0.5.
+- **Lainnya: no edit.**
+  - d08's 55 Lainnya rows are all small ~200-px thumbnails, and no other row has P(Lainnya) > 0.2.
+  - The single Lainnya exact copy (test_02745) was rejected. Its 758×758 train copy has only Aman neighbours, and the 640-size train Lainnya images duplicate Aman images.
 
-**Pre-registered reading.** Rows are in `work/results.tsv`; compare each score with 0.88789.
-- `d09_vnA` ≥ +0.002 → KEEP.
-- `d09_otherR` ≥ +0.001 → KEEP, and on 10-10 try the next tier (mean P(R) 0.15–0.25).
-- Any edit ≤ −0.002 → DISCARD.
-- The combo should land near the sum of the two. A big gap means the 3 copy-fix rows matter: the Lainnya one is worth about ±0.01 if it falls in the public split.
-
-**Final selection.** Pick 2 on Kaggle before **10-10 16:59 UTC**, otherwise Kaggle picks by public score.
-- Final 1: the best-scoring combination of KEEP edits.
-- Final 2: a hedge that differs on d08's "other" Aman → Rusak block, e.g. the d10 family.
+**Upload plan.** Pre-registered in `work/results.tsv`; d08 = 0.88789. Times are UTC, with WIB in brackets.
+1. **Today, before 00:00 (07:00 WIB):** upload `d09_vnA` in the team's one remaining 10-08 slot. Check the teammate has not used it.
+2. **Then, from 00:00 (07:00 WIB) 10-09:**
+   - vnA ≥ **0.8899** (KEEP): upload `d09_combo` and `d09_otherR`.
+   - vnA between 0.8869 and 0.8899 (unclear): upload `d09_otherR` only.
+   - vnA ≤ **0.8869** (DISCARD): skip the combo, upload `d09_otherR` alone, and rethink before spending more slots. otherR's support weakens if vnA fails.
+3. **Reading otherR:**
+   - otherR ≥ +0.001 with vnA KEEP → KEEP. On 10-10, try the next tier (mean P(R) 0.15–0.25).
+   - If vnA was ≤ +0.001, a small otherR gain is noise and the extension is off.
+4. **Final selection:** pick 2 on Kaggle before **10-10 16:59 UTC (23:59 WIB)**, otherwise Kaggle picks by public score.
+   - Final 1: the best combination of KEEP edits.
+   - Final 2: a hedge that differs on d08's "other" Aman → Rusak block, e.g. the d10 family.
 
 **Not worth it now:** DINOv3-7B with patience 3.
 - At epoch 1 the val loss rose while train accuracy jumped from 0.84 to 0.91, i.e. it was memorising noisy labels.
 - The plateau LR cut never ran, because patience = plateau = 1.
 - Each epoch takes about 18 min, and no LB slot is left to validate the result.
 
-**Honesty note.** No evidence supports 0.98+. Train-label CV does not track the LB here: d10's "0.983 held-out" scored 0.8846, and d08's "CV 0.957–0.990" scored 0.8879. Trust paired LB probes (`work/lbdelta.py`) and the LB regression.
+**Honesty note.**
+- Realistic expectation: about 0.89. No evidence supports 0.98+.
+- Train-label CV does not track the LB here: d10's "0.983 held-out" scored 0.8846, and d08's "CV 0.957–0.990" scored 0.8879. Trust paired LB probes (`work/lbdelta.py`) and the LB regression.
 
 ---
 
