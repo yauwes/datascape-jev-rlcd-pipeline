@@ -60,6 +60,26 @@
    - So there is no rule to transfer to 640 or fam251.
 4. **Conclusion.** No file beats d08 on the evidence. Today's slots can only buy information. Default finals: **d08 + d10** (both scored).
 
+### 0.1 Expected vs actual public LB (`work/expectation_vs_lb.csv`)
+
+The pattern is consistent. Expected LB from train-label CV/OOF misses by −0.03 to −0.10. Expected LB from paired probes (`work/lbdelta.py`) on a scored base misses by ≤ 0.006: `d06_cur_A` −0.004, `d06_F1_AR25` −0.0055, `d11_lbopt` −0.0004. The two source probes (p416, p675) were deliberately unknown-q.
+
+| Date | Submission | CV/OOF (train labels) | Expected LB | Public LB | Gap |
+|---|---|---|---|---|---|
+| 2026-10-04 | `d04_da_bt2` | 0.9318 | 0.9300 | **0.84521** | -0.0848 |
+| 2026-10-04 | `d05_h2_nolock_s337` | 0.8967 | 0.8450 | **0.83004** | -0.0150 |
+| 2026-10-05 | `d05_p416_allA` | 0.9318 | 0.8500 | **0.87739** | +0.0274 |
+| 2026-10-05 | `d05_p675_R` | 0.9318 | 0.8550 | **0.80201** | -0.0530 |
+| 2026-10-06 | `d06_F1_AR25` | 0.9318 | 0.8860 | **0.88047** | -0.0055 |
+| 2026-10-06 | `d06_cur_A` | 0.9318 | 0.8810 | **0.87703** | -0.0040 |
+| 2026-10-07 | `d06_master_tightened_similarity` | 0.9671 | 0.8950 | **0.86234** | -0.0327 |
+| 2026-10-07 | `d07_pure_curated_master` | 0.9085 | 0.8838 | **0.87747** | -0.0063 |
+| 2026-10-07 | `d08_grand_consensus_champion` | 0.9570 | 0.9150 | **0.88789** | -0.0271 |
+| 2026-10-08 | `d10_transductive_098_champion` | 0.9830 | 0.9810 | **0.88458** | -0.0964 |
+| 2026-10-09 | `d11_lbopt` | nan | 0.8893 | **0.88891** | -0.0004 |
+
+So a "0.99 CV" model is not a 0.99 LB model here. The test labels follow per-source conventions that the train labels violate (416/675), and more epochs fit the train labels harder, not the test convention.
+
 **Honesty note.** No file here is a 0.98+ file. Train-label CV does not track the LB: d10's "0.983 held-out" scored 0.8846, and d08's "CV 0.957–0.990" scored 0.8879. Only paired LB probes (`work/lbdelta.py`) count.
 
 ---
