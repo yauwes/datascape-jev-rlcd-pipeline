@@ -32,6 +32,19 @@
 - Generator: `colab/make_nb16.py`.
 - **Pre-registered gate:** use converged training for the other folds only if its valLoss is ≤ F2's − 0.005, or its valF1 is ≥ F2's + 0.005, on identical val rows.
 
+**Why more 7B epochs/folds cannot reach 0.99 (measured 10-09).**
+- On the 1,413 free test rows (no copy, not 416/675/VN), the blend members almost always agree.
+- Raising the 7B weight changes this many rows vs d11:
+
+  | 7B weight | 0.35 | 0.5 | 0.65 | 0.8 | 1.0 (F2 alone) |
+  |---|---|---|---|---|---|
+  | Rows changed | 0 | 4 | 7 | 14 | **29** |
+
+- Averaging in a second 7B fold changes 1 row.
+- So the ~10% public error that remains is **systematic**: every model agrees and the test label differs. A better model of the same family moves at most ~30 rows (≤ ~0.005–0.01 LB).
+- A large gain needs a new group-level convention, like 416→Aman (+0.032), found by LB probes on regions where the models agree.
+- `work/make_d13.py NAME files...` rebuilds d11 with any 7B prediction set. Self-check: F2 alone reproduces d11.
+
 ### 0.1 Expected vs actual public LB (`work/expectation_vs_lb.csv`)
 
 The pattern is consistent. Expected LB from train-label CV/OOF misses by −0.03 to −0.10. Expected LB from paired probes (`work/lbdelta.py`) on a scored base misses by ≤ 0.006: `d06_cur_A` −0.004, `d06_F1_AR25` −0.0055, `d11_lbopt` −0.0004. The two source probes (p416, p675) were deliberately unknown-q.
