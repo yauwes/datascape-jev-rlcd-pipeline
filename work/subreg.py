@@ -16,7 +16,7 @@ def add(name, csv, strategy, oof, exp, lo, hi):
     mix = json.dumps(s.label.value_counts(normalize=True).round(3).to_dict())
     row = dict(name=name, created_utc=datetime.datetime.utcnow().isoformat(timespec='minutes'), csv=dst, strategy=strategy, oof_macro_f1=float(oof),
                expected_lb=float(exp), exp_lo=float(lo), exp_hi=float(hi), pred_mix=mix)
-    pd.concat([d, pd.DataFrame([row])])[COLS].to_csv(LED, index=False); print('registered', name, mix)
+    pd.concat([d, pd.DataFrame([row])])[list(dict.fromkeys(list(d.columns) + COLS))].to_csv(LED, index=False); print('registered', name, mix)   # keeps other agents' extra columns
 
 def whoami():
     out = subprocess.run(['kaggle', 'config', 'view'], capture_output=True, text=True).stdout

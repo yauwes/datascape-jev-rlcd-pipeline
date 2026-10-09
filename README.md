@@ -11,7 +11,20 @@
 
 ## 0. Checkpoint 10-09 (read this first)
 
-**Team best: `d08_grand_consensus_champion`, public 0.88789.** The leader on 10-09 is at 0.98509, a gap of about 0.10 macro-F1 (hundreds of rows).
+**Team best: `d11_lbopt`, public 0.88891** (10-09 slot 1). It is d08 plus 17 rows where the LB regression over 11 scored subs prefers another label (`python work/make_d11.py`, bit-reproducible here).
+- Expected 0.8893; got +0.0010 vs d08. That is under the pre-registered +0.0015 KEEP bar, so it counts as noise-level. The sign of the method is confirmed.
+- The leader on 10-09 is at 0.98509, a gap of about 0.10 macro-F1 (hundreds of rows).
+
+**In progress (10-09, slot 2 candidate): session 15 on the Colab A100-80GB.**
+- **What runs:** DINOv3-7B folds 1–4 with the F2 recipe plus LB-backed train cleaning.
+  - `work/s15/pack/drop15.csv` drops 290 images: the 211 416×416 Rusak images (their test copies are Aman on the LB), and 85 minority labels in conflicting pixel-copy clusters.
+  - Generator: `colab/make_nb15.py`. Runner: `work/s15/pack/run15.py`.
+  - Outputs go to `asuudane/datascape-colab-out15`; the Drive mount failed this run.
+- **Candidate:** `python work/make_d12.py <dir with pred_F2c_f1..4.npz>` builds `d12_7b5`.
+  - It is d11 with d08's blend recomputed on the 5-fold 7B average.
+  - Only "free" rows may change: no train copy, not 416/675/VN, and not one of d11's edits.
+  - Self-check: with F2 copies as input it reproduces d11 exactly.
+- **Submit rule:** submit only if the 4 new folds validate like F2 (fold-0 valF1 0.8867) and the changed rows don't contradict any LB-backed group. Nothing guarantees a gain; the expected effect is small (variance reduction).
 
 **The 10-08 candidates are retracted. Do not upload `d09_vnA`, `d09_otherR` or `d09_combo`.**
 - The teammate's `d23_precision_consensus` (branch `farhan/4pillars-and-d23`, commit `4d763e4`) is a subset of `d09_combo`. It contains:
