@@ -1,8 +1,6 @@
 # Write-up DATASCAPE 2026: Klasifikasi Kondisi Paket (Aman / Rusak / Lainnya)
 
-**Tim:** `<NamaTim>` · **Metrik:** macro-F1 · **Submisi terbaik:** `d11_lbopt`, public LB **0.88891**
-
-> Draft (10-09). Angka private diisi setelah leaderboard final. Nama file final: `NamaTim_Writeup_Datascape.pdf`.
+**Tim:** last game · **Metrik:** macro-F1 · **Submisi terbaik:** `d11_lbopt`, public LB **0.88891** · **Private LB:** (diisi setelah pengumuman)
 
 ## 1. Ringkasan
 
@@ -11,9 +9,11 @@ Tugasnya mengklasifikasikan foto paket e-commerce menjadi tiga kelas: **Aman**, 
 Temuan inti kami: **label test mengikuti konvensi per sumber data, dan konvensi itu tidak selalu sama dengan label train.** Sumber data bisa dikenali dari ukuran gambarnya.
 
 Contoh paling jelas adalah sumber 416×416 (kotak di konveyor, sintetis):
+
 - 136 baris test adalah salinan piksel dari gambar train berlabel Rusak;
 - LB membuktikan baris test tersebut Aman (+0.032 saat diubah);
-- analisis piksel menunjukkan salinan train itu adalah gambar yang sama dengan **tempelan kerusakan sintetis**, sedangkan baris test adalah gambar aslinya (bagian 3.4).
+
+- analisis piksel menunjukkan latar salinan train itu identik dengan gambar test; yang berbeda **hanya area kotaknya** (kotak di-render ulang dengan posisi/rotasi lain). Jadi label Rusak di sana adalah konvensi pembuat data sintetis, bukan kerusakan yang terlihat (bagian 3.4).
 
 Karena itu kami tidak memakai CV di label train sebagai patokan. Patokannya adalah **probe LB berpasangan** dan **regresi atas semua skor LB**.
 
@@ -33,26 +33,32 @@ Karena itu kami tidak memakai CV di label train sebagai patokan. Patokannya adal
 
 - **Komposisi train dan test sangat berbeda per sumber.** Contoh: 512×512 ada 2.492 di train tetapi hanya 45 di test; 224×224 ada 253 di train tetapi 520 di test. Artinya prior kelas per sumber di test tidak bisa diambil dari train.
 - **Duplikat lintas split.** 1.129 baris test punya salinan piksel di train (NCC dihedral ≥ 0.95), dan 253 di antaranya identik byte.
+
 - **Noise label.** Di dalam train, 169 dari 4.401 pasangan salinan berlabel berbeda.
 - **Augmentasi dari panitia.** Kelas Rusak di 416×416 rata-rata punya 9,2 gambar per klaster duplikat; kelas Aman hanya 1,9.
 
 ## 3. Metodologi
 
 ### 3.1 Validasi
+
 - StratifiedGroupKFold (5 fold) di atas klaster near-duplicate (DINOv2 max-over-rotasi/flip + MD5), supaya tidak ada salinan yang bocor ke fold validasi.
 - Hasilnya, CV di label train tetap terlalu optimistis 0.03–0.10 terhadap LB (tabel di bagian 4). Karena itu setiap keputusan penting diuji dengan probe LB yang **mengubah satu kelompok saja** dari base yang sudah punya skor.
   - Ekspektasinya dihitung dengan `work/lbdelta.py`, yang mengintegrasikan jumlah baris public ~ Binomial(n, 0.3).
   - Aturan KEEP/DISCARD didaftarkan sebelum submit (`work/results.tsv`).
 
 ### 3.2 Model
+
 - **Menara visi beku + MLP head.** Embedding dari 11 menara (PE-Core, SigLIP, EVA02, CLIP, DINOv2/v3, dan lain-lain), lalu MLP/LogReg dievaluasi group-OOF.
 - **Head domain-adapted** (`da_h2`): dilatih pada train ditambah baris test yang terkunci twin.
+
 - **DINOv3-7B** (6,7 miliar parameter): fine-tune 6 blok teratas + head di A100 (bf16 untuk blok beku). Inilah komponen terkuat di LB.
 - **Blend d08:** 0,35·7B + 0,30·r_cat11 + 0,20·ens_pe + 0,15·da_h2.
 
 ### 3.3 Aturan sumber dan kunci salinan (semua terbukti di LB)
+
 - **416×416 → Aman:** +0.032 dibanding base.
 - **675×900 tanpa salinan → Aman:** mengubahnya ke Rusak memberi −0.043.
+
 - **Mengikuti salinan piksel di train untuk sumber lain** (twin lock + head domain-adapted): +0.015 dibanding model polos (0.845 vs 0.830).
 - **Batas aturan ini:** 679×900 *tidak* ikut aturan 675. Probe tim d23 (14 baris 679 diubah ke Aman) memberi −0.0048.
 
@@ -65,11 +71,15 @@ Setiap baris test kami sejajarkan dengan salinannya di train (pada orientasi dih
 | Salinan 416 berlabel Aman | 2,9 |
 | Sumber lain | 2–9 |
 
-Interpretasinya: label "Rusak" pada salinan train 416 berasal dari tempelan kerusakan sintetis, sedangkan gambar test adalah versi aslinya yang bersih. Di sumber lain, pasangan berlabel bertentangan tidak memiliki tanda ini (640: 4,8%; lainnya: 0%), jadi konflik di sana adalah noise label biasa. Notebook bagian 11 memuat gambar contohnya.
+Interpretasinya: salinan train 416 berlabel "Rusak" adalah gambar yang sama dengan kotak yang **di-render ulang** (posisi/rotasi berubah) di atas latar yang identik, sedangkan baris test adalah versi "Aman"-nya. Di sumber lain, pasangan berlabel bertentangan tidak memiliki tanda ini (640: 4,8%; lainnya: 0%), jadi konflik di sana adalah noise label biasa.
+
+![Contoh 416: baris test (Aman menurut LB), salinan train berlabel Rusak, dan peta selisih terlokalisasi](fig_416_overlay.png)
 
 ### 3.5 Belajar dari leaderboard: regresi LB → `d11_lbopt`
+
 - **Model regresinya:** setiap submisi yang sudah punya skor dianggap "base + baris yang diubah". Baris dengan pola label yang sama di semua submisi membentuk satu kelompok, lalu selisih LB dijelaskan sebagai jumlah gain per kelompok.
 - **Prior:** ridge; prior ketat hanya untuk kelompok yang sudah terbukti (675×900).
+
 - **Hasil:** d11 = d08 + 17 baris yang posterior-nya memilih label lain. Ekspektasi 0.8893, hasil **0.88891**.
 
 ### 3.6 Eksperimen yang ditolak (bukti negatif)
@@ -96,14 +106,16 @@ Ada batas yang terukur: di 1.413 baris test "bebas", semua anggota blend hampir 
 Ekspektasi dari probe LB berpasangan pada base yang sudah punya skor meleset ≤ 0.006 (d06_cur_A −0.004, d06_F1_AR25 −0.0055, d11 −0.0004). Pengecualiannya adalah probe sumber p416/p675: keduanya sengaja dibuat untuk *mengukur* proporsi label yang belum diketahui, sehingga ekspektasinya hanya titik tengah. Sebaliknya, ekspektasi dari CV label train meleset 0.03–0.10.
 
 ## 5. Kesimpulan dan pekerjaan lanjutan
+
 - **Kunci di dataset ini:** konvensi label per sumber dan duplikat lintas split, bukan arsitektur model.
 - **Untuk mendekati skor teratas (±0.98)** diperlukan konvensi kelompok lain seperti 416, di wilayah tempat semua model sepakat. Cara menemukannya adalah probe LB per kelompok, karena model yang lebih besar tidak membantu.
+
 - **Reproduksi:**
-  - `notebook/Datascape_Pipeline.ipynb` memuat assert md5 untuk d11;
+  - `last_game_Notebook_Datascape.ipynb` (= `notebook/Datascape_Pipeline.ipynb`) memuat assert md5 untuk d11;
   - `python work/make_d11.py` membangun ulang d11;
   - `work/lb_regress.py` menjalankan regresi LB.
 
 ## Deklarasi AI
-Kode, analisis, dan draft write-up ini disusun dengan bantuan asisten AI **Claude (Anthropic)**, dipakai untuk menulis kode, brainstorming, dan penyusunan dokumen.
+Kode, analisis, dan write-up ini disusun dengan bantuan asisten AI **Claude (Anthropic)**, dipakai untuk menulis kode, brainstorming, dan penyusunan dokumen.
 
 **Tidak ada LLM/VLM yang dipakai untuk inference/prediksi.** Semua prediksi test dibuat secara programatik oleh model visi tanpa teks (DINOv3, PE-Core, SigLIP, EVA02, dan lain-lain) beserta aturan yang dihitung otomatis. Tidak ada label test yang ditentukan manual.

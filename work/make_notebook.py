@@ -29,10 +29,18 @@ Pixel-copy scores are recomputed when `RECOMPUTE_PIX = True` (~90 s).
 8. Iterative pseudo-labelling (test-domain held-out check)
 9. Experiment ranking and expectation vs reality
 10. Learning from the leaderboard → `d11_lbopt` (team best 0.88891)
-11. Why the 416 rule works: synthetic damage overlays
+11. Why the 416 rule works: re-rendered boxes in the train copies
 12. Expected vs actual LB for every scored submission
 
-AI-use declaration: code was written with an AI coding assistant (Claude); no VLM/LLM inference is used on the data. Vision towers are used as frozen image encoders only (no text, no zero-shot), as allowed by the organiser."""),
+**AI declaration / Deklarasi AI.**
+- Kode, analisis, dan dokumentasi disusun dengan bantuan asisten AI **Claude (Anthropic)** untuk penulisan kode, brainstorming, dan debugging.
+- **Tidak ada LLM/VLM yang dipakai untuk inference/prediksi.** Prediksi test dihasilkan secara programatik oleh model visi tanpa teks:
+  - menara visi (DINOv3, PE-Core, SigLIP, EVA02, CLIP image tower) sebagai encoder citra;
+  - DINOv3-7B yang di-fine-tune sebagai classifier;
+  - aturan yang dihitung otomatis.
+- Tidak ada label test yang ditentukan manual. Hanya data panitia yang dipakai.
+
+*(EN) Code and docs were written with the AI assistant Claude (Anthropic). No LLM/VLM inference is used for predictions; only text-free vision models, fine-tuned or frozen, plus programmatic rules. No manual labels; organiser data only.*"""),
 code("""import os, json, hashlib, time, numpy as np, pandas as pd
 from pathlib import Path
 from sklearn.metrics import f1_score, confusion_matrix
@@ -277,13 +285,13 @@ d11 = pd.read_csv(SUBS / 'd11_lbopt.csv'); d08 = pd.read_csv(SUBS / 'd08_grand_c
 m = d11.merge(d08, on='filename', suffixes=('_d11', '_d08')); ch = m[m.label_d11 != m.label_d08]
 print(len(ch), 'rows differ from d08'); ch.groupby(['label_d08', 'label_d11']).size()""")]
 
-cells += [md("""## 11. Why the 416×416 rule works: synthetic damage overlays in train
+cells += [md("""## 11. Why the 416×416 rule works: re-rendered boxes in the train copies
 191 of the 193 test 416×416 rows have a pixel copy in train; 136 of those copies are labelled Rusak, yet the LB proves the test rows Aman (+0.032). The procedure:
 1. Align each test row with its train copy (best dihedral view).
 2. Compare them at 256 px.
 3. Measure how **localised** the difference is: the max/median of the box-filtered |diff|.
 
-The 416 Rusak copies differ from their test twin by one compact blob, i.e. a pasted damage patch; the test row is the clean original. Outside 416, conflicting copies show no blob (label noise, not edits), so the rule does not transfer."""),
+The 416 Rusak copies differ from their test twin only inside the box: the box is re-rendered with another pose, on a pixel-identical background. The test row is the "Aman" version. Outside 416, conflicting copies show no such blob (plain label noise), so the rule does not transfer."""),
 code("""import matplotlib.pyplot as plt
 from scipy.ndimage import uniform_filter
 from PIL import Image
