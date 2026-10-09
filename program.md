@@ -1,3 +1,10 @@
+## >>> NEXT ACTION 10-10 (state at 10-09 01:40 UTC) <<<
+- **Team best:** `d11_lbopt`, public 0.88891 (`work/make_d11.py`; d08 + 17 LB-regression rows). The regression with d11 added proposes 0 further edits.
+- **Finals:** the user must EXPLICITLY select `d11_lbopt` + `d08_grand_consensus_champion` on Kaggle before 10-10 16:59 UTC. Don't rely on auto-select: the teammate's files share the team.
+- **Slots:** hold them unless a candidate is clearly better than d11 (the user's rule). 7B variants move at most 29 free rows (README §0), so they can't qualify.
+- **Session 15** (cleaned 7B folds) failed its gate and was stopped. **Session 16** (F2 recipe, cosine 4 epochs, fold 0) answers the user's "train to convergence" question only. Judge it on the LAST epoch's raw val vs F2 0.3266 / 0.8867. Session 17 is cancelled.
+- d09_* are retracted (the teammate's d23 lost 0.0048 on a subset).
+
 ## >>> NEXT ACTION 10-06 00:00 UTC (survives context reset) <<<
 SUBMIT: d06_cur_A, d06_F1_AR25
 (The cron submits exactly the names on the SUBMIT line, at most 2 and only if each is registered in submissions/ledger.csv. Slot 2 is added here ONLY after `subreg add`.)
