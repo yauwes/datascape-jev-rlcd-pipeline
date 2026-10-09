@@ -15,50 +15,22 @@
 - Expected 0.8893; got +0.0010 vs d08. That is under the pre-registered +0.0015 KEEP bar, so it counts as noise-level. The sign of the method is confirmed.
 - The leader on 10-09 is at 0.98509, a gap of about 0.10 macro-F1 (hundreds of rows).
 
-**In progress (10-09, slot 2 candidate): session 15 on the Colab A100-80GB.**
-- **What runs:** DINOv3-7B folds 1–4 with the F2 recipe plus LB-backed train cleaning.
-  - `work/s15/pack/drop15.csv` drops 290 images: the 211 416×416 Rusak images (their test copies are Aman on the LB), and 85 minority labels in conflicting pixel-copy clusters.
-  - Generator: `colab/make_nb15.py`. Runner: `work/s15/pack/run15.py`.
-  - Outputs go to `asuudane/datascape-colab-out15`; the Drive mount failed this run.
-- **Candidate:** `python work/make_d12.py <dir with pred_F2c_f1..4.npz>` builds `d12_7b5`.
-  - It is d11 with d08's blend recomputed on the 5-fold 7B average.
-  - Only "free" rows may change: no train copy, not 416/675/VN, and not one of d11's edits.
-  - Self-check: with F2 copies as input it reproduces d11 exactly.
-- **Submit rule:** submit only if the 4 new folds validate like F2 (fold-0 valF1 0.8867) and the changed rows don't contradict any LB-backed group. Nothing guarantees a gain; the expected effect is small (variance reduction).
+**Session 15 (10-09): DINOv3-7B fold 1 with LB-backed cleaning. Gate FAILED, so d12 was cancelled and the session stopped after fold 1 (user OK).**
 
-**The 10-08 candidates are retracted. Do not upload `d09_vnA`, `d09_otherR` or `d09_combo`.**
-- The teammate's `d23_precision_consensus` (branch `farhan/4pillars-and-d23`, commit `4d763e4`) is a subset of `d09_combo`. It contains:
-  - 14 of vnA's 24 VN rows, Rusak → Aman;
-  - 7 of otherR's 20 rows, Aman → Rusak;
-  - both copy fixes, Aman → Rusak.
-- It scored **0.88309 (−0.0048 vs d08)**. Using `lbdelta` from d08 to d23, that score needs most of the 14 VN rows to be truly Rusak **and** most of the 9 Aman → Rusak rows to be truly Aman. One block being all wrong is not enough to reach 0.8831.
-- d10 (23 of the 24 vnA rows R → A, −0.0033) and d12 (19 of them, −0.0114) point the same way.
+| Fold-1 val rows (cleaned) | macro-F1 | F1 Rusak | Predicted Rusak (true 0.244) | Acc 640 | Acc fam251 | h2 on same rows |
+|---|---|---|---|---|---|---|
+| F2c fold 1 (session 15, −290 rows) | **0.846** | 0.688 | 0.145 | 0.737 | 0.818 | 0.906 |
+| F2 fold 0 (session 14, all rows) | **0.882** | 0.762 | 0.180 | 0.798 | 0.844 | 0.907 |
 
-**What this overturns from the 10-08 checkpoint:**
-- "679×900 and 900×67x are the same Aman family as 675×900" is false. Only 675×900 rows without a train copy are LB-proven Aman (`d05_p675_R`, −0.043). d08's 7B-driven Rusak calls on 679×900 look right.
-- F1 trained with the 416/675 test rows pseudo-labelled Aman, so it gives P(Rusak) ≈ 0.04 on those 14 rows: it carried the 675 convention onto look-alike sizes. F1 agreement is not evidence on VN look-alikes.
-- The "no-copy other, mean(F1, F2) P(R) ≥ 0.25" Aman → Rusak tier is not Rusak.
-- d08 also looks right on the 2 rows whose exact train copy (ncc 1.0) says Rusak; they sat in d23's losing block.
+- The h2 heads score the same on both folds, so fold 1 is not harder.
+- Dropping the 211 416×416 Rusak images shifted the 7B towards Aman. It then under-calls Rusak everywhere.
+- **Lesson:** don't remove a whole class block from training without balancing; a prior shift costs more than the label noise it removes.
+- The fold-1 predictions are kept in `work/s15/out15/` (report: `work/s15/fold_report.py`).
 
-**Research 10-09 (no slot spent yet).**
-1. **LB regression refit** (`work/lb_regress.py`, 11 scored subs, Aman prior only on 675×900). No row group outside d08 has P(gain > 0) ≥ 0.7, so d08 is locally optimal against every scored submission.
-2. **Per source** (test vs train, `meta_sorted` order):
-
-   | Source | Test rows | d08 Rusak | Train Rusak | Test rows with a pixel/SSCD copy | Reading |
-   |---|---|---|---|---|---|
-   | 640×640 | 347 | 0.775 | 0.469 (0.385 per near-dup cluster) | 255: copies 174 R / 81 A | no-copy 92, d08 87 R at blended P(R) ≥ 0.76 |
-   | h 250–270 landscape thumbnails ("fam251") | 393 | 0.735 | 0.370 | 169: copies 126 R / 43 A | no-copy 224, d08 70% R |
-   | 679×900 | 30 | 0.733 | 0.725 | 10: all Aman copies | d23 says d08's Rusak calls are right |
-   | 224×224, 736×736, large photos | 520 / 55 / ~200 | 0 | ≈ 0 | top-1 neighbours Aman | consistent |
-   | Lainnya | d08 55 | | | | both fine-tunes call the same 52; no other row has P(L) > 0.27 |
-
-   The OOF Rusak share (h2, grouped 5-fold) is 0.37 on 640 and 0.32 on fam251, against 0.95 and 0.70 for d08 on the no-copy test rows. The copies are 68–75% Rusak, and `d06_F1_AR25` gained +0.0034 by adding Rusak there. So the evidence backs d08: probing its 35 least-confident Rusak calls back to Aman has negative EV.
-3. **Copy mechanism** (`dihedral argmax`, scratch analysis):
-   - 1129 test rows have a pixel copy, 253 of them byte-identical.
-   - The dihedral view does **not** predict a label flip. Inside train, 169 of 4401 pixel-copy pairs conflict, at 3–5% for every view.
-   - The LB-proven 416 flip happens with the identity view.
-   - So there is no rule to transfer to 640 or fam251.
-4. **Conclusion.** No file beats d08 on the evidence. Today's slots can only buy information. Default finals: **d08 + d10** (both scored).
+**Running (10-09, from 01:22 UTC): session 16, the user's "train until convergence" request, tested fairly.**
+- Setup: F2's exact recipe and data, fold 0, up to 6 epochs, LR ×0.3 after each non-improving epoch, patience 2, best epoch restored.
+- Generator: `colab/make_nb16.py`.
+- **Pre-registered gate:** use converged training for the other folds only if its valLoss is ≤ F2's − 0.005, or its valF1 is ≥ F2's + 0.005, on identical val rows.
 
 ### 0.1 Expected vs actual public LB (`work/expectation_vs_lb.csv`)
 
