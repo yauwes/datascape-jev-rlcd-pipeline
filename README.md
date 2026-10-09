@@ -27,6 +27,26 @@
 - The "no-copy other, mean(F1, F2) P(R) ≥ 0.25" Aman → Rusak tier is not Rusak.
 - d08 also looks right on the 2 rows whose exact train copy (ncc 1.0) says Rusak; they sat in d23's losing block.
 
+**Research 10-09 (no slot spent yet).**
+1. **LB regression refit** (`work/lb_regress.py`, 11 scored subs, Aman prior only on 675×900). No row group outside d08 has P(gain > 0) ≥ 0.7, so d08 is locally optimal against every scored submission.
+2. **Per source** (test vs train, `meta_sorted` order):
+
+   | Source | Test rows | d08 Rusak | Train Rusak | Test rows with a pixel/SSCD copy | Reading |
+   |---|---|---|---|---|---|
+   | 640×640 | 347 | 0.775 | 0.469 (0.385 per near-dup cluster) | 255: copies 174 R / 81 A | no-copy 92, d08 87 R at blended P(R) ≥ 0.76 |
+   | h 250–270 landscape thumbnails ("fam251") | 393 | 0.735 | 0.370 | 169: copies 126 R / 43 A | no-copy 224, d08 70% R |
+   | 679×900 | 30 | 0.733 | 0.725 | 10: all Aman copies | d23 says d08's Rusak calls are right |
+   | 224×224, 736×736, large photos | 520 / 55 / ~200 | 0 | ≈ 0 | top-1 neighbours Aman | consistent |
+   | Lainnya | d08 55 | | | | both fine-tunes call the same 52; no other row has P(L) > 0.27 |
+
+   The OOF Rusak share (h2, grouped 5-fold) is 0.37 on 640 and 0.32 on fam251, against 0.95 and 0.70 for d08 on the no-copy test rows. The copies are 68–75% Rusak, and `d06_F1_AR25` gained +0.0034 by adding Rusak there. So the evidence backs d08: probing its 35 least-confident Rusak calls back to Aman has negative EV.
+3. **Copy mechanism** (`dihedral argmax`, scratch analysis):
+   - 1129 test rows have a pixel copy, 253 of them byte-identical.
+   - The dihedral view does **not** predict a label flip. Inside train, 169 of 4401 pixel-copy pairs conflict, at 3–5% for every view.
+   - The LB-proven 416 flip happens with the identity view.
+   - So there is no rule to transfer to 640 or fam251.
+4. **Conclusion.** No file beats d08 on the evidence. Today's slots can only buy information. Default finals: **d08 + d10** (both scored).
+
 **Honesty note.** No file here is a 0.98+ file. Train-label CV does not track the LB: d10's "0.983 held-out" scored 0.8846, and d08's "CV 0.957–0.990" scored 0.8879. Only paired LB probes (`work/lbdelta.py`) count.
 
 ---
