@@ -79,7 +79,7 @@ Interpretasinya: label "Rusak" pada salinan train 416 berasal dari tempelan keru
 | Pseudo-label iteratif | +0.002, di bawah ambang |
 | d09 (VN → Aman) | Subset-nya (d23) memberi −0.0048 |
 | Membuang 211 gambar 416-Rusak dari train 7B | valF1 0.846 vs 0.882; model jadi kurang memanggil Rusak (prediksi 14,5% vs 24,4%) |
-| Melatih 7B lebih lama | F2 sudah terbaik di epoch pertama: valLoss 0.3266 → 0.3284, train acc 0.84 → 0.91. Hasil uji cosine 4 epoch: (diisi) |
+| Melatih 7B lebih lama | F2 sudah terbaik di epoch pertama: valLoss 0.3266 → 0.3284, train acc 0.84 → 0.91. Uji cosine 4 epoch (sesi 16): val F1 0.889 → 0.892 → 0.886 sementara train acc naik ke 0.970, jadi tidak ada perbaikan berarti |
 
 Ada batas yang terukur: di 1.413 baris test "bebas", semua anggota blend hampir selalu sepakat. Bahkan 7B sendirian hanya mengubah 29 baris. Artinya sisa error bersifat sistematis dan tidak bisa diperbaiki dengan menambah epoch atau fold.
 

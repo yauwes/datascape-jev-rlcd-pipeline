@@ -27,7 +27,17 @@
 - **Lesson:** don't remove a whole class block from training without balancing; a prior shift costs more than the label noise it removes.
 - The fold-1 predictions are kept in `work/s15/out15/` (report: `work/s15/fold_report.py`).
 
-**Running (10-09, from 01:22 UTC): session 16, the user's "train until convergence" request, tested fairly.**
+**Session 16 (10-09, done 02:46 UTC; runtime released): the user's "train until convergence" request.**
+- **Setup:** F2's exact recipe and data, fold 0, 4 epochs with a cosine-annealed LR.
+- **Raw val F1 on F2's rows:**
+
+  | | F2 (1 epoch) | ep1 | ep2 | ep3 | ep4 |
+  |---|---|---|---|---|---|
+  | Val F1 | 0.8867 | 0.8889 | 0.892 | 0.8861 | in `asuudane/datascape-colab-out16` `gate16.json` |
+
+- Train acc climbs from 0.84 to **0.970**. More epochs memorise the train labels and do not improve validation beyond ±0.005, so this cannot reach 0.99. Session 17 was cancelled before this outcome.
+
+**Earlier plan text (kept for the record):**
 - Setup: F2's exact recipe and data, fold 0, up to 6 epochs, LR ×0.3 after each non-improving epoch, patience 2, best epoch restored.
 - Generator: `colab/make_nb16.py`.
 - **Pre-registered gate:** use converged training for the other folds only if its valLoss is ≤ F2's − 0.005, or its valF1 is ≥ F2's + 0.005, on identical val rows.
