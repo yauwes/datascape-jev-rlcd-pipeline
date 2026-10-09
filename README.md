@@ -55,6 +55,30 @@
 - A large gain needs a new group-level convention, like 416→Aman (+0.032), found by LB probes on regions where the models agree.
 - `work/make_d13.py NAME files...` rebuilds d11 with any 7B prediction set. Self-check: F2 alone reproduces d11.
 
+**Teammate files d21 / d22 / d24 (branch `farhan/4pillars-and-d23`, unscored): do not submit.** Against d11 they change 323–415 rows. Most of those rows move in directions the LB has already refuted:
+
+| File | 416×416 → Rusak | 675×900 → Rusak | VN-scan Rusak → Aman |
+|---|---|---|---|
+| d21 | 145 | 107 | 19 |
+| d22 | 189 | 137 | 15 |
+| d24 | 181 | 76 | 22 |
+
+- 416 is LB-proven Aman (+0.032).
+- 675×900 to Rusak gave −0.043.
+- VN R→A gave −0.0048 (d23).
+- No remaining block of 20 or more rows lies in an LB-supported direction.
+
+**Rules check (Kaggle Rules tab, 10-09).**
+- "Hanya boleh menggunakan data yang disediakan panitia": external or original-source datasets are not allowed.
+- "dilarang keras melakukan prediksi/inference manual", plus Foundational Rule 4b (no hand labelling of test records).
+- Any edit must therefore come from a programmatic rule.
+- Deliverable names on the Rules tab are `NamaTim_Notebook.ipynb` / `NamaTim_Writeup.pdf`; the guidebook adds `_Datascape`. Follow the upload link's instruction.
+
+**Checked 10-09 for hidden systematic error; none actionable:**
+- **Twins:** 77% of test rows have an SSCD twin at s ≥ 0.55, and d11 follows the pure twin vote except on 68 rows, 40 of them the LB-proven 416 rows.
+- **Injected noise:** 29.5% of train rows are noisy, 88% of those Aman. In test, 72.7% of 224×224 rows are noisy, but a group montage shows intact stock boxes.
+- **Lainnya:** semantic kNN over 3 towers finds no Aman/Rusak row with ≥ 30% Lainnya neighbours.
+
 ### 0.1 Expected vs actual public LB (`work/expectation_vs_lb.csv`)
 
 The pattern is consistent. Expected LB from train-label CV/OOF misses by −0.03 to −0.10. Expected LB from paired probes (`work/lbdelta.py`) on a scored base misses by ≤ 0.006: `d06_cur_A` −0.004, `d06_F1_AR25` −0.0055, `d11_lbopt` −0.0004. The two source probes (p416, p675) were deliberately unknown-q.
