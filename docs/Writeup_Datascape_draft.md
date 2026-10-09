@@ -109,6 +109,7 @@ Untuk mendeteksi jalan pintas serupa, kami membandingkan prediksi model dengan v
 | d09 (VN → Aman) | Subset-nya (d23) memberi −0.0048 |
 | Membuang 211 gambar 416-Rusak dari train 7B | valF1 0.846 vs 0.882; model jadi kurang memanggil Rusak (prediksi 14,5% vs 24,4%) |
 | 640 tanpa salinan → Aman (87 baris, mirip konvensi 675) | LB −0.032 (0.85698): semua baris itu memang Rusak. Ini memvalidasi uji "model vs voting kNN": di 675 keduanya tidak sepakat (konvensi berbeda), sedangkan di 640 keduanya sepakat Rusak |
+| Cleaning konsensus 11 backbone (DINOv2/v3, PE, SigLIP, EVA02, CLIP, AIMv2, InternViT, ConvNeXt-B/L, EVA02-B) | Aturan ketat (≥10/11, p ≥ 0,9) mengoreksi 43 label train; aturan longgar (≥8/11, p ≥ 0,7) 602 label. Prediksi test hanya berubah ≤22 baris. Head yang dibersihkan justru makin mirip submisi final, jadi d11 sudah mencerminkan konsensus bersih |
 | Melatih 7B lebih lama | F2 sudah terbaik di epoch pertama: valLoss 0.3266 → 0.3284, train acc 0.84 → 0.91. Uji cosine 4 epoch (sesi 16): val F1 0.889 → 0.892 → 0.886 untuk epoch 1–3 (epoch 4 ada di `gate16.json`, dataset `asuudane/datascape-colab-out16`), sementara train acc naik ke 0.970, jadi tidak ada perbaikan berarti |
 
 Ada batas yang terukur: di 1.413 baris test "bebas", semua anggota blend hampir selalu sepakat. Bahkan 7B sendirian hanya mengubah 29 baris. Artinya sisa error bersifat sistematis dan tidak bisa diperbaiki dengan menambah epoch atau fold.

@@ -79,6 +79,13 @@
 - **Injected noise:** 29.5% of train rows are noisy, 88% of those Aman. In test, 72.7% of 224×224 rows are noisy, but a group montage shows intact stock boxes.
 - **Lainnya:** semantic kNN over 3 towers finds no Aman/Rusak row with ≥ 30% Lainnya neighbours.
 
+**10-09 (evening, offline only; the user asked not to submit): multi-backbone consensus cleaning (`python work/consensus_clean.py [K T]`).**
+- Jurors: 11 group-OOF models (8 frozen towers + ConvNeXt-B/L + EVA02-B fine-tunes).
+- A train label is corrected when at least K jurors agree on another class with mean p ≥ T.
+- Strict (10/11, 0.9): 43 labels corrected, at most 22 d11 test rows move. Loose (8/11, 0.7): 602 labels corrected, at most 19 rows move.
+- The cleaned head moves *toward* d11 (free-row disagreements fall from 75 to 40). So d11 already reflects the clean consensus, and the ceiling is about +0.006.
+- Closed. No GPU retrain is warranted.
+
 **10-09 slot 2: long-shot probe `d14_640A` (user OK) scored 0.85698 (−0.032 vs d11), so it is DISCARDED.**
 - What it did: d11 with all 87 640×640 test rows that have no train copy flipped Rusak → Aman (`python work/make_d14.py`).
 - The hypothesis was a 675-like convention, i.e. new images of a family that train labels Rusak.
