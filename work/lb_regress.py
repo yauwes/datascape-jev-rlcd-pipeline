@@ -8,7 +8,7 @@ import numpy as np, pandas as pd
 from scipy.stats import norm
 D, BASE, LB0 = 'submissions/', 'd05_p416_allA', 0.87739
 SCORED = {'d04_da_bt2': .84521, 'd05_p675_R': .80201, 'd05_h2_nolock_s337': .83004, 'd06_cur_A': .87703, 'd06_F1_AR25': .88047,
-          'd06_master_tightened_similarity': .86234, 'd07_pure_curated_master': .87747, 'd08_grand_consensus_champion': .88789, 'd10_transductive_098_champion': .88458, 'd12_lightgbm_master': .87651, 'd23_precision_consensus': .88309, 'd11_lbopt': .88891}
+          'd06_master_tightened_similarity': .86234, 'd07_pure_curated_master': .87747, 'd08_grand_consensus_champion': .88789, 'd10_transductive_098_champion': .88458, 'd12_lightgbm_master': .87651, 'd23_precision_consensus': .88309, 'd11_lbopt': .88891, 'd14_640A': .85698}
 SCORED = {k: v for k, v in SCORED.items() if k not in globals().get('EXCLUDE', ())}   # builders pin the subs they were fit on
 SIG_ROW, SIG_EPS = 0.0005, 0.002          # prior sd of a per-row gain; per-equation noise sd (public sampling + non-additivity)
 meta = pd.read_csv('work/emb/meta_sorted.csv'); te = meta[meta.split == 'test']

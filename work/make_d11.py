@@ -2,7 +2,7 @@
 # (work/lb_regress.py, 675x900-only Aman prior) prefers another label by >= 1e-4 expected gain per row. ~17 rows, posterior sum ~ +0.003;
 # expect less (winner's curse). Usage (Datascape/ or repo root): python work/make_d11.py
 import numpy as np, pandas as pd
-EXCLUDE = ('d11_lbopt',)   # fit on the 11 subs scored before d11
+EXCLUDE = ('d11_lbopt', 'd14_640A')   # fit on the 11 subs scored before d11
 exec(open('work/lb_regress.py').read().split("print(f'{len(SCORED)} scored subs")[0])   # fit only: base, lab, key, vars_, v
 d08 = lab['d08_grand_consensus_champion']; MIN_GAIN = 1e-4
 gain = lambda r, l: 0.0 if l == base[r] else (v[vars_.index((key[r], l))] if (key[r], l) in vars_ else -np.inf)

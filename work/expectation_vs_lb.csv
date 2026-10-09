@@ -25,3 +25,4 @@ date,sub,cv_or_oof,expected_lb,public_lb,gap
 2026-10-08,d10_transductive_098_champion,0.983,0.981,0.88458,-0.0964
 2026-10-08,d23_precision_consensus,,,0.88309,
 2026-10-09,d11_lbopt,,0.8893,0.88891,-0.0004
+2026-10-09,d14_640A,,0.865,0.85698,-0.008

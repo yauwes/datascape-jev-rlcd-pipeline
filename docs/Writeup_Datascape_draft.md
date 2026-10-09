@@ -75,6 +75,24 @@ Interpretasinya: salinan train 416 berlabel "Rusak" adalah gambar yang sama deng
 
 ![Contoh 416: baris test (Aman menurut LB), salinan train berlabel Rusak, dan peta selisih terlokalisasi](fig_416_overlay.png)
 
+### 3.4b Forensik file: jejak pipeline panitia
+Tabel kuantisasi JPEG tiap file dihash (`work/forensics.py`). Hasilnya menunjukkan tiga encoder:
+
+| Encoder | Kualitas | Isi |
+|---|---|---|
+| `q42ee3e6d` | ±95 | Pipeline noise yang hampir hanya ada di train (6.670 train vs 164 test); 51% gambarnya diberi noise, dominan Aman |
+| `q2b47ef28` | ±75 | Sumber yang di-resize (224/416/640/675/VN) |
+| `qe7ebbc55` | — | 95–97% Lainnya |
+
+Di 416/675/VN, gambar train yang bersih hampir semuanya Rusak, sedangkan Aman-nya melewati pipeline noise. Akibatnya model belajar jalan pintas "bersih = Rusak", padahal seluruh test di sumber itu bersih. Inilah penjelasan mekanistik aturan 416/675.
+
+Untuk mendeteksi jalan pintas serupa, kami membandingkan prediksi model dengan voting kNN atas kembaran SSCD:
+
+| Kelompok | Model: Rusak | kNN: Rusak | Kebenaran |
+|---|---|---|---|
+| 675 tanpa salinan | 95% | 0,14 | Aman (terbukti LB) |
+| 640 tanpa salinan | 95% | 0,77 | Rusak (probe d14) |
+
 ### 3.5 Belajar dari leaderboard: regresi LB → `d11_lbopt`
 
 - **Model regresinya:** setiap submisi yang sudah punya skor dianggap "base + baris yang diubah". Baris dengan pola label yang sama di semua submisi membentuk satu kelompok, lalu selisih LB dijelaskan sebagai jumlah gain per kelompok.
@@ -83,12 +101,14 @@ Interpretasinya: salinan train 416 berlabel "Rusak" adalah gambar yang sama deng
 - **Hasil:** d11 = d08 + 17 baris yang posterior-nya memilih label lain. Ekspektasi 0.8893, hasil **0.88891**.
 
 ### 3.6 Eksperimen yang ditolak (bukti negatif)
+
 | Ide | Alasan ditolak |
 |---|---|
 | Relabel dengan cleanlab | LB −0.019 |
 | Pseudo-label iteratif | +0.002, di bawah ambang |
 | d09 (VN → Aman) | Subset-nya (d23) memberi −0.0048 |
 | Membuang 211 gambar 416-Rusak dari train 7B | valF1 0.846 vs 0.882; model jadi kurang memanggil Rusak (prediksi 14,5% vs 24,4%) |
+| 640 tanpa salinan → Aman (87 baris, mirip konvensi 675) | LB −0.032 (0.85698): semua baris itu memang Rusak. Ini memvalidasi uji "model vs voting kNN": di 675 keduanya tidak sepakat (konvensi berbeda), sedangkan di 640 keduanya sepakat Rusak |
 | Melatih 7B lebih lama | F2 sudah terbaik di epoch pertama: valLoss 0.3266 → 0.3284, train acc 0.84 → 0.91. Uji cosine 4 epoch (sesi 16): val F1 0.889 → 0.892 → 0.886 untuk epoch 1–3 (epoch 4 ada di `gate16.json`, dataset `asuudane/datascape-colab-out16`), sementara train acc naik ke 0.970, jadi tidak ada perbaikan berarti |
 
 Ada batas yang terukur: di 1.413 baris test "bebas", semua anggota blend hampir selalu sepakat. Bahkan 7B sendirian hanya mengubah 29 baris. Artinya sisa error bersifat sistematis dan tidak bisa diperbaiki dengan menambah epoch atau fold.
@@ -102,6 +122,7 @@ Ada batas yang terukur: di 1.413 baris test "bebas", semua anggota blend hampir 
 | d08_grand_consensus (7B) | 0.957 | 0.915 | 0.88789 |
 | d10_transductive | 0.983 | 0.981 | 0.88458 |
 | **d11_lbopt (final)** | — | 0.8893 | **0.88891** |
+| d14_640A (probe 640) | — | 0.8650 | 0.85698 |
 
 Ekspektasi dari probe LB berpasangan pada base yang sudah punya skor meleset ≤ 0.006 (d06_cur_A −0.004, d06_F1_AR25 −0.0055, d11 −0.0004). Pengecualiannya adalah probe sumber p416/p675: keduanya sengaja dibuat untuk *mengukur* proporsi label yang belum diketahui, sehingga ekspektasinya hanya titik tengah. Sebaliknya, ekspektasi dari CV label train meleset 0.03–0.10.
 

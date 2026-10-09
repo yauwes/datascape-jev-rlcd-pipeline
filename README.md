@@ -79,6 +79,13 @@
 - **Injected noise:** 29.5% of train rows are noisy, 88% of those Aman. In test, 72.7% of 224×224 rows are noisy, but a group montage shows intact stock boxes.
 - **Lainnya:** semantic kNN over 3 towers finds no Aman/Rusak row with ≥ 30% Lainnya neighbours.
 
+**10-09 slot 2: long-shot probe `d14_640A` (user OK) scored 0.85698 (−0.032 vs d11), so it is DISCARDED.**
+- What it did: d11 with all 87 640×640 test rows that have no train copy flipped Rusak → Aman (`python work/make_d14.py`).
+- The hypothesis was a 675-like convention, i.e. new images of a family that train labels Rusak.
+- The score lands at the "all truly Rusak" end of the `lbdelta` grid (expected 0.912 if all Aman, 0.858 if all Rusak). So d11's 640 calls are right.
+- This validates the shortcut detector below: models and kNN both said Rusak.
+- Finals are unchanged: d11 + d08.
+
 **10-09 (afternoon): search for a 0.9+ lever. None found, no slot spent.** (`work/forensics.py` → `work/forensics.csv`, plus analysis in `work/results.tsv`)
 
 1. **JPEG forensics identify the organiser's pipelines:**

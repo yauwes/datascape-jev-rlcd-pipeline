@@ -12,7 +12,8 @@ def add(name, csv, strategy, oof, exp, lo, hi):
     s = pd.read_csv(csv); ss = pd.read_csv('datascape/sample_submission.csv')
     assert list(s.columns) == ['filename', 'label'] and len(s) == len(ss) and set(s.filename) == set(ss.filename)
     assert set(s.label) <= {'Aman', 'Rusak', 'Lainnya'}
-    dst = f'submissions/{name}.csv'; shutil.copy(csv, dst)
+    dst = f'submissions/{name}.csv'
+    if os.path.abspath(csv) != os.path.abspath(dst): shutil.copy(csv, dst)   # builders may already write to submissions/
     mix = json.dumps(s.label.value_counts(normalize=True).round(3).to_dict())
     row = dict(name=name, created_utc=datetime.datetime.utcnow().isoformat(timespec='minutes'), csv=dst, strategy=strategy, oof_macro_f1=float(oof),
                expected_lb=float(exp), exp_lo=float(lo), exp_hi=float(hi), pred_mix=mix)

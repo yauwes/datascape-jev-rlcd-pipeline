@@ -2,6 +2,7 @@
 - **Team best:** `d11_lbopt`, public 0.88891 (`work/make_d11.py`; d08 + 17 LB-regression rows). The regression with d11 added proposes 0 further edits.
 - **Finals: SELECTED on Kaggle 10-09 ~05:05 UTC (2/2): `d11_lbopt` + `d08_grand_consensus_champion`, verified on the Submissions page.** Any team member can change this until 10-10 16:59 UTC, so tell Farhan.
 - **Deliverables ready:** `deliverables/last_game_Notebook_Datascape.ipynb` (executed, 0 errors) and `deliverables/last_game_Writeup_Datascape.pdf` in the repo. Fill in the private score after the final leaderboard, then re-render with headless Chrome from `deliverables/writeup.html`.
+- **10-09 slot 2 (user OK):** long-shot `d14_640A` (87 no-copy 640 rows R→A) scored 0.85698 (−0.032), so DISCARD: 640 no-copy rows are Rusak. 10-09 used 2/3 slots.
 - **Slots:** hold them unless a candidate is clearly better than d11 (the user's rule). 7B variants move at most 29 free rows (README §0), so they can't qualify.
 - **Session 15** (cleaned 7B folds) failed its gate and was stopped. **Session 16** (F2 recipe, cosine 4 epochs, fold 0) answers the user's "train to convergence" question only. Judge it on the LAST epoch's raw val vs F2 0.3266 / 0.8867. Session 17 is cancelled.
 - d09_* are retracted (the teammate's d23 lost 0.0048 on a subset).
