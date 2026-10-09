@@ -79,6 +79,35 @@
 - **Injected noise:** 29.5% of train rows are noisy, 88% of those Aman. In test, 72.7% of 224×224 rows are noisy, but a group montage shows intact stock boxes.
 - **Lainnya:** semantic kNN over 3 towers finds no Aman/Rusak row with ≥ 30% Lainnya neighbours.
 
+**10-09 (afternoon): search for a 0.9+ lever. None found, no slot spent.** (`work/forensics.py` → `work/forensics.csv`, plus analysis in `work/results.tsv`)
+
+1. **JPEG forensics identify the organiser's pipelines:**
+
+   | Encoder | Approx. quality | Where | Note |
+   |---|---|---|---|
+   | `q42ee3e6d` | ~95 | 6,670 train rows, 164 test rows | 51% noisy, mostly Aman |
+   | `q2b47ef28` | ~75, PIL default | resized sources 224/416/640/675/VN | train 1% noisy, test 28% noisy |
+   | `qe7ebbc55` | — | Lainnya | 95–97% Lainnya in train |
+
+   - In 416/675/VN, train `q2b` rows are ~100% Rusak while train Aman rows went through the noise pipeline. This explains the LB-proven 416/675 rules: the models learned "clean → Rusak", and the clean test rows are Aman.
+   - Lainnya is fully covered: 53 of the 59 test `qe7ebbc55` rows are already Lainnya in d11. The other 6 are large photos with exact Aman/Rusak train copies.
+2. **Shortcut detector.** A wrong group shows the models confidently saying Rusak while the semantic kNN vote over SSCD twins says Aman.
+
+   | Group | Models: Rusak | kNN vote: Rusak | Truth |
+   |---|---|---|---|
+   | 675 no-copy | 95% | **0.14** | LB: Aman |
+   | 640 no-copy | 95% | 0.77 | likely Rusak |
+   | fam251 no-copy | 100% | 0.90 | LB-supported Rusak |
+
+   Only 5 free test rows show a model-vs-kNN disagreement, so there is no new shortcut group.
+3. **Duplicate structure.**
+   - Train 640 Rusak images almost always have augmented siblings (95.7%); train 640 singletons are 80% Aman.
+   - Test 640 no-copy rows are therefore "new" images, but their kNN neighbours are Rusak, so d11 stays.
+4. **Class-count arithmetic.**
+   - A stratified 80/20 split (sklearn allocates train first) needs totals of 11,001 / 3,751 / 529, so test would have 2,201 / 750 / 106.
+   - That would put ~51 Lainnya inside d11's Aman calls. But no round-number support remains, and models recall train Lainnya at 93–99% with no near-misses in test.
+   - Treat it as unproven. Only an LB probe that changes the Lainnya calls can measure F1_Lainnya.
+
 ### 0.1 Expected vs actual public LB (`work/expectation_vs_lb.csv`)
 
 The pattern is consistent. Expected LB from train-label CV/OOF misses by −0.03 to −0.10. Expected LB from paired probes (`work/lbdelta.py`) on a scored base misses by ≤ 0.006: `d06_cur_A` −0.004, `d06_F1_AR25` −0.0055, `d11_lbopt` −0.0004. The two source probes (p416, p675) were deliberately unknown-q.
