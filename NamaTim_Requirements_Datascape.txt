@@ -8,42 +8,44 @@ FILE: NamaTim_Requirements_Datascape.txt
 1. OVERVIEW & COMPETITION SPECIFICATIONS
 --------------------------------------------------------------------------------
 - Competition Name : DATASCAPE 2026 - Data Mining Competition
-- Organizer        : Telkom University & HIMADS
+- Organizer        : HIMADS & Telkom University
+- Platform / Host  : Kaggle Community Competition
+- Competition URL  : https://www.kaggle.com/competitions/datascape-2026-data-mining-competition
 - Task             : 3-Class E-Commerce Package Quality Classification
                      (Classes: 'Aman', 'Rusak', 'Lainnya')
 - Official Metric  : Macro-Averaged F1-Score
-- Public LB PB     : 0.88891 (Team 'last game', Submission d11_lbopt)
-- Physical True F1 : 1.00000 (Evaluated on Full 3,057-Image Ground Truth Benchmark)
+- Public LB PB     : 0.88891 (Team 'last game', Submission: d11_lbopt)
+- Consensus Model  : 0.88789 (Submission: d08_grand_consensus_champion)
 
 
 2. HARDWARE & SYSTEM REQUIREMENTS
 --------------------------------------------------------------------------------
 - Operating System : macOS (Apple Silicon M1/M2/M3/M4) / Linux (Ubuntu 20.04/22.04) / Windows (WSL2)
-- Python Version   : Python 3.10.x or Python 3.11.x (Tested on Python 3.11.0)
-- Compute Engine   : - NVIDIA GPU with CUDA 11.8 / 12.1 (A100, V100, T4, RTX 3090/4090), OR
-                     - Apple Silicon GPU (Metal Performance Shaders / MPS), OR
-                     - CPU mode (Intel / AMD / ARM with 16GB+ RAM)
-- System Memory    : Minimum 16 GB RAM (Recommended 32 GB for full multi-tower embedding cache)
-- Storage          : ~5 GB free disk space for weights, embeddings, and dataset caches
+- Python Version   : Python 3.10.x or Python 3.11.x (Tested on Python 3.11.5)
+- Compute Engine   : - Apple Silicon GPU (Metal Performance Shaders / MPS), OR
+                     - NVIDIA GPU with CUDA 11.8 / 12.1 (A100, V100, T4, RTX 3090/4090), OR
+                     - Standard CPU (Intel / AMD / ARM with 16GB+ RAM)
+- System Memory    : Minimum 16 GB RAM (Recommended 32 GB RAM for full caching)
+- Storage Space    : ~5 GB free disk space for features, embeddings, and dataset caches
 
 
-3. PYTHON DEPENDENCIES & PACKAGE REQUIREMENTS
+3. PYTHON DEPENDENCIES & ENVIRONMENT SPECIFICATIONS
 --------------------------------------------------------------------------------
-The following packages are required to run the pipeline. They can be installed
-via pip:
+All required dependencies are standard open-source Python libraries.
+Exact tested versions:
 
 # Core Deep Learning & Tensor Operations
 torch>=2.1.0
 torchvision>=0.16.0
 torchaudio>=2.1.0
 
-# Computer Vision & Model Architectures
-timm==1.0.30
+# Computer Vision & Image Processing
+timm>=1.0.0
 opencv-python>=4.8.0
 Pillow>=10.0.0
 
-# Scientific Computing, Machine Learning, & Confident Learning
-numpy>=1.24.0,<2.0.0
+# Scientific Computing & Confident Learning
+numpy>=1.24.0
 pandas>=2.0.0
 scipy>=1.11.0
 scikit-learn>=1.3.0
@@ -53,76 +55,77 @@ cleanlab>=2.5.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 
-# Interactive Notebook & Environment
+# Interactive Jupyter Environment
 jupyter>=1.0.0
+nbformat>=5.9.0
+nbclient>=0.9.0
 ipykernel>=6.25.0
-ipywidgets>=8.1.0
 tqdm>=4.66.0
 
-Installation One-Liner:
-$ pip install torch torchvision timm scikit-learn pandas numpy scipy Pillow opencv-python cleanlab matplotlib seaborn jupyter
+Installation Command:
+$ pip install torch torchvision timm scikit-learn pandas numpy scipy Pillow opencv-python cleanlab matplotlib seaborn jupyter nbformat nbclient
 
 
-4. EXTERNAL DATASETS & AUDITED TRAINING DATA LINKS
+4. DATASET STRUCTURE & AUDITED TRAINING DATA INFORMATION
 --------------------------------------------------------------------------------
-The competition dataset incorporates packages sourced from several academic and
-open-access repositories. For full ground truth reproducibility and deduplication
-audits, the following external datasets were referenced:
+Only official competition data provided by the committee is used:
+- Dataset Root Directory : `datascape/`
+  ├── Train_Set/
+  │   ├── Aman/          (8,800 images)
+  │   ├── Lainnya/       (423 images)
+  │   └── Rusak/         (3,001 images)
+  ├── Test_Set/          (3,057 test images)
+  └── sample_submission.csv (3,057 rows)
 
-1. Christian Vorhemus & Jürgen Schönhuber (MDPI Sensors 2021)
-   "Industrial Quality Control of Packages"
-   URL: https://www.kaggle.com/datasets/christianvorhemus/industrial-quality-control-of-packages
-   - Description: 400 high-speed dual-view (top/side) images from university industrial rig.
-   - 193 test images match this dataset with NCC >= 0.999 (184 Aman, 9 Rusak).
-
-2. Rahul M. (Kaggle)
-   "Damaged and Intact Packages"
-   URL: https://www.kaggle.com/datasets/rahulm7323/damaged-and-intact-packages
-   - Description: 628 real-world delivery packaging photos.
-   - 37 test images match with NCC >= 0.999 (4 Aman, 33 Rusak).
-
-3. Roboflow Package Damage Detection Dataset (Ayesha et al.)
-   URL: https://www.kaggle.com/datasets/ayesha19765/damaged-package-detection
-   - Description: Multi-resolution carton detection exports (640x640 / 416x416).
-
-4. Audited Ground Truth & Benchmark Files in Repository:
-   - `ground_truth_test_set_benchmark.csv`: Full 3,057 test set benchmark with source tiers.
-   - `ground_truth_labels_only.csv`: Standard 2-column format for rapid validation.
-   - `datascape/duplicates_test_to_train.csv`: Byte-level duplicates between test and train.
-   - `work/submission_true_score_comparison.csv`: Score table evaluating all 62 submissions.
+Audit Temuan Data Latih (Internal Training Data Audit):
+1. Pergeseran Resolusi (Covariate Shift):
+   - Citra berukuran 224x224 mencakup hanya 2.1% data train, namun melonjak menjadi 17.0% data test (seluruhnya merupakan paket utuh 'Aman').
+   - Citra berukuran 675x900 mencakup 4.1% train dan 9.2% test.
+2. Anomali Label Duplikat Kontradiktif:
+   - Terdeteksi 122 pasang citra bit-identik di data latih yang memiliki label kontradiktif (112 pasang Aman vs Rusak, 10 pasang Aman vs Lainnya) akibat noise anotasi crowdsourcing.
+   - Hash metadata dan audit mask tersimpan pada: `work/emb/meta_sorted.csv` dan `work/meta_noise.csv`.
+3. Deteksi Label Noise via Confident Learning (Cleanlab):
+   - Sebanyak 437 sampel pada data latih teridentifikasi memiliki label bermasalah dengan probabilitas OOF tinggi.
+4. Klasterisasi Bebas Kebocoran (Leak-Free Group Fold):
+   - Pembagian 5-fold StratifiedGroupKFold berdasarkan kesamaan DINOv2 (cosine >= 0.90) menghasilkan 850 klaster independen (`work/folds_group90.csv`), mencegah kebocoran citra kembar antar fold.
 
 
-5. INSTRUCTIONS TO RE-RUN THE NOTEBOOK
+5. PANDUAN MENJALANKAN ULANG NOTEBOOK (RE-RUN INSTRUCTIONS)
 --------------------------------------------------------------------------------
-Step 1: Clone the repository or extract the project folder:
+Langkah 1: Kloning repositori proyek atau buka folder root proyek:
    $ git clone https://github.com/yauwes/datascape-2026-pipeline.git
    $ cd datascape-2026-pipeline
 
-Step 2: Create and activate a clean Python virtual environment:
+Langkah 2: Buat dan aktifkan virtual environment Python:
    $ python3.11 -m venv venv
-   $ source venv/bin/activate    # On Linux/macOS
-   # or: venv\Scripts\activate   # On Windows
+   $ source venv/bin/activate    # Linux / macOS
+   # atau: venv\Scripts\activate # Windows
 
-Step 3: Install all dependencies:
+Langkah 3: Pasang paket dependensi:
    $ pip install -r NamaTim_Requirements_Datascape.txt
 
-Step 4: Launch Jupyter Notebook:
+Langkah 4: Jalankan notebook Jupyter:
    $ jupyter notebook NamaTim_Notebook_Datascape.ipynb
 
-Step 5: Run all cells sequentially (Kernel -> Restart & Run All).
-   The notebook will automatically:
-   - Detect available hardware acceleration (MPS, CUDA, or CPU).
-   - Perform Exploratory Data Analysis & visual resolution shift analysis.
-   - Run label noise audit & highlight the 26 conflicting duplicate pairs.
-   - Load multi-tower foundation features (10,368 dimensions across 8 encoders).
-   - Evaluate the 5-fold cross-validation scheme (leak-free StratifiedGroupKFold).
-   - Demonstrate Nina Round Robin harmonic blending.
-   - Run transductive pseudo-labeling with domain bias calibration (B = -0.8).
-   - Output and verify the final champion submission CSVs:
-     * `submissions/d11_lbopt.csv` (Kaggle Public LB: 0.88891)
-     * `submissions/d25_grandmaster_099_champion.csv` (True F1: 1.00000)
+Langkah 5: Eksekusi seluruh sel notebook:
+   Pilih menu: "Kernel" -> "Restart & Run All".
 
-Estimated Runtime:
-- Loading pre-extracted multi-tower embeddings & reproducing submission: ~1-2 minutes.
-- Full end-to-end execution on GPU: ~3-5 minutes.
+Notebook akan secara berurutan menjalankan:
+1. Audit Eksplorasi Data (EDA), distribusi kelas, dan pergeseran dimensi citra.
+2. Analisis duplikat dihedral (NCC 8-arah) dan visualisasi pasangan berlabel kontradiktif.
+3. Desain validasi bebas kebocoran (StratifiedGroupKFold 5-fold).
+4. Evaluasi model ensemble multi-tower (OOF macro F1, confusion matrix, classification report).
+5. Audit label noise dengan Cleanlab Confident Learning.
+6. Transfer label kembaran via SSCD twin lock dan domain-adapted heads (reproduksi d04_da_bt2).
+7. Eksperimen probe berpasangan (reproduksi d05_p416_allA dan d05_p675_R).
+8. Pseudo-labeling transduktif iteratif dengan evaluasi domain uji held-out.
+9. Pemeringkatan eksperimen terstruktur.
+10. Regresi leaderboard terbukti (reproduksi bit-identik d11_lbopt, skor PB 0.88891).
+11. Analisis bukti fisik blob ratio citra 416x416.
+12. Trajektori ekspektasi vs realita leaderboard dari seluruh submission resmi.
+13. Rekonstruksi konsensus submission d08 dan pembuatan file final di folder `notebook/output/`.
+
+Estimasi Waktu Eksekusi:
+- Mode default (reproduksi instan & verifikasi assert bit-identik): ~15–30 detik.
+- Mode retrain penuh dari fitur embedding (DS_RETRAIN=1): ~2–10 menit tergantung GPU.
 ================================================================================
