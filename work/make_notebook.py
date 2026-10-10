@@ -5,7 +5,13 @@ from nbformat.v4 import new_notebook, new_markdown_cell as md, new_code_cell as 
 cells = []
 cells += [md("""# Datascape 2026: package-condition classification pipeline (Aman / Rusak / Lainnya)
 
-Reproducible end-to-end notebook for the team's current best submission and the scenarios built on it. Metric: macro-F1; public LB = 30% of test.
+Reproducible end-to-end notebook for team **last game**. Metric: macro-F1; public LB = 30% of test.
+
+**Official final submissions (selected on Kaggle):**
+- `d11_lbopt`: public **0.88891**, the team best;
+- `d08_grand_consensus_champion`: public 0.88789.
+
+Section 10 rebuilds d11 bit-exactly (md5 assert). Section 13 rebuilds d08 from its component model predictions (3,054 of 3,057 rows identical) and writes both final files to `notebook/output/`.
 
 **What is cached and what is recomputed.** Three things are loaded from cache, not recomputed from raw images here:
 - the frozen-tower embeddings (`work/emb/*.npz`, extracted by `colab/emb_giant.py` / `kernels/emb*`);
@@ -31,6 +37,7 @@ Pixel-copy scores are recomputed when `RECOMPUTE_PIX = True` (~90 s).
 10. Learning from the leaderboard → `d11_lbopt` (team best 0.88891)
 11. Why the 416 rule works: re-rendered boxes in the train copies
 12. Expected vs actual LB for every scored submission
+13. Final submissions: d08 rebuilt from its components, final files written
 
 **AI declaration / Deklarasi AI.**
 - Kode, analisis, dan dokumentasi disusun dengan bantuan asisten AI **Claude (Anthropic)** untuk penulisan kode, brainstorming, dan debugging.
@@ -45,7 +52,7 @@ code("""import os, json, hashlib, time, numpy as np, pandas as pd
 from pathlib import Path
 from sklearn.metrics import f1_score, confusion_matrix
 pd.set_option('display.width', 160); pd.set_option('display.max_colwidth', 80)
-ROOT = Path(os.environ.get('DS_ROOT', Path.cwd().parent if Path.cwd().name == 'notebook' else Path.cwd())).resolve()
+ROOT = Path(os.environ.get('DS_ROOT', Path.cwd().parent if Path.cwd().name in ('notebook', 'deliverables') else Path.cwd())).resolve()
 W, SUBS = ROOT / 'work', ROOT / 'submissions'
 RETRAIN = os.environ.get('DS_RETRAIN') == '1'   # True: retrain domain-adapted heads from embeddings
 RECOMPUTE_PIX = False    # True: recompute pixel-exact copy scores from the images (~90 s)
@@ -297,8 +304,13 @@ from scipy.ndimage import uniform_filter
 from PIL import Image
 I10, S10 = np.load(W / 'nntr_sscd.npz')['i'], np.load(W / 'nntr_sscd.npz')['s']; NCC10 = np.load(W / 'pix_all.npz')['ncc']
 mf = pd.read_csv(W / 'emb' / 'meta_sorted.csv'); te_idx = np.where(mf.split == 'test')[0]; n = 256
+RAW = {Path(p).stem: p for p in (ROOT / 'datascape').glob('*_Set/**/*') if Path(p).is_file()}   # organiser data, used when work/small is absent
+def img_path(r):
+    p = ROOT / mf.path.values[r]
+    if p.exists(): return p
+    st = Path(mf.path.values[r]).stem; return RAW[st.split('__', 1)[1] if '__' in st else st]
 def g(r):
-    a = np.asarray(Image.open(ROOT / mf.path.values[r]).convert('L').resize((n, n), Image.BILINEAR), np.float32); return (a - a.mean()) / (a.std() + 1e-6)
+    a = np.asarray(Image.open(img_path(r)).convert('L').resize((n, n), Image.BILINEAR), np.float32); return (a - a.mean()) / (a.std() + 1e-6)
 rows = []
 for t in te_idx[(mf.w.values[te_idx] == 416) & (mf.h.values[te_idx] == 416)]:
     k = NCC10[t].argmax()
@@ -309,13 +321,59 @@ for t in te_idx[(mf.w.values[te_idx] == 416) & (mf.h.values[te_idx] == 416)]:
 B416 = pd.DataFrame(rows); print(B416.groupby('train_copy_label').blob_ratio.describe()[['count', '25%', '50%', '75%']].round(1))
 ex = B416[B416.train_copy_label == 'Rusak'].sort_values('blob_ratio').iloc[len(B416[B416.train_copy_label == 'Rusak']) // 2]
 fig, ax = plt.subplots(1, 3, figsize=(10, 3.4))
-for a_, im, ttl in zip(ax, [Image.open(ROOT / mf.path.values[ex.t]), Image.open(ROOT / mf.path.values[ex.c]), ex['diff']], ['test row (LB: Aman)', 'train copy (label Rusak)', f'|difference| (blob ratio {ex.blob_ratio:.0f})']):
+for a_, im, ttl in zip(ax, [Image.open(img_path(ex.t)), Image.open(img_path(ex.c)), ex['diff']], ['test row (LB: Aman)', 'train copy (label Rusak)', f'|difference| (blob ratio {ex.blob_ratio:.0f})']):
     a_.imshow(im, cmap='magma' if ttl.startswith('|') else None); a_.set_title(ttl, fontsize=9); a_.axis('off')
 plt.tight_layout(); plt.show()""")]
 
 cells += [md("""## 12. Expected vs actual public LB, all scored submissions
 Train-label CV/OOF claims overestimate the LB by 0.03–0.10. Paired-probe expectations on a scored base (`work/lbdelta.py`) are within 0.006."""),
 code("""pd.read_csv(W / 'expectation_vs_lb.csv').dropna(subset=['public_lb'])""")]
+
+cells += [md("""## 13. Final submissions: `d08` rebuilt from its components, then `d11_lbopt`
+**d08 recipe.** Blend the four components below and take the argmax, then apply three locks.
+
+| Weight | Component |
+|---|---|
+| 0.35 | DINOv3-7B fine-tune F2 (`colab/make_nb14.py`, A100; pseudo-labels: twin-locked test rows + 416/675 test rows as Aman) |
+| 0.30 | `r_cat11` (MLP on 11 frozen towers) |
+| 0.20 | `ens_pe_heads` (Perception-Encoder heads) |
+| 0.15 | `da_h2` (domain-adapted heads) |
+
+Locks:
+1. The sources 224×224, 416×416 and 675×900 → Aman. For 416 and 675 this is LB-proven.
+2. A test row whose pixel copies in train are unanimously Aman → Aman. VN-parcel sizes are locked only at NCC ≥ 0.995. Rusak copies are not locked; the blend decides.
+3. Copies whose train labels conflict → Aman.
+
+The original d08 builder script was not preserved. This rule set reproduces the submitted file on 3,054 of 3,057 rows. The 3 other rows are 640×640 conflict-copy rows that the submitted d08 kept as Rusak; d11 later moved 2 of them to Aman via the LB regression (section 10). **d11 = submitted d08 + 17 regression rows**, verified bit-exactly in section 10."""),
+code("""import shutil
+mt = pd.read_csv(W / 'emb' / 'meta_sorted.csv'); te_rows = np.where(mt.split == 'test')[0]
+r13 = pd.read_csv(W / 's13' / 'pack' / 'rows13.csv'); assert (('work/small/test/' + r13.stem + '.jpg').values == mt.path.values[te_rows]).all()
+tp = {p: i for i, p in enumerate(mt.path.values[te_rows])}
+def avg_test(files):
+    P = 0
+    for f in files:
+        z = np.load(f, allow_pickle=True); Q = np.zeros((len(te_rows), 3)); Q[[tp[p] for p in z['test_path']]] = z['test']; P = P + Q
+    return P / len(files)
+comp = {k: avg_test(sorted((W / 'preds' / k).glob(f'pred_{k}_f*.npz'))) for k in ['r_cat11', 'ens_pe_heads', 'da_h2']}
+comp['F2'] = avg_test([W / 's14' / 'out14' / 'pred_F2_f0_best.npz'])
+blend = .35 * comp['F2'] + .30 * comp['r_cat11'] + .20 * comp['ens_pe_heads'] + .15 * comp['da_h2']
+lab = np.array(C)[blend.argmax(1)]
+w_, h_ = mt.w.values[te_rows], mt.h.values[te_rows]; sz = np.char.add(np.char.add(w_.astype(str), 'x'), h_.astype(str))
+vnp = ((h_ == 900) & (w_ >= 650) & (w_ <= 690)) | ((w_ == 900) & (h_ >= 650) & (h_ <= 690))
+cp, cn = r13.copy_label.values, r13.best_ncc.values               # copy code: 0/1/2 = unanimous copy class, -1 = no copy, -2 = conflicting copies
+lab[np.isin(sz, ['224x224', '416x416', '675x900'])] = 'Aman'
+lab[(cp == 0) & (~vnp | (cn >= .995))] = 'Aman'
+lab[cp == -2] = 'Aman'
+s2f = {f.rsplit('.', 1)[0]: f for f in pd.read_csv(ROOT / 'datascape' / 'sample_submission.csv').filename}
+fn_ = np.array([s2f[p.split('/')[-1][:-4]] for p in mt.path.values[te_rows]])
+d08f = pd.read_csv(SUBS / 'd08_grand_consensus_champion.csv').set_index('filename').label.reindex(fn_).values
+d11f = pd.read_csv(SUBS / 'd11_lbopt.csv').set_index('filename').label.reindex(fn_).values
+diff = lab != d08f
+print(f'rebuilt d08 vs submitted d08: {len(lab) - diff.sum()}/{len(lab)} rows identical ({1 - diff.mean():.2%})')
+out = ROOT / 'notebook' / 'output'; out.mkdir(parents=True, exist_ok=True)
+for n in ['d11_lbopt', 'd08_grand_consensus_champion']: shutil.copy(SUBS / f'{n}.csv', out / f'FINAL_{n}.csv')
+print('final files:', sorted(p.name for p in out.glob('FINAL_*')), '| d11 label mix:', pd.read_csv(SUBS / 'd11_lbopt.csv').label.value_counts().to_dict())
+pd.DataFrame({'filename': fn_[diff], 'size': sz[diff], 'copy_code': cp[diff], 'ncc': cn[diff].round(3), 'rebuilt_d08': lab[diff], 'submitted_d08': d08f[diff], 'final_d11': d11f[diff]})""")]
 
 nb = new_notebook(cells=cells, metadata={'kernelspec': {'name': 'python3', 'display_name': 'Python 3', 'language': 'python'}})
 p = 'notebook/Datascape_Pipeline.ipynb'; import os; os.makedirs('notebook', exist_ok=True); nbf.write(nb, p)

@@ -8,6 +8,8 @@ datascape/Train_Set/
 datascape/Test_Set/
 *.zip
 *.pdf
+!NamaTim_Writeup_Datascape.pdf
+!lastgame_Writeup_Datascape.pdf
 *.pt
 *.pth
 *.safetensors

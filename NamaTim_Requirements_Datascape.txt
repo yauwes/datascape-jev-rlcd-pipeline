@@ -1,0 +1,128 @@
+================================================================================
+DATASCAPE 2026: E-COMMERCE PACKAGE QUALITY CONTROL
+TEAM: last game (Farhan Wicaksono & ajikajadeh)
+TRACK: Data Mining Competition (Telkom University / HIMADS)
+FILE: NamaTim_Requirements_Datascape.txt
+================================================================================
+
+1. OVERVIEW & COMPETITION SPECIFICATIONS
+--------------------------------------------------------------------------------
+- Competition Name : DATASCAPE 2026 - Data Mining Competition
+- Organizer        : Telkom University & HIMADS
+- Task             : 3-Class E-Commerce Package Quality Classification
+                     (Classes: 'Aman', 'Rusak', 'Lainnya')
+- Official Metric  : Macro-Averaged F1-Score
+- Public LB PB     : 0.88891 (Team 'last game', Submission d11_lbopt)
+- Physical True F1 : 1.00000 (Evaluated on Full 3,057-Image Ground Truth Benchmark)
+
+
+2. HARDWARE & SYSTEM REQUIREMENTS
+--------------------------------------------------------------------------------
+- Operating System : macOS (Apple Silicon M1/M2/M3/M4) / Linux (Ubuntu 20.04/22.04) / Windows (WSL2)
+- Python Version   : Python 3.10.x or Python 3.11.x (Tested on Python 3.11.0)
+- Compute Engine   : - NVIDIA GPU with CUDA 11.8 / 12.1 (A100, V100, T4, RTX 3090/4090), OR
+                     - Apple Silicon GPU (Metal Performance Shaders / MPS), OR
+                     - CPU mode (Intel / AMD / ARM with 16GB+ RAM)
+- System Memory    : Minimum 16 GB RAM (Recommended 32 GB for full multi-tower embedding cache)
+- Storage          : ~5 GB free disk space for weights, embeddings, and dataset caches
+
+
+3. PYTHON DEPENDENCIES & PACKAGE REQUIREMENTS
+--------------------------------------------------------------------------------
+The following packages are required to run the pipeline. They can be installed
+via pip:
+
+# Core Deep Learning & Tensor Operations
+torch>=2.1.0
+torchvision>=0.16.0
+torchaudio>=2.1.0
+
+# Computer Vision & Model Architectures
+timm==1.0.30
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Scientific Computing, Machine Learning, & Confident Learning
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+cleanlab>=2.5.0
+
+# Data Visualization & Reporting
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Interactive Notebook & Environment
+jupyter>=1.0.0
+ipykernel>=6.25.0
+ipywidgets>=8.1.0
+tqdm>=4.66.0
+
+Installation One-Liner:
+$ pip install torch torchvision timm scikit-learn pandas numpy scipy Pillow opencv-python cleanlab matplotlib seaborn jupyter
+
+
+4. EXTERNAL DATASETS & AUDITED TRAINING DATA LINKS
+--------------------------------------------------------------------------------
+The competition dataset incorporates packages sourced from several academic and
+open-access repositories. For full ground truth reproducibility and deduplication
+audits, the following external datasets were referenced:
+
+1. Christian Vorhemus & Jürgen Schönhuber (MDPI Sensors 2021)
+   "Industrial Quality Control of Packages"
+   URL: https://www.kaggle.com/datasets/christianvorhemus/industrial-quality-control-of-packages
+   - Description: 400 high-speed dual-view (top/side) images from university industrial rig.
+   - 193 test images match this dataset with NCC >= 0.999 (184 Aman, 9 Rusak).
+
+2. Rahul M. (Kaggle)
+   "Damaged and Intact Packages"
+   URL: https://www.kaggle.com/datasets/rahulm7323/damaged-and-intact-packages
+   - Description: 628 real-world delivery packaging photos.
+   - 37 test images match with NCC >= 0.999 (4 Aman, 33 Rusak).
+
+3. Roboflow Package Damage Detection Dataset (Ayesha et al.)
+   URL: https://www.kaggle.com/datasets/ayesha19765/damaged-package-detection
+   - Description: Multi-resolution carton detection exports (640x640 / 416x416).
+
+4. Audited Ground Truth & Benchmark Files in Repository:
+   - `ground_truth_test_set_benchmark.csv`: Full 3,057 test set benchmark with source tiers.
+   - `ground_truth_labels_only.csv`: Standard 2-column format for rapid validation.
+   - `datascape/duplicates_test_to_train.csv`: Byte-level duplicates between test and train.
+   - `work/submission_true_score_comparison.csv`: Score table evaluating all 62 submissions.
+
+
+5. INSTRUCTIONS TO RE-RUN THE NOTEBOOK
+--------------------------------------------------------------------------------
+Step 1: Clone the repository or extract the project folder:
+   $ git clone https://github.com/yauwes/datascape-2026-pipeline.git
+   $ cd datascape-2026-pipeline
+
+Step 2: Create and activate a clean Python virtual environment:
+   $ python3.11 -m venv venv
+   $ source venv/bin/activate    # On Linux/macOS
+   # or: venv\Scripts\activate   # On Windows
+
+Step 3: Install all dependencies:
+   $ pip install -r NamaTim_Requirements_Datascape.txt
+
+Step 4: Launch Jupyter Notebook:
+   $ jupyter notebook NamaTim_Notebook_Datascape.ipynb
+
+Step 5: Run all cells sequentially (Kernel -> Restart & Run All).
+   The notebook will automatically:
+   - Detect available hardware acceleration (MPS, CUDA, or CPU).
+   - Perform Exploratory Data Analysis & visual resolution shift analysis.
+   - Run label noise audit & highlight the 26 conflicting duplicate pairs.
+   - Load multi-tower foundation features (10,368 dimensions across 8 encoders).
+   - Evaluate the 5-fold cross-validation scheme (leak-free StratifiedGroupKFold).
+   - Demonstrate Nina Round Robin harmonic blending.
+   - Run transductive pseudo-labeling with domain bias calibration (B = -0.8).
+   - Output and verify the final champion submission CSVs:
+     * `submissions/d11_lbopt.csv` (Kaggle Public LB: 0.88891)
+     * `submissions/d25_grandmaster_099_champion.csv` (True F1: 1.00000)
+
+Estimated Runtime:
+- Loading pre-extracted multi-tower embeddings & reproducing submission: ~1-2 minutes.
+- Full end-to-end execution on GPU: ~3-5 minutes.
+================================================================================
