@@ -3,6 +3,7 @@ DATASCAPE 2026: E-COMMERCE PACKAGE QUALITY CONTROL
 TEAM: last game (Farhan Wicaksono & ajikajadeh)
 TRACK: Data Mining Competition (Telkom University / HIMADS)
 FILE: lastgame_Requirements_Datascape.txt
+ARCHITECTURE: Jev System One Decision Model & RLCD (Reinforcement Learning for Calibrated Decisions)
 ================================================================================
 
 1. OVERVIEW & COMPETITION SPECIFICATIONS
@@ -11,6 +12,7 @@ FILE: lastgame_Requirements_Datascape.txt
 - Organizer        : HIMADS & Telkom University
 - Platform / Host  : Kaggle Community Competition
 - Competition URL  : https://www.kaggle.com/competitions/datascape-2026-data-mining-competition
+- New Project Repo : https://github.com/yauwes/datascape-jev-rlcd-pipeline.git
 - Task             : 3-Class E-Commerce Package Quality Classification
                      (Classes: 'Aman', 'Rusak', 'Lainnya')
 - Official Metric  : Macro-Averaged F1-Score
@@ -88,13 +90,16 @@ Audit Temuan Data Latih (Internal Training Data Audit):
    - Sebanyak 437 sampel pada data latih teridentifikasi memiliki label bermasalah dengan probabilitas OOF tinggi.
 4. Klasterisasi Bebas Kebocoran (Leak-Free Group Fold):
    - Pembagian 5-fold StratifiedGroupKFold berdasarkan kesamaan DINOv2 (cosine >= 0.90) menghasilkan 850 klaster independen (`work/folds_group90.csv`), mencegah kebocoran citra kembar antar fold.
+5. Formulasi Primitif Keputusan Jev & Kalibrasi RLCD:
+   - Evaluasi Noul Primitives (`is_nonbox` dan `is_structural_damage`) dan Choice Primitive (`Aman`, `Rusak`, `Lainnya`).
+   - Algoritma RLCD mengalibrasi probabilitas logit kerusakan ($B = -0.8$) untuk memecahkan False Alarm Trap.
 
 
 5. PANDUAN MENJALANKAN ULANG NOTEBOOK (RE-RUN INSTRUCTIONS)
 --------------------------------------------------------------------------------
 Langkah 1: Kloning repositori proyek atau buka folder root proyek:
-   $ git clone https://github.com/yauwes/datascape-2026-pipeline.git
-   $ cd datascape-2026-pipeline
+   $ git clone https://github.com/yauwes/datascape-jev-rlcd-pipeline.git
+   $ cd datascape-jev-rlcd-pipeline
 
 Langkah 2: Buat dan aktifkan virtual environment Python:
    $ python3.11 -m venv venv
